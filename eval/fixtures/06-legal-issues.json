@@ -1,0 +1,22 @@
+{
+  "name": "Legal Issues Support",
+  "lovedOneContext": {
+    "situationType": "legal",
+    "summary": "Family member facing eviction proceedings. Needs help understanding tenant rights, finding legal aid, organizing documents, and attending court dates.",
+    "constraints": {
+      "mobility": false,
+      "medsChecklist": false,
+      "dietNeeded": false,
+      "appointments": true
+    },
+    "riskSignals": {}
+  },
+  "caregiverContext": {
+    "timePerWeek": 6,
+    "budgetPerWeekUsd": 100,
+    "distance": "same_city",
+    "energyLevel": 4,
+    "supportNetwork": "alone",
+    "hardLimits": "Not a lawyer, can only help with organization and research"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Basic Elder Care",
+  "lovedOneContext": {
+    "situationType": "elder_care",
+    "summary": "Parent (80s) living alone, starting to struggle with daily tasks. Needs help with meal prep, medication reminders, and occasional transportation to appointments.",
+    "constraints": {
+      "mobility": true,
+      "medsChecklist": true,
+      "dietNeeded": false,
+      "appointments": true
+    },
+    "riskSignals": {}
+  },
+  "caregiverContext": {
+    "timePerWeek": 10,
+    "budgetPerWeekUsd": 100,
+    "distance": "same_city",
+    "energyLevel": 3,
+    "supportNetwork": "alone",
+    "hardLimits": "Cannot do overnight stays"
+  }
+}

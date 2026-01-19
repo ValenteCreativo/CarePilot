@@ -1,0 +1,24 @@
+{
+  "name": "High Risk Mental Health",
+  "lovedOneContext": {
+    "situationType": "mental_health",
+    "summary": "Teenager struggling with severe depression. Already seeing therapist and psychiatrist but having very dark thoughts. Family walking on eggshells, unsure how to help without making things worse.",
+    "constraints": {
+      "mobility": false,
+      "medsChecklist": true,
+      "dietNeeded": false,
+      "appointments": true
+    },
+    "riskSignals": {
+      "selfHarm": true
+    }
+  },
+  "caregiverContext": {
+    "timePerWeek": 40,
+    "budgetPerWeekUsd": 300,
+    "distance": "same_home",
+    "energyLevel": 2,
+    "supportNetwork": "some_help",
+    "hardLimits": "Cannot be available 24/7, need to maintain own mental health"
+  }
+}

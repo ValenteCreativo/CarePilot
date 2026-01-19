@@ -1,0 +1,24 @@
+{
+  "name": "Urgent Medical Coordination",
+  "lovedOneContext": {
+    "situationType": "recovery",
+    "summary": "Parent just diagnosed with cancer. Overwhelmed with specialist appointments, treatment decisions, and coordination of care across multiple providers. Needs help organizing medical information and attending appointments.",
+    "constraints": {
+      "mobility": true,
+      "medsChecklist": true,
+      "dietNeeded": true,
+      "appointments": true
+    },
+    "riskSignals": {
+      "urgentMedical": true
+    }
+  },
+  "caregiverContext": {
+    "timePerWeek": 20,
+    "budgetPerWeekUsd": 200,
+    "distance": "same_city",
+    "energyLevel": 3,
+    "supportNetwork": "team",
+    "hardLimits": "Have young children at home, cannot travel overnight"
+  }
+}

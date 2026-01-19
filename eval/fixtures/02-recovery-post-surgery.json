@@ -1,0 +1,22 @@
+{
+  "name": "Post-Surgery Recovery",
+  "lovedOneContext": {
+    "situationType": "recovery",
+    "summary": "Spouse recovering from knee replacement surgery. Needs 6 weeks of intensive support with mobility, physical therapy exercises, and wound care coordination.",
+    "constraints": {
+      "mobility": true,
+      "medsChecklist": true,
+      "dietNeeded": false,
+      "appointments": true
+    },
+    "riskSignals": {}
+  },
+  "caregiverContext": {
+    "timePerWeek": 30,
+    "budgetPerWeekUsd": 200,
+    "distance": "same_home",
+    "energyLevel": 4,
+    "supportNetwork": "some_help",
+    "hardLimits": "Must keep working full-time"
+  }
+}

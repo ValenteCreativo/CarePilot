@@ -1,0 +1,22 @@
+{
+  "name": "Mental Health Support",
+  "lovedOneContext": {
+    "situationType": "mental_health",
+    "summary": "Adult sibling dealing with depression and anxiety. Has therapist and psychiatrist but struggles with daily routines, self-care, and maintaining social connections.",
+    "constraints": {
+      "mobility": false,
+      "medsChecklist": true,
+      "dietNeeded": false,
+      "appointments": true
+    },
+    "riskSignals": {}
+  },
+  "caregiverContext": {
+    "timePerWeek": 8,
+    "budgetPerWeekUsd": 50,
+    "distance": "same_city",
+    "energyLevel": 3,
+    "supportNetwork": "some_help",
+    "hardLimits": "Not a trained therapist, can only provide practical support"
+  }
+}

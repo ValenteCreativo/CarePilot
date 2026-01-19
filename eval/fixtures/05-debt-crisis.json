@@ -1,0 +1,22 @@
+{
+  "name": "Debt Crisis Management",
+  "lovedOneContext": {
+    "situationType": "debt",
+    "summary": "Parent in serious debt after medical emergency. Behind on mortgage, utilities, and credit cards. Needs help organizing finances, negotiating with creditors, and finding assistance programs.",
+    "constraints": {
+      "mobility": false,
+      "medsChecklist": false,
+      "dietNeeded": false,
+      "appointments": false
+    },
+    "riskSignals": {}
+  },
+  "caregiverContext": {
+    "timePerWeek": 5,
+    "budgetPerWeekUsd": 0,
+    "distance": "remote",
+    "energyLevel": 3,
+    "supportNetwork": "alone",
+    "hardLimits": "Cannot provide financial bailout, can only help organize and research"
+  }
+}

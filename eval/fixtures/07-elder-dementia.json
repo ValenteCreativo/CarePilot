@@ -1,0 +1,22 @@
+{
+  "name": "Elder Care with Dementia",
+  "lovedOneContext": {
+    "situationType": "elder_care",
+    "summary": "Parent with early-stage dementia. Still mostly independent but forgetting appointments, leaving stove on, and getting confused about medications. Family considering whether to move them closer or hire help.",
+    "constraints": {
+      "mobility": false,
+      "medsChecklist": true,
+      "dietNeeded": true,
+      "appointments": true
+    },
+    "riskSignals": {}
+  },
+  "caregiverContext": {
+    "timePerWeek": 15,
+    "budgetPerWeekUsd": 500,
+    "distance": "remote",
+    "energyLevel": 3,
+    "supportNetwork": "some_help",
+    "hardLimits": "Live 4 hours away, can only visit weekends"
+  }
+}

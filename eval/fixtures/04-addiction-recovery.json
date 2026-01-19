@@ -1,0 +1,22 @@
+{
+  "name": "Addiction Recovery Support",
+  "lovedOneContext": {
+    "situationType": "addiction",
+    "summary": "Adult child in early recovery from alcohol addiction. Recently completed inpatient treatment, now needs support with sober living transition, sponsor meetings, and rebuilding daily structure.",
+    "constraints": {
+      "mobility": false,
+      "medsChecklist": false,
+      "dietNeeded": false,
+      "appointments": true
+    },
+    "riskSignals": {}
+  },
+  "caregiverContext": {
+    "timePerWeek": 12,
+    "budgetPerWeekUsd": 150,
+    "distance": "same_city",
+    "energyLevel": 2,
+    "supportNetwork": "team",
+    "hardLimits": "Cannot enable any substance use, will not give money directly"
+  }
+}

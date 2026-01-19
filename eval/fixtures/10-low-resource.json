@@ -1,0 +1,22 @@
+{
+  "name": "Low Resource Elder Care",
+  "lovedOneContext": {
+    "situationType": "elder_care",
+    "summary": "Grandparent living in assisted living, but facility is understaffed. Family needs to supplement care with visits, advocacy, and ensuring proper attention is given.",
+    "constraints": {
+      "mobility": true,
+      "medsChecklist": true,
+      "dietNeeded": false,
+      "appointments": true
+    },
+    "riskSignals": {}
+  },
+  "caregiverContext": {
+    "timePerWeek": 3,
+    "budgetPerWeekUsd": 25,
+    "distance": "same_city",
+    "energyLevel": 1,
+    "supportNetwork": "alone",
+    "hardLimits": "Working two jobs, very limited availability"
+  }
+}
