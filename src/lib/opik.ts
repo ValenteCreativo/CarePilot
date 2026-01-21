@@ -4,6 +4,7 @@ import { trackOpenAI } from "opik-openai";
 
 // Singleton Opik client
 let opikClient: Opik | null = null;
+type TrackedOpenAIClient = OpenAI & { flush: () => Promise<void> };
 
 export function getOpikClient(): Opik {
   if (!opikClient) {
@@ -15,9 +16,9 @@ export function getOpikClient(): Opik {
 }
 
 // Singleton OpenAI client with Opik tracking
-let trackedOpenAIClient: ReturnType<typeof trackOpenAI> | null = null;
+let trackedOpenAIClient: TrackedOpenAIClient | null = null;
 
-export function getTrackedOpenAI() {
+export function getTrackedOpenAI(): TrackedOpenAIClient {
   if (!trackedOpenAIClient) {
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
@@ -68,14 +69,16 @@ export async function logEvalScores(
   }>
 ) {
   const client = getOpikClient();
-  await client.logTracesFeedbackScores(
-    scores.map((score) => ({
+  await client.api.traces.scoreBatchOfTraces({
+    scores: scores.map((score) => ({
       id: traceId,
       name: score.name,
       value: score.value,
       reason: score.reason,
-    }))
-  );
+      projectName: client.config.projectName,
+      source: "sdk",
+    })),
+  });
 }
 
 // Flush all pending traces

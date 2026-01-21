@@ -99,7 +99,7 @@ export async function runTriageStage(
       inputHash,
       outputJson: result,
       latencyMs,
-      opikTraceId: trace.id,
+      opikTraceId: trace.data.id,
     }).returning();
 
     trace.update({
@@ -107,7 +107,7 @@ export async function runTriageStage(
     });
     trace.end();
 
-    return { result, llmRunId: llmRun.id, traceId: trace.id };
+    return { result, llmRunId: llmRun.id, traceId: trace.data.id };
   } catch (error) {
     trace.update({
       output: { error: String(error) },
@@ -153,7 +153,7 @@ export async function runPlanStage(
       inputHash,
       outputJson: result,
       latencyMs,
-      opikTraceId: trace.id,
+      opikTraceId: trace.data.id,
     }).returning();
 
     trace.update({
@@ -161,7 +161,7 @@ export async function runPlanStage(
     });
     trace.end();
 
-    return { result, llmRunId: llmRun.id, traceId: trace.id };
+    return { result, llmRunId: llmRun.id, traceId: trace.data.id };
   } catch (error) {
     trace.update({
       output: { error: String(error) },
@@ -208,7 +208,7 @@ export async function runCriticStage(
       inputHash,
       outputJson: result,
       latencyMs,
-      opikTraceId: trace.id,
+      opikTraceId: trace.data.id,
     }).returning();
 
     trace.update({
@@ -216,7 +216,7 @@ export async function runCriticStage(
     });
     trace.end();
 
-    return { result, llmRunId: llmRun.id, traceId: trace.id };
+    return { result, llmRunId: llmRun.id, traceId: trace.data.id };
   } catch (error) {
     trace.update({
       output: { error: String(error) },

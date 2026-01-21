@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Plus, FileText, Clock, AlertCircle } from "lucide-react";
 import { getOrCreateUser } from "@/lib/auth";
 import { db, cases, plans } from "@/db";
@@ -89,23 +88,6 @@ function CaseCard({ caseItem }: { caseItem: CaseWithPlan }) {
   );
 }
 
-function CaseCardSkeleton() {
-  return (
-    <Card>
-      <CardHeader className="pb-2">
-        <div className="flex items-start justify-between">
-          <Skeleton className="h-6 w-32" />
-          <Skeleton className="h-5 w-20" />
-        </div>
-        <Skeleton className="h-4 w-24 mt-2" />
-      </CardHeader>
-      <CardContent>
-        <Skeleton className="h-4 w-48" />
-      </CardContent>
-    </Card>
-  );
-}
-
 function EmptyState() {
   return (
     <Card className="border-dashed">
@@ -181,26 +163,6 @@ export default async function Dashboard() {
           ))}
         </div>
       )}
-    </div>
-  );
-}
-
-// Export loading state
-export function Loading() {
-  return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <div>
-          <Skeleton className="h-9 w-40" />
-          <Skeleton className="h-5 w-60 mt-1" />
-        </div>
-        <Skeleton className="h-10 w-36" />
-      </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <CaseCardSkeleton />
-        <CaseCardSkeleton />
-        <CaseCardSkeleton />
-      </div>
     </div>
   );
 }
