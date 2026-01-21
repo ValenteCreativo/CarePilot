@@ -5,6 +5,13 @@ import { eq } from "drizzle-orm";
 
 const hasDatabase = !!process.env.DATABASE_URL;
 
+function isMissingUsersTableError(error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  // Postgres missing relation code
+  // Neon returns code on the cause object
+  return message.includes('relation "users" does not exist') || (error as { code?: string }).code === "42P01";
+}
+
 async function safeSetCookie(name: string, value: string, maxAge: number) {
   try {
     const cookieStore = await cookies();
@@ -36,23 +43,41 @@ export async function getOrCreateUser(): Promise<string> {
   }
 
   if (existingUserId) {
-    // Verify user exists in DB
-    const existingUser = await db.query.users.findFirst({
-      where: eq(users.id, existingUserId),
-    });
+    try {
+      // Verify user exists in DB
+      const existingUser = await db.query.users.findFirst({
+        where: eq(users.id, existingUserId),
+      });
 
-    if (existingUser) {
-      return existingUser.id;
+      if (existingUser) {
+        return existingUser.id;
+      }
+    } catch (error) {
+      if (isMissingUsersTableError(error)) {
+        // DB not initialized; fallback without failing the request.
+        await safeSetCookie(COOKIE_NAME, existingUserId, COOKIE_MAX_AGE);
+        return existingUserId;
+      }
+      throw error;
     }
   }
 
-  // Create new user
-  const [newUser] = await db.insert(users).values({}).returning();
+  try {
+    // Create new user
+    const [newUser] = await db.insert(users).values({}).returning();
 
-  // Best-effort cookie set
-  await safeSetCookie(COOKIE_NAME, newUser.id, COOKIE_MAX_AGE);
+    // Best-effort cookie set
+    await safeSetCookie(COOKIE_NAME, newUser.id, COOKIE_MAX_AGE);
 
-  return newUser.id;
+    return newUser.id;
+  } catch (error) {
+    if (isMissingUsersTableError(error)) {
+      const fallbackId = existingUserId || randomUUID();
+      await safeSetCookie(COOKIE_NAME, fallbackId, COOKIE_MAX_AGE);
+      return fallbackId;
+    }
+    throw error;
+  }
 }
 
 export async function getCurrentUserId(): Promise<string | null> {
@@ -67,12 +92,19 @@ export async function getCurrentUserId(): Promise<string | null> {
     return userId;
   }
 
-  // Verify user exists
-  const existingUser = await db.query.users.findFirst({
-    where: eq(users.id, userId),
-  });
+  try {
+    // Verify user exists
+    const existingUser = await db.query.users.findFirst({
+      where: eq(users.id, userId),
+    });
 
-  return existingUser ? existingUser.id : null;
+    return existingUser ? existingUser.id : null;
+  } catch (error) {
+    if (isMissingUsersTableError(error)) {
+      return userId;
+    }
+    throw error;
+  }
 }
 
 export async function setUserCookie(userId: string): Promise<void> {
