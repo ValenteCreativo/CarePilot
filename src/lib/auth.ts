@@ -1,6 +1,25 @@
 import { cookies } from "next/headers";
+import { randomUUID } from "crypto";
 import { db, users } from "@/db";
 import { eq } from "drizzle-orm";
+
+const hasDatabase = !!process.env.DATABASE_URL;
+
+async function safeSetCookie(name: string, value: string, maxAge: number) {
+  try {
+    const cookieStore = await cookies();
+    // In Server Components, setting cookies can throw; catch and continue.
+    cookieStore.set(name, value, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge,
+      path: "/",
+    });
+  } catch {
+    // Ignore; best-effort cookie set.
+  }
+}
 
 const COOKIE_NAME = "cp_uid";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
@@ -8,6 +27,13 @@ const COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
 export async function getOrCreateUser(): Promise<string> {
   const cookieStore = await cookies();
   const existingUserId = cookieStore.get(COOKIE_NAME)?.value;
+
+  if (!hasDatabase) {
+    // Fallback: return a deterministic per-request id without touching the DB.
+    const fallbackId = existingUserId || randomUUID();
+    await safeSetCookie(COOKIE_NAME, fallbackId, COOKIE_MAX_AGE);
+    return fallbackId;
+  }
 
   if (existingUserId) {
     // Verify user exists in DB
@@ -23,15 +49,8 @@ export async function getOrCreateUser(): Promise<string> {
   // Create new user
   const [newUser] = await db.insert(users).values({}).returning();
 
-  // Set cookie - note: this only works in server actions or route handlers
-  // For regular server components, we need to handle this differently
-  cookieStore.set(COOKIE_NAME, newUser.id, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: COOKIE_MAX_AGE,
-    path: "/",
-  });
+  // Best-effort cookie set
+  await safeSetCookie(COOKIE_NAME, newUser.id, COOKIE_MAX_AGE);
 
   return newUser.id;
 }
@@ -42,6 +61,10 @@ export async function getCurrentUserId(): Promise<string | null> {
 
   if (!userId) {
     return null;
+  }
+
+  if (!hasDatabase) {
+    return userId;
   }
 
   // Verify user exists
