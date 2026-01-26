@@ -14,19 +14,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body
-        className="font-sans antialiased min-h-screen bg-background"
-      >
-        <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container mx-auto px-4 h-14 flex items-center">
-            <a href="/" className="flex items-center gap-2">
-              <span className="text-xl font-semibold tracking-tight">CarePilot</span>
-            </a>
-          </div>
-        </header>
-        <main className="container mx-auto px-4 py-8">
-          {children}
-        </main>
+      <body className="font-sans antialiased min-h-screen bg-background">
+        {children}
         <Toaster />
       </body>
     </html>
