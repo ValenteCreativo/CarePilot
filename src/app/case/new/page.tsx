@@ -12,29 +12,63 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { ArrowLeft, ArrowRight, AlertTriangle, Loader2 } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  AlertTriangle,
+  Loader2,
+  Heart,
+  Brain,
+  Pill,
+  Scale,
+  Gavel,
+  HelpCircle,
+  Activity,
+  Home,
+  MapPin,
+  Users,
+  Clock,
+  DollarSign,
+  Zap,
+  Ban,
+  Check,
+} from "lucide-react";
 import { toast } from "sonner";
 
 const situationTypes = [
-  { value: "recovery", label: "Recovery", description: "Post-surgery, illness, or injury recovery" },
-  { value: "elder_care", label: "Elder Care", description: "Supporting aging family members" },
-  { value: "mental_health", label: "Mental Health", description: "Managing mental health conditions" },
-  { value: "addiction", label: "Addiction", description: "Supporting recovery from addiction" },
-  { value: "debt", label: "Debt", description: "Financial stress and debt management" },
-  { value: "legal", label: "Legal", description: "Legal matters and proceedings" },
-  { value: "other", label: "Other", description: "Other care situations" },
+  { value: "recovery", label: "Recovery", description: "Post-surgery, illness, or injury recovery", icon: Activity },
+  { value: "elder_care", label: "Elder Care", description: "Supporting aging family members", icon: Heart },
+  { value: "mental_health", label: "Mental Health", description: "Managing mental health conditions", icon: Brain },
+  { value: "addiction", label: "Addiction", description: "Supporting recovery from addiction", icon: Pill },
+  { value: "debt", label: "Debt", description: "Financial stress and debt management", icon: DollarSign },
+  { value: "legal", label: "Legal", description: "Legal matters and proceedings", icon: Gavel },
+  { value: "other", label: "Other", description: "Other care situations", icon: HelpCircle },
 ];
 
 const distanceOptions = [
-  { value: "same_home", label: "Same Home", description: "Living together" },
-  { value: "same_city", label: "Same City", description: "Within driving distance" },
-  { value: "remote", label: "Remote", description: "Different city or long distance" },
+  { value: "same_home", label: "Same Home", description: "Living together", icon: Home },
+  { value: "same_city", label: "Same City", description: "Within driving distance", icon: MapPin },
+  { value: "remote", label: "Remote", description: "Different city or long distance", icon: MapPin },
 ];
 
 const supportOptions = [
   { value: "alone", label: "Alone", description: "No other helpers available" },
   { value: "some_help", label: "Some Help", description: "Occasional support from others" },
   { value: "team", label: "Team", description: "Regular coordinated support" },
+];
+
+const constraintItems = [
+  { key: "mobility" as const, label: "Mobility assistance needed", icon: Activity },
+  { key: "medsChecklist" as const, label: "Medication tracking needed", icon: Pill },
+  { key: "dietNeeded" as const, label: "Special diet requirements", icon: Heart },
+  { key: "appointments" as const, label: "Appointment coordination", icon: Clock },
+];
+
+const riskItems = [
+  { key: "selfHarm" as const, label: "Self-harm concerns" },
+  { key: "violence" as const, label: "Violence concerns" },
+  { key: "urgentMedical" as const, label: "Urgent medical needs" },
+  { key: "abuse" as const, label: "Abuse concerns" },
 ];
 
 type FormData = {
@@ -175,23 +209,69 @@ export default function NewCasePage() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
+      {/* Header */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Create Care Case</h1>
         <p className="text-muted-foreground mt-1">
-          Step {step} of 2: {step === 1 ? "About the situation" : "About you as caregiver"}
+          We&apos;ll help you build a structured plan for managing care.
         </p>
       </div>
 
-      {/* Progress indicator */}
-      <div className="flex gap-2">
-        <div className={`h-2 flex-1 rounded-full ${step >= 1 ? "bg-primary" : "bg-muted"}`} />
-        <div className={`h-2 flex-1 rounded-full ${step >= 2 ? "bg-primary" : "bg-muted"}`} />
+      {/* Enhanced Stepper */}
+      <div className="relative">
+        <div className="flex items-center justify-between">
+          {/* Step 1 */}
+          <div className="flex items-center gap-3 flex-1">
+            <div
+              className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ${
+                step >= 1
+                  ? "bg-primary border-primary text-primary-foreground"
+                  : "border-muted-foreground/30 text-muted-foreground"
+              }`}
+            >
+              {step > 1 ? <Check className="w-5 h-5" /> : <span className="font-semibold">1</span>}
+            </div>
+            <div className="hidden sm:block">
+              <p className={`text-sm font-medium ${step >= 1 ? "text-foreground" : "text-muted-foreground"}`}>
+                Step 1
+              </p>
+              <p className="text-xs text-muted-foreground">About the situation</p>
+            </div>
+          </div>
+
+          {/* Connector */}
+          <div className="flex-1 mx-4">
+            <div className={`h-0.5 rounded-full transition-all ${step >= 2 ? "bg-primary" : "bg-muted"}`} />
+          </div>
+
+          {/* Step 2 */}
+          <div className="flex items-center gap-3 flex-1 justify-end">
+            <div className="hidden sm:block text-right">
+              <p className={`text-sm font-medium ${step >= 2 ? "text-foreground" : "text-muted-foreground"}`}>
+                Step 2
+              </p>
+              <p className="text-xs text-muted-foreground">About you as caregiver</p>
+            </div>
+            <div
+              className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ${
+                step >= 2
+                  ? "bg-primary border-primary text-primary-foreground"
+                  : "border-muted-foreground/30 text-muted-foreground"
+              }`}
+            >
+              <span className="font-semibold">2</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {step === 1 ? (
-        <Card>
+        <Card className="border-border/60">
           <CardHeader>
-            <CardTitle>Loved One Context</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Heart className="w-5 h-5 text-primary" />
+              Loved One Context
+            </CardTitle>
             <CardDescription>
               Describe the care situation at a high level. Avoid including personally identifiable information.
             </CardDescription>
@@ -205,6 +285,7 @@ export default function NewCasePage() {
                 placeholder="e.g., Mom's Recovery Plan, Dad's Elder Care"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                className="bg-background"
               />
             </div>
 
@@ -216,22 +297,30 @@ export default function NewCasePage() {
                 onValueChange={(value) => setFormData({ ...formData, situationType: value })}
                 className="grid grid-cols-2 gap-3"
               >
-                {situationTypes.map((type) => (
-                  <div key={type.value}>
-                    <RadioGroupItem
-                      value={type.value}
-                      id={type.value}
-                      className="peer sr-only"
-                    />
-                    <Label
-                      htmlFor={type.value}
-                      className="flex flex-col rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
-                    >
-                      <span className="font-medium">{type.label}</span>
-                      <span className="text-xs text-muted-foreground">{type.description}</span>
-                    </Label>
-                  </div>
-                ))}
+                {situationTypes.map((type) => {
+                  const Icon = type.icon;
+                  return (
+                    <div key={type.value}>
+                      <RadioGroupItem
+                        value={type.value}
+                        id={type.value}
+                        className="peer sr-only"
+                      />
+                      <Label
+                        htmlFor={type.value}
+                        className="flex items-start gap-3 rounded-lg border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
+                      >
+                        <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <Icon className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <span className="font-medium">{type.label}</span>
+                          <p className="text-xs text-muted-foreground mt-0.5">{type.description}</p>
+                        </div>
+                      </Label>
+                    </div>
+                  );
+                })}
               </RadioGroup>
             </div>
 
@@ -244,6 +333,7 @@ export default function NewCasePage() {
                 rows={4}
                 value={formData.summary}
                 onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
+                className="bg-background resize-none"
               />
               <p className="text-xs text-muted-foreground">
                 Keep this general to protect privacy.
@@ -256,28 +346,40 @@ export default function NewCasePage() {
             <div className="space-y-3">
               <Label>Care Constraints (select all that apply)</Label>
               <div className="grid grid-cols-2 gap-3">
-                {[
-                  { key: "mobility" as const, label: "Mobility assistance needed" },
-                  { key: "medsChecklist" as const, label: "Medication tracking needed" },
-                  { key: "dietNeeded" as const, label: "Special diet requirements" },
-                  { key: "appointments" as const, label: "Appointment coordination" },
-                ].map((item) => (
-                  <div key={item.key} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={item.key}
-                      checked={formData.constraints[item.key]}
-                      onCheckedChange={(checked) =>
+                {constraintItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={item.key}
+                      className={`flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer ${
+                        formData.constraints[item.key]
+                          ? "border-primary/50 bg-primary/5"
+                          : "border-border/40 hover:border-border"
+                      }`}
+                      onClick={() =>
                         setFormData({
                           ...formData,
-                          constraints: { ...formData.constraints, [item.key]: checked === true },
+                          constraints: { ...formData.constraints, [item.key]: !formData.constraints[item.key] },
                         })
                       }
-                    />
-                    <Label htmlFor={item.key} className="text-sm cursor-pointer">
-                      {item.label}
-                    </Label>
-                  </div>
-                ))}
+                    >
+                      <Checkbox
+                        id={item.key}
+                        checked={formData.constraints[item.key]}
+                        onCheckedChange={(checked) =>
+                          setFormData({
+                            ...formData,
+                            constraints: { ...formData.constraints, [item.key]: checked === true },
+                          })
+                        }
+                      />
+                      <Icon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                      <Label htmlFor={item.key} className="text-sm cursor-pointer flex-1">
+                        {item.label}
+                      </Label>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
@@ -290,13 +392,21 @@ export default function NewCasePage() {
                 Risk Signals (select if present)
               </Label>
               <div className="grid grid-cols-2 gap-3">
-                {[
-                  { key: "selfHarm" as const, label: "Self-harm concerns" },
-                  { key: "violence" as const, label: "Violence concerns" },
-                  { key: "urgentMedical" as const, label: "Urgent medical needs" },
-                  { key: "abuse" as const, label: "Abuse concerns" },
-                ].map((item) => (
-                  <div key={item.key} className="flex items-center space-x-2">
+                {riskItems.map((item) => (
+                  <div
+                    key={item.key}
+                    className={`flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer ${
+                      formData.riskSignals[item.key]
+                        ? "border-destructive/50 bg-destructive/5"
+                        : "border-border/40 hover:border-border"
+                    }`}
+                    onClick={() =>
+                      setFormData({
+                        ...formData,
+                        riskSignals: { ...formData.riskSignals, [item.key]: !formData.riskSignals[item.key] },
+                      })
+                    }
+                  >
                     <Checkbox
                       id={item.key}
                       checked={formData.riskSignals[item.key]}
@@ -307,14 +417,14 @@ export default function NewCasePage() {
                         })
                       }
                     />
-                    <Label htmlFor={item.key} className="text-sm cursor-pointer">
+                    <Label htmlFor={item.key} className="text-sm cursor-pointer flex-1">
                       {item.label}
                     </Label>
                   </div>
                 ))}
               </div>
               {hasRiskSignals && (
-                <Alert variant="destructive">
+                <Alert variant="destructive" className="mt-4">
                   <AlertTriangle className="h-4 w-4" />
                   <AlertDescription>
                     If there&apos;s immediate danger, please contact emergency services. Our plan will include safety-focused guidance, but this tool is not a substitute for professional help.
@@ -323,28 +433,36 @@ export default function NewCasePage() {
               )}
             </div>
 
-            <div className="flex justify-end">
-              <Button onClick={handleNext}>
-                Next
+            <div className="flex justify-end pt-4">
+              <Button onClick={handleNext} size="lg">
+                Continue
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </div>
           </CardContent>
         </Card>
       ) : (
-        <Card>
+        <Card className="border-border/60">
           <CardHeader>
-            <CardTitle>Caregiver Context</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="w-5 h-5 text-primary" />
+              Caregiver Context
+            </CardTitle>
             <CardDescription>
               Tell us about your capacity and resources so we can create a realistic plan.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Time per week */}
-            <div className="space-y-3">
-              <div className="flex justify-between">
-                <Label>Time Available (hours/week)</Label>
-                <span className="text-sm text-muted-foreground">{formData.timePerWeek} hours</span>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <Label className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-muted-foreground" />
+                  Time Available (hours/week)
+                </Label>
+                <span className="text-sm font-medium bg-muted px-3 py-1 rounded-md">
+                  {formData.timePerWeek} hours
+                </span>
               </div>
               <Slider
                 value={[formData.timePerWeek]}
@@ -352,6 +470,7 @@ export default function NewCasePage() {
                 min={1}
                 max={60}
                 step={1}
+                className="py-2"
               />
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>1 hour</span>
@@ -360,10 +479,15 @@ export default function NewCasePage() {
             </div>
 
             {/* Budget */}
-            <div className="space-y-3">
-              <div className="flex justify-between">
-                <Label>Budget (USD/week)</Label>
-                <span className="text-sm text-muted-foreground">${formData.budgetPerWeekUsd}</span>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <Label className="flex items-center gap-2">
+                  <DollarSign className="w-4 h-4 text-muted-foreground" />
+                  Budget (USD/week)
+                </Label>
+                <span className="text-sm font-medium bg-muted px-3 py-1 rounded-md">
+                  ${formData.budgetPerWeekUsd}
+                </span>
               </div>
               <Slider
                 value={[formData.budgetPerWeekUsd]}
@@ -371,6 +495,7 @@ export default function NewCasePage() {
                 min={0}
                 max={1000}
                 step={25}
+                className="py-2"
               />
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>$0</span>
@@ -380,36 +505,46 @@ export default function NewCasePage() {
 
             {/* Distance */}
             <div className="space-y-3">
-              <Label>Distance from Loved One</Label>
+              <Label className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-muted-foreground" />
+                Distance from Loved One
+              </Label>
               <RadioGroup
                 value={formData.distance}
                 onValueChange={(value) => setFormData({ ...formData, distance: value })}
                 className="grid grid-cols-3 gap-3"
               >
-                {distanceOptions.map((option) => (
-                  <div key={option.value}>
-                    <RadioGroupItem
-                      value={option.value}
-                      id={`distance-${option.value}`}
-                      className="peer sr-only"
-                    />
-                    <Label
-                      htmlFor={`distance-${option.value}`}
-                      className="flex flex-col items-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer text-center"
-                    >
-                      <span className="font-medium text-sm">{option.label}</span>
-                      <span className="text-xs text-muted-foreground">{option.description}</span>
-                    </Label>
-                  </div>
-                ))}
+                {distanceOptions.map((option) => {
+                  const Icon = option.icon;
+                  return (
+                    <div key={option.value}>
+                      <RadioGroupItem
+                        value={option.value}
+                        id={`distance-${option.value}`}
+                        className="peer sr-only"
+                      />
+                      <Label
+                        htmlFor={`distance-${option.value}`}
+                        className="flex flex-col items-center rounded-lg border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer text-center transition-all"
+                      >
+                        <Icon className="w-5 h-5 text-muted-foreground mb-2" />
+                        <span className="font-medium text-sm">{option.label}</span>
+                        <span className="text-xs text-muted-foreground mt-0.5">{option.description}</span>
+                      </Label>
+                    </div>
+                  );
+                })}
               </RadioGroup>
             </div>
 
             {/* Energy Level */}
-            <div className="space-y-3">
-              <div className="flex justify-between">
-                <Label>Your Energy Level</Label>
-                <span className="text-sm text-muted-foreground">
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <Label className="flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-muted-foreground" />
+                  Your Energy Level
+                </Label>
+                <span className="text-sm font-medium bg-muted px-3 py-1 rounded-md">
                   {["Very Low", "Low", "Moderate", "Good", "High"][formData.energyLevel - 1]}
                 </span>
               </div>
@@ -419,6 +554,7 @@ export default function NewCasePage() {
                 min={1}
                 max={5}
                 step={1}
+                className="py-2"
               />
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>Exhausted</span>
@@ -428,7 +564,10 @@ export default function NewCasePage() {
 
             {/* Support Network */}
             <div className="space-y-3">
-              <Label>Support Network</Label>
+              <Label className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-muted-foreground" />
+                Support Network
+              </Label>
               <RadioGroup
                 value={formData.supportNetwork}
                 onValueChange={(value) => setFormData({ ...formData, supportNetwork: value })}
@@ -443,10 +582,10 @@ export default function NewCasePage() {
                     />
                     <Label
                       htmlFor={`support-${option.value}`}
-                      className="flex flex-col items-center rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer text-center"
+                      className="flex flex-col items-center rounded-lg border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer text-center transition-all"
                     >
                       <span className="font-medium text-sm">{option.label}</span>
-                      <span className="text-xs text-muted-foreground">{option.description}</span>
+                      <span className="text-xs text-muted-foreground mt-0.5">{option.description}</span>
                     </Label>
                   </div>
                 ))}
@@ -455,22 +594,26 @@ export default function NewCasePage() {
 
             {/* Hard Limits */}
             <div className="space-y-2">
-              <Label htmlFor="hardLimits">Hard Limits (optional)</Label>
+              <Label htmlFor="hardLimits" className="flex items-center gap-2">
+                <Ban className="w-4 h-4 text-muted-foreground" />
+                Hard Limits (optional)
+              </Label>
               <Textarea
                 id="hardLimits"
                 placeholder="Things you cannot or will not do, boundaries you need to maintain..."
                 rows={3}
                 value={formData.hardLimits}
                 onChange={(e) => setFormData({ ...formData, hardLimits: e.target.value })}
+                className="bg-background resize-none"
               />
             </div>
 
-            <div className="flex justify-between">
-              <Button variant="outline" onClick={handleBack}>
+            <div className="flex justify-between pt-4">
+              <Button variant="outline" onClick={handleBack} size="lg">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back
               </Button>
-              <Button onClick={handleSubmit} disabled={isSubmitting}>
+              <Button onClick={handleSubmit} disabled={isSubmitting} size="lg">
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />

@@ -144,7 +144,7 @@ export default function CaseDetailPage() {
       const response = await fetch(`/api/case/${caseId}`);
       if (!response.ok) {
         if (response.status === 404) {
-          router.push("/");
+          router.push("/app");
           return;
         }
         throw new Error("Failed to fetch case");
@@ -251,7 +251,7 @@ export default function CaseDetailPage() {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <Link href="/" className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 mb-2">
+          <Link href="/app" className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 mb-2">
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
           </Link>
