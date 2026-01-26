@@ -73,7 +73,8 @@ const riskItems = [
 
 type FormData = {
   title: string;
-  situationType: string;
+  situationTypes: string[];
+  situationTypeOther: string;
   summary: string;
   constraints: {
     mobility: boolean;
@@ -97,7 +98,8 @@ type FormData = {
 
 const initialFormData: FormData = {
   title: "",
-  situationType: "",
+  situationTypes: [],
+  situationTypeOther: "",
   summary: "",
   constraints: {
     mobility: false,
@@ -132,8 +134,12 @@ export default function NewCasePage() {
       toast.error("Please provide a title for this case");
       return false;
     }
-    if (!formData.situationType) {
-      toast.error("Please select a situation type");
+    if (formData.situationTypes.length === 0) {
+      toast.error("Please select at least one situation type");
+      return false;
+    }
+    if (formData.situationTypes.includes("other") && !formData.situationTypeOther.trim()) {
+      toast.error("Please describe the 'Other' situation type");
       return false;
     }
     if (!formData.summary.trim()) {
@@ -176,7 +182,9 @@ export default function NewCasePage() {
         body: JSON.stringify({
           title: formData.title,
           lovedOneContext: {
-            situationType: formData.situationType,
+            situationType: formData.situationTypes[0] || "other", // Primary type for backward compatibility
+            situationTypes: formData.situationTypes,
+            situationTypeOther: formData.situationTypes.includes("other") ? formData.situationTypeOther : undefined,
             summary: formData.summary,
             constraints: formData.constraints,
             riskSignals: formData.riskSignals,
@@ -289,39 +297,65 @@ export default function NewCasePage() {
               />
             </div>
 
-            {/* Situation Type */}
+            {/* Situation Type - Multi-select */}
             <div className="space-y-3">
-              <Label>Situation Type</Label>
-              <RadioGroup
-                value={formData.situationType}
-                onValueChange={(value) => setFormData({ ...formData, situationType: value })}
-                className="grid grid-cols-2 gap-3"
-              >
+              <Label>Situation Type (select all that apply)</Label>
+              <div className="grid grid-cols-2 gap-3">
                 {situationTypes.map((type) => {
                   const Icon = type.icon;
+                  const isSelected = formData.situationTypes.includes(type.value);
                   return (
-                    <div key={type.value}>
-                      <RadioGroupItem
-                        value={type.value}
+                    <div
+                      key={type.value}
+                      className={`flex items-start gap-3 rounded-lg border-2 p-4 cursor-pointer transition-all ${
+                        isSelected
+                          ? "border-primary bg-primary/5"
+                          : "border-muted bg-popover hover:bg-accent hover:text-accent-foreground"
+                      }`}
+                      onClick={() => {
+                        const newTypes = isSelected
+                          ? formData.situationTypes.filter((t) => t !== type.value)
+                          : [...formData.situationTypes, type.value];
+                        setFormData({ ...formData, situationTypes: newTypes });
+                      }}
+                    >
+                      <Checkbox
                         id={type.value}
-                        className="peer sr-only"
+                        checked={isSelected}
+                        onCheckedChange={(checked) => {
+                          const newTypes = checked
+                            ? [...formData.situationTypes, type.value]
+                            : formData.situationTypes.filter((t) => t !== type.value);
+                          setFormData({ ...formData, situationTypes: newTypes });
+                        }}
                       />
-                      <Label
-                        htmlFor={type.value}
-                        className="flex items-start gap-3 rounded-lg border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer transition-all"
-                      >
-                        <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <Icon className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <span className="font-medium">{type.label}</span>
-                          <p className="text-xs text-muted-foreground mt-0.5">{type.description}</p>
-                        </div>
-                      </Label>
+                      <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-4 h-4 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <span className="font-medium">{type.label}</span>
+                        <p className="text-xs text-muted-foreground mt-0.5">{type.description}</p>
+                      </div>
                     </div>
                   );
                 })}
-              </RadioGroup>
+              </div>
+
+              {/* Other text field */}
+              {formData.situationTypes.includes("other") && (
+                <div className="mt-3 pl-4 border-l-2 border-primary/30">
+                  <Label htmlFor="situationTypeOther" className="text-sm">
+                    Please describe the situation
+                  </Label>
+                  <Input
+                    id="situationTypeOther"
+                    placeholder="Describe the care situation..."
+                    value={formData.situationTypeOther}
+                    onChange={(e) => setFormData({ ...formData, situationTypeOther: e.target.value })}
+                    className="mt-2 bg-background"
+                  />
+                </div>
+              )}
             </div>
 
             {/* Summary */}

@@ -9,7 +9,9 @@ export const users = pgTable("users", {
 
 // Loved one context JSON type
 export type LovedOneContext = {
-  situationType: "recovery" | "elder_care" | "mental_health" | "addiction" | "debt" | "legal" | "other";
+  situationType: string; // Legacy single type for backward compatibility
+  situationTypes?: ("recovery" | "elder_care" | "mental_health" | "addiction" | "debt" | "legal" | "other")[]; // Multi-select
+  situationTypeOther?: string; // Custom text when "other" is selected
   summary: string;
   constraints: {
     mobility?: boolean;
