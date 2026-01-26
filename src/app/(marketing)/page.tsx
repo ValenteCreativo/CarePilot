@@ -228,11 +228,12 @@ export default function LandingPage() {
                 Demo
               </Link>
               <a
-                href="https://github.com"
+                href="https://github.com/ValenteCreativo/CarePilot"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
               >
+                <Github className="w-4 h-4" />
                 GitHub
               </a>
               <Link href="/app/quality" className="text-muted-foreground hover:text-foreground transition-colors">
