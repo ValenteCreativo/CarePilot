@@ -131,6 +131,23 @@ export const humanFeedback = pgTable("human_feedback", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+// Actions table - autonomous actions to be executed
+export const actions = pgTable("actions", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  caseId: uuid("case_id").notNull().references(() => cases.id),
+  type: text("type").notNull().$type<"reminder" | "message" | "calendar" | "checkin_prompt">(),
+  status: text("status").notNull().$type<"pending" | "approved" | "executing" | "completed" | "failed">().default("pending"),
+  payload: json("payload").notNull(),
+  scheduledFor: timestamp("scheduled_for"),
+  executedAt: timestamp("executed_at"),
+  approvedAt: timestamp("approved_at"),
+  failureReason: text("failure_reason"),
+  opikTraceId: text("opik_trace_id"),
+  externalId: text("external_id"), // Twilio SID, Calendar event ID, etc
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 // Relations
 export const usersRelations = relations(users, ({ many }) => ({
   cases: many(cases),
@@ -144,6 +161,7 @@ export const casesRelations = relations(cases, ({ one, many }) => ({
   plans: many(plans),
   checkins: many(checkins),
   llmRuns: many(llmRuns),
+  actions: many(actions),
 }));
 
 export const plansRelations = relations(plans, ({ one, many }) => ({
@@ -180,5 +198,12 @@ export const humanFeedbackRelations = relations(humanFeedback, ({ one }) => ({
   plan: one(plans, {
     fields: [humanFeedback.planId],
     references: [plans.id],
+  }),
+}));
+
+export const actionsRelations = relations(actions, ({ one }) => ({
+  case: one(cases, {
+    fields: [actions.caseId],
+    references: [cases.id],
   }),
 }));
