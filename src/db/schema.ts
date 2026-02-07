@@ -4,8 +4,19 @@ import { relations, type InferSelectModel } from "drizzle-orm";
 // Users table - anonymous users identified by cookie
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
+  phoneNumber: text("phone_number").unique(),
+  whatsappState: text("whatsapp_state").$type<"NUEVO" | "ACTIVO">(),
+  whatsappStep: integer("whatsapp_step"),
+  whatsappContext: json("whatsapp_context").$type<WhatsAppOnboardingContext>(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+// WhatsApp onboarding context JSON type
+export type WhatsAppOnboardingContext = {
+  caregivingSituation?: string;
+  timeAvailable?: string;
+  budgetConstraints?: string;
+};
 
 // Loved one context JSON type
 export type LovedOneContext = {
@@ -148,12 +159,23 @@ export const actions = pgTable("actions", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+// Messages table - WhatsApp conversation log (optional)
+export const messages = pgTable("messages", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id").notNull().references(() => users.id),
+  direction: text("direction").notNull().$type<"inbound" | "outbound">(),
+  body: text("body").notNull(),
+  raw: json("raw"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 // Export Action type
 export type Action = InferSelectModel<typeof actions>;
 
 // Relations
 export const usersRelations = relations(users, ({ many }) => ({
   cases: many(cases),
+  messages: many(messages),
 }));
 
 export const casesRelations = relations(cases, ({ one, many }) => ({
@@ -208,5 +230,12 @@ export const actionsRelations = relations(actions, ({ one }) => ({
   case: one(cases, {
     fields: [actions.caseId],
     references: [cases.id],
+  }),
+}));
+
+export const messagesRelations = relations(messages, ({ one }) => ({
+  user: one(users, {
+    fields: [messages.userId],
+    references: [users.id],
   }),
 }));

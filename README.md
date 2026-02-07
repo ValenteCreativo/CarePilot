@@ -78,11 +78,14 @@ OPIK_API_KEY=your-opik-api-key
 OPIK_PROJECT_NAME=carepilot
 NEXT_PUBLIC_OPIK_PROJECT_URL=https://www.comet.com/opik/your-project
 
-# Twilio (for autonomous SMS/WhatsApp actions in v2.0)
+# Twilio (for autonomous SMS/WhatsApp actions + webhook bot)
 TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 TWILIO_AUTH_TOKEN=your-auth-token
+# SMS sender
 TWILIO_FROM_NUMBER=+1234567890
-# WhatsApp Sandbox: Send "join your-code" to +1 415 523 8886
+# WhatsApp sender (recommended; whatsapp:+E164)
+TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
+# Backward-compatible alias
 TWILIO_WHATSAPP_FROM=whatsapp:+14155238886
 ```
 
@@ -116,6 +119,17 @@ This will:
 - Log traces to Opik
 - Print aggregate metrics to console
 
+### Simulate Twilio Webhook
+
+Send a local test webhook to `/api/whatsapp`:
+
+```bash
+TWILIO_AUTH_TOKEN=your-auth-token \\
+WEBHOOK_URL=http://localhost:3000/api/whatsapp \\
+TWILIO_TEST_BODY=\"status\" \\
+npm run whatsapp:simulate
+```
+
 ## API Routes
 
 | Route | Method | Description |
@@ -130,6 +144,7 @@ This will:
 | `/api/case/[id]/actions/generate` | POST | Generate autonomous actions from plan |
 | `/api/actions/execute` | POST | Execute a specific action |
 | `/api/actions/approve` | POST | Approve a pending action |
+| `/api/whatsapp` | POST | Twilio WhatsApp webhook (bot) |
 
 ## Database Schema
 
@@ -166,6 +181,7 @@ CarePilot v2.0 introduces **agent-driven execution**: instead of just suggesting
 2. For WhatsApp: Join sandbox by texting your join code to `+1 415 523 8886`
 3. Run `npm run db:push` to create the `actions` table
 4. Generate a plan, then generate actions from it
+5. Configure Twilio webhook URL to `https://your-deployment.vercel.app/api/whatsapp`
 
 ### Demo Flow (WhatsApp Bot)
 
@@ -192,6 +208,7 @@ Current implementation:
    - `TWILIO_ACCOUNT_SID` (for v2.0 autonomous actions)
    - `TWILIO_AUTH_TOKEN`
    - `TWILIO_FROM_NUMBER`
+   - `TWILIO_WHATSAPP_NUMBER`
 4. Deploy!
 
 ## Safety Note
