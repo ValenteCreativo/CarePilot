@@ -3,6 +3,7 @@ import { getCurrentUserId } from "@/lib/auth";
 import { db, cases } from "@/db";
 import { eq, and } from "drizzle-orm";
 import { generatePlan } from "@/lib/pipeline";
+import { actionGenerator } from "@/lib/actions/generator";
 
 export async function POST(
   request: NextRequest,
@@ -11,6 +12,10 @@ export async function POST(
   try {
     const { id } = await params;
     const userId = await getCurrentUserId();
+    
+    // Optional: caregiverPhone to auto-generate actions
+    const body = await request.json().catch(() => ({}));
+    const { caregiverPhone } = body;
 
     if (!userId) {
       return NextResponse.json(
@@ -38,10 +43,22 @@ export async function POST(
       caseData.caregiverContext
     );
 
+    // Auto-generate actions if phone provided
+    let actionIds: string[] = [];
+    if (caregiverPhone) {
+      actionIds = await actionGenerator.generateFromPlan({
+        caseId: caseData.id,
+        plan: result.plan,
+        caregiverPhone,
+      });
+    }
+
     return NextResponse.json({
       plan: result.plan,
       planId: result.planId,
       triageResult: result.triageResult,
+      actionsGenerated: actionIds.length > 0,
+      actionCount: actionIds.length,
     });
   } catch (error) {
     console.error("Error generating plan:", error);
