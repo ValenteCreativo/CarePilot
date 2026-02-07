@@ -56,7 +56,7 @@ export class ActionExecutor {
         case "reminder":
         case "message":
         case "checkin_prompt":
-          result = await this.executeSmsAction(action);
+          result = await this.executeSmsAction(action as Action & { type: "reminder" | "message" | "checkin_prompt" });
           break;
         default:
           result = {
@@ -79,7 +79,10 @@ export class ActionExecutor {
         .where(eq(actions.id, actionId));
 
       trace.update({
-        output: result,
+        output: {
+          ...result,
+          executedAt: result.executedAt.toISOString(),
+        },
       });
       trace.end();
 
@@ -102,7 +105,10 @@ export class ActionExecutor {
         .where(eq(actions.id, actionId));
 
       trace.update({
-        output: failureResult,
+        output: {
+          ...failureResult,
+          executedAt: failureResult.executedAt.toISOString(),
+        },
       });
       trace.end();
 

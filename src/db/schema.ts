@@ -1,5 +1,5 @@
 import { pgTable, uuid, text, timestamp, json, boolean, integer, real } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
+import { relations, type InferSelectModel } from "drizzle-orm";
 
 // Users table - anonymous users identified by cookie
 export const users = pgTable("users", {
@@ -147,6 +147,9 @@ export const actions = pgTable("actions", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
+
+// Export Action type
+export type Action = InferSelectModel<typeof actions>;
 
 // Relations
 export const usersRelations = relations(users, ({ many }) => ({
