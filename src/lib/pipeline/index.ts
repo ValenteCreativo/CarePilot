@@ -1,6 +1,7 @@
 import { createHash } from "crypto";
 import { db, llmRuns, llmEvals, plans, type LovedOneContext, type CaregiverContext, type PlanJson } from "@/db";
 import { getOpikClient, getTrackedOpenAI, getModelName, logEvalScores, flushOpik } from "../opik";
+import { geminiService } from "../gemini";
 import { PROMPT_VERSION, buildTriagePrompt, buildPlanPrompt, buildCriticPrompt, buildEvalPrompt } from "./prompts";
 
 type TriageResult = {
@@ -20,10 +21,16 @@ function hashInput(input: string): string {
   return createHash("sha256").update(input).digest("hex").slice(0, 16);
 }
 
-async function callOpenAI(
+async function callAI(
   prompt: string,
   systemPrompt?: string
 ): Promise<{ content: string; latencyMs: number }> {
+  // Use Gemini as primary AI for CarePilot
+  if (process.env.GOOGLE_AI_API_KEY) {
+    return geminiService.generateText(prompt, systemPrompt);
+  }
+  
+  // Fallback to OpenAI if Gemini not configured
   const openai = getTrackedOpenAI();
   const model = getModelName();
   const start = Date.now();
@@ -87,7 +94,7 @@ export async function runTriageStage(
     const prompt = buildTriagePrompt(lovedOneContext, caregiverContext);
     const inputHash = hashInput(prompt);
 
-    const { content, latencyMs } = await callOpenAI(prompt);
+    const { content, latencyMs } = await callAI(prompt);
     const result = parseJsonResponse<TriageResult>(content);
 
     // Log to database
@@ -142,7 +149,7 @@ export async function runPlanStage(
     const prompt = buildPlanPrompt(lovedOneContext, caregiverContext, triageResult);
     const inputHash = hashInput(prompt);
 
-    const { content, latencyMs } = await callOpenAI(prompt);
+    const { content, latencyMs } = await callAI(prompt);
     const result = parseJsonResponse<PlanJson>(content);
 
     const [llmRun] = await db.insert(llmRuns).values({
@@ -197,7 +204,7 @@ export async function runCriticStage(
     const prompt = buildCriticPrompt(lovedOneContext, caregiverContext, planJson);
     const inputHash = hashInput(prompt);
 
-    const { content, latencyMs } = await callOpenAI(prompt);
+    const { content, latencyMs } = await callAI(prompt);
     const result = parseJsonResponse<PlanJson>(content);
 
     const [llmRun] = await db.insert(llmRuns).values({
@@ -246,7 +253,7 @@ export async function runEvals(
   for (const metric of metrics) {
     try {
       const prompt = buildEvalPrompt(metric, planJsonStr, caregiverContext);
-      const { content } = await callOpenAI(prompt);
+      const { content } = await callAI(prompt);
       const result = parseJsonResponse<{ score?: number; verdict?: string; rationale: string }>(content);
 
       const evalResult = {
