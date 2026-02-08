@@ -68,6 +68,62 @@ class TwilioService {
       };
     }
   }
+
+  async sendWhatsAppMessage(
+    config: TwilioMessageConfig,
+    to: string,
+    body: string
+  ): Promise<{ success: boolean; sid?: string; error?: string }> {
+    if (!config) {
+      return {
+        success: false,
+        error: "WhatsApp service not configured",
+      };
+    }
+
+    try {
+      const params = new URLSearchParams();
+      params.append("To", to);
+      params.append("From", config.fromNumber);
+      params.append("Body", body);
+
+      const auth = Buffer.from(
+        `${config.accountSid}:${config.authToken}`
+      ).toString("base64");
+
+      const response = await fetch(
+        `https://api.twilio.com/2010-04-01/Accounts/${config.accountSid}/Messages.json`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Basic ${auth}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: params.toString(),
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        return {
+          success: false,
+          error: `Failed to send WhatsApp message: ${errorText}`,
+        };
+      }
+
+      const data = await response.json();
+      return {
+        success: true,
+        sid: data.sid,
+      };
+    } catch (error) {
+      console.error("WhatsApp send error:", error);
+      return {
+        success: false,
+        error: "Failed to send WhatsApp message",
+      };
+    }
+  }
 }
 
 export const twilioService = new TwilioService();

@@ -19,10 +19,10 @@ type ActionRow = {
 type ColumnKey = "pending" | "approved" | "executing" | "completed";
 
 const columns: Array<{ key: ColumnKey; label: string; helper: string }> = [
-  { key: "pending", label: "Pending", helper: "Awaiting caregiver approval" },
-  { key: "approved", label: "Approved", helper: "Queued for execution" },
-  { key: "executing", label: "In Progress", helper: "Actively executing" },
-  { key: "completed", label: "Completed", helper: "Done or archived" },
+  { key: "pending", label: "For Review", helper: "Suggestions from your Guide" },
+  { key: "approved", label: "On the Way", helper: "Scheduled to act" },
+  { key: "executing", label: "Acting", helper: "CarePilot is on it" },
+  { key: "completed", label: "Peace Achieved", helper: "Done and settled" },
 ];
 
 function getPayloadLabel(payload: unknown) {
@@ -66,7 +66,7 @@ export function ActionsKanban({ initialActions }: { initialActions: ActionRow[] 
         return;
       }
 
-      toast.success("Action updated");
+      toast.success("All set!");
       router.refresh();
     });
   };
@@ -82,7 +82,7 @@ export function ActionsKanban({ initialActions }: { initialActions: ActionRow[] 
           <div className="space-y-3">
             {grouped[column.key].length === 0 ? (
               <Card className="bg-background/60 border-dashed border-border/60">
-                <CardContent className="p-4 text-xs text-muted-foreground">No actions here yet.</CardContent>
+                <CardContent className="p-4 text-xs text-muted-foreground">Nothing here yet.</CardContent>
               </Card>
             ) : (
               grouped[column.key].map((action) => (
@@ -108,7 +108,7 @@ export function ActionsKanban({ initialActions }: { initialActions: ActionRow[] 
                             onClick={() => updateStatus(action.id, "approved")}
                             disabled={isPending}
                           >
-                            Approve
+                            Let's do this
                           </Button>
                           <Button
                             size="sm"
@@ -116,7 +116,7 @@ export function ActionsKanban({ initialActions }: { initialActions: ActionRow[] 
                             onClick={() => updateStatus(action.id, "failed")}
                             disabled={isPending}
                           >
-                            Reject
+                            Not now
                           </Button>
                         </>
                       )}
@@ -126,22 +126,22 @@ export function ActionsKanban({ initialActions }: { initialActions: ActionRow[] 
                           onClick={() => updateStatus(action.id, "completed")}
                           disabled={isPending}
                         >
-                          Mark complete
+                          Mark as done
                         </Button>
                       )}
                       {action.status === "executing" && (
                         <Button size="sm" variant="outline" disabled>
-                          Executing...
+                          On it...
                         </Button>
                       )}
                       {action.status === "completed" && (
                         <Button size="sm" variant="ghost" disabled>
-                          Completed
+                          All set
                         </Button>
                       )}
                       {action.status === "failed" && (
                         <Button size="sm" variant="ghost" disabled>
-                          Rejected
+                          Passed
                         </Button>
                       )}
                     </div>

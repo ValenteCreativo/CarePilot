@@ -7,6 +7,10 @@ Esta es la estructura actual de archivos y carpetas del proyecto.
 ├── PROJECT_STATUS.md
 ├── DEPLOYMENT.md
 ├── README.md
+├── Descripcion.md (Documentación en español)
+├── PaletaColores.md (Guía de colores y branding)
+├── Textos.md (Documentación de textos en inglés)
+├── Estructura.md (Este archivo)
 ├── next.config.ts
 ├── tsconfig.json
 ├── package.json
@@ -22,7 +26,15 @@ Esta es la estructura actual de archivos y carpetas del proyecto.
 │   ├── globe.svg
 │   ├── next.svg
 │   ├── vercel.svg
-│   └── window.svg
+│   ├── window.svg
+│   ├── images/
+│   │   ├── README.md
+│   │   └── logos/ (Eliminada - solo CarePilot.jpg)
+│   └── logos/
+│       ├── README.md
+│       ├── carepilot-icon.svg
+│       ├── carepilot-logo.svg
+│       └── whatsapp-icon.svg
 ├── scripts/
 │   ├── seed.ts
 │   └── simulate-whatsapp-webhook.ts
@@ -52,18 +64,23 @@ Esta es la estructura actual de archivos y carpetas del proyecto.
     │   ├── layout.tsx
     │   ├── loading.tsx
     │   ├── page.tsx (Marketing/Home)
+    │   ├── fonts/
+    │   │   ├── DMSans-VariableFont_opsz,wght.ttf
+    │   │   ├── Parisienne-Regular.ttf
+    │   │   ├── Ultra-Regular.ttf
+    │   │   └── font-classes.css
     │   ├── login/
     │   │   └── page.tsx
     │   ├── signup/
     │   │   └── page.tsx
     │   ├── (marketing)/
     │   │   ├── layout.tsx
-    │   │   └── page.tsx
+    │   │   └── page.tsx (Con "How It Works" y CarePilot.jpg)
     │   ├── dashboard/
     │   │   ├── layout.tsx
-    │   │   ├── page.tsx
+    │   │   ├── page.tsx (Con empty states humanizados)
     │   │   ├── actions/
-    │   │   │   └── page.tsx
+    │   │   │   └── page.tsx (Kanban con voz humana)
     │   │   ├── analytics/
     │   │   │   └── page.tsx
     │   │   ├── settings/
@@ -80,7 +97,7 @@ Esta es la estructura actual de archivos y carpetas del proyecto.
     │   │   ├── new/
     │   │   │   └── page.tsx
     │   │   └── [id]/
-    │   │       ├── page.tsx
+    │   │       ├── page.tsx (Con mensajes de celebración)
     │   │       ├── actions/
     │   │       │   └── page.tsx
     │   │       └── quality/
@@ -95,7 +112,7 @@ Esta es la estructura actual de archivos y carpetas del proyecto.
     │       │   ├── execute/
     │       │   │   └── route.ts
     │       │   └── reject/
-    │       │       └── route.ts
+    │       │   │   └── route.ts
     │       ├── analytics/
     │       │   └── route.ts
     │       ├── case/
@@ -123,15 +140,15 @@ Esta es la estructura actual de archivos y carpetas del proyecto.
     │       ├── signup/
     │       │   └── route.ts
     │       └── whatsapp/
-    │           ├── route.ts
+    │           ├── route.ts (Con voz del bot en inglés)
     │           └── test/
     │               └── route.ts
     ├── components/
     │   ├── auth/
-    │   │   ├── auth-form.tsx
+    │   │   ├── auth-form.tsx (Formulario en inglés)
     │   │   └── signout-button.tsx
     │   ├── dashboard/
-    │   │   ├── actions-kanban.tsx
+    │   │   ├── actions-kanban.tsx (Con columnas humanizadas)
     │   │   ├── analytics-dashboard.tsx
     │   │   ├── settings-client.tsx
     │   │   └── whatsapp-config.tsx
@@ -174,17 +191,38 @@ Esta es la estructura actual de archivos y carpetas del proyecto.
         │   └── types.ts
         └── pipeline/
             ├── index.ts
-            └── prompts.ts
+            └── prompts.ts (Con personalidad del bot definida)
 ```
 
 ## Resumen de carpetas principales
 
-- **`src/app`**: Rutas de Next.js (App Router), incluye páginas y layouts.
-- **`src/api`**: Endpoints de la API del proyecto.
-- **`src/components`**: Componentes de React, divididos en lógica de negocio y UI general (Shadcn).
-- **`src/lib`**: Utilidades, configuración de servicios externos (Twilio, Gemini, Auth) y lógica central.
+- **`src/app`**: Rutas de Next.js (App Router), incluye páginas y layouts. Actualizado con textos en inglés y voz humanizada.
+- **`src/api`**: Endpoints de la API del proyecto. WhatsApp route con voz del bot en inglés.
+- **`src/components`**: Componentes de React, divididos en lógica de negocio y UI general (Shadcn). Kanban humanizado.
+- **`src/lib`**: Utilidades, configuración de servicios externos (Twilio, Gemini, Auth) y lógica central. Prompts con personalidad definida.
 - **`src/db`**: Configuración de la base de datos y esquemas de Drizzle ORM.
 - **`drizzle`**: Migraciones de la base de datos SQL.
 - **`eval`**: Pruebas de evaluación y fixtures para el sistema.
 - **`scripts`**: Scripts de utilidad para desarrollo y seeding.
-- **`public`**: Activos estáticos como imágenes y vectores.
+- **`public`**: Activos estáticos como imágenes y vectores. Solo CarePilot.jpg en logos.
+
+## Cambios Recientes Implementados
+
+### Branding y UI
+- **Fuentes personalizadas**: DMSans, Parisienne, Ultra integradas
+- **Paleta de colores**: 4 colores HEX simplificados
+- **Logo**: CarePilot.jpg como única imagen de marca
+- **How It Works**: Sección agregada al marketing page
+
+### Textos y Voz (Todo en Inglés)
+- **Marketing**: Hero section y value propositions humanizados
+- **Dashboard**: Empty states con narrativa de nutrias
+- **Kanban**: Columnas con voz humana ("For Review", "On the Way", "Acting", "Peace Achieved")
+- **Celebraciones**: Mensajes de refuerzo positivo para cuidadores
+- **WhatsApp Bot**: Voz de "CarePilot Guide" con personalidad definida
+
+### Documentación
+- **Descripcion.md**: Actualizada con estado actual del proyecto
+- **PaletaColores.md**: Guía completa de branding
+- **Textos.md**: Documentación de todos los textos en inglés
+- **Estructura.md**: Este archivo, actualizado con cambios recientes

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,17 +10,21 @@ import {
   Stethoscope,
   ShieldCheck,
   Star,
+  Users,
+  Bot,
+  CheckCircle,
+  Smartphone,
 } from "lucide-react";
 
 const valueProps = [
   {
-    title: "24/7 WhatsApp support",
-    description: "Ask questions anytime and get calm, actionable guidance in minutes.",
+    title: "24/7 Support in your pocket",
+    description: "Ask questions anytime. Get clear, calm guidance in minutes, not hours.",
     icon: MessageSquare,
   },
   {
-    title: "Smart scheduling",
-    description: "Coordinate appointments, follow-ups, and reminders without the back-and-forth.",
+    title: "Your schedule, under control",
+    description: "Forget the back-and-forth of calls. We manage your appointments and prep without you losing track.",
     icon: CalendarClock,
   },
   {
@@ -40,24 +45,59 @@ const proofItems = [
   "Built with clinicians and experienced caregivers",
 ];
 
+const howItWorksSteps = [
+  {
+    step: 1,
+    title: "Tell Us Your Story",
+    description: "Share your loved one's context and your routine through WhatsApp. It's the beginning of our support network.",
+    icon: MessageSquare,
+  },
+  {
+    step: 2,
+    title: "Your Guide Prepares the Plan",
+    description: "Your Otter Guide designs a 7-day plan tailored to your work and their specific needs.",
+    icon: Bot,
+  },
+  {
+    step: 3,
+    title: "You Decide, We Act",
+    description: "With one tap, you authorize tasks. We handle reminders, scheduling, and coordination.",
+    icon: CheckCircle,
+  },
+  {
+    step: 4,
+    title: "Rest with Peace of Mind",
+    description: "24/7 WhatsApp assistance. You'll never care alone again; reclaim your time and peace.",
+    icon: Smartphone,
+  },
+];
+
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(14,116,144,0.22),_transparent_55%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(14,116,144,0.18),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,151,178,0.22),_transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(0,151,178,0.18),_transparent_60%)]" />
         <div className="container mx-auto px-4 py-24 md:py-32 relative">
           <div className="max-w-3xl">
+            <div className="mb-6">
+              <Image
+                src="/images/logos/CarePilot.jpg"
+                alt="CarePilot Logo"
+                width={120}
+                height={120}
+                priority
+                className="rounded-xl shadow-lg"
+              />
+            </div>
             <Badge variant="secondary" className="mb-6">
               Compassionate AI support for caregivers
             </Badge>
             <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-foreground">
-              CarePilot: Your AI Care Assistant
+              CarePilot: Caring is hard. Don't do it alone.
             </h1>
             <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
-              CarePilot keeps caregiving organized through WhatsApp. Share your schedule and your loved
-              one&apos;s needs, then let the agent coordinate reminders, appointments, and daily tasks so you
-              can stay present.
+              CarePilot organizes the chaos of care through WhatsApp. Share your routine and your loved one&apos;s needs; we handle the reminders, appointments, and daily tasks so you can simply be present.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Link href="/signup">
@@ -100,72 +140,135 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-16 border-t border-border/50">
+      <section className="py-24 border-t border-border/50 bg-[#aee4ff]/30">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-semibold mb-4">Subscription that respects your time</h2>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                For about $30/month, CarePilot handles scheduling, reminders, and coordination so you stay
-                on top of care without chasing every detail. Cancel anytime. No surprise fees.
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display text-primary mb-6">How It Works</h2>
+            <p className="text-lg text-primary/80 max-w-2xl mx-auto font-sans">
+              Get started in minutes with a process designed to give you peace. No complex setups, everything happens where you already are: WhatsApp.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
+            {/* Decorative Connection Line (Desktop) */}
+            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 border-t-2 border-dashed border-primary/20 -translate-y-8" />
+
+            {howItWorksSteps.map((item) => (
+              <div key={item.step} className="relative group">
+                <div className="bg-[#fff8d7] p-8 rounded-[2.5rem] border-2 border-primary/10 flex flex-col items-center text-center shadow-[0_8px_30px_rgb(0,151,178,0.08)] transition-all duration-300 hover:shadow-[0_12px_40px_rgb(0,151,178,0.12)] hover:-translate-y-1 h-full z-10 relative">
+                  {/* Step Badge */}
+                  <span className="absolute -top-4 -left-4 w-12 h-12 bg-[#FF0000] text-white rounded-full flex items-center justify-center font-display text-xl shadow-lg z-20">
+                    {item.step}
+                  </span>
+
+                  {/* Icon Container */}
+                  <div className="mb-8 p-5 bg-[#aee4ff] rounded-2xl text-primary shadow-inner">
+                    <item.icon className="h-8 w-8" />
+                  </div>
+
+                  <h3 className="text-xl font-display text-primary mb-4 leading-tight">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-primary/70 font-sans leading-relaxed text-sm">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-20 text-center">
+            <Link href="/signup">
+              <Button size="lg" className="px-10 py-7 text-lg rounded-2xl shadow-xl hover:scale-105 transition-transform">
+                Start Your Free Trial
+              </Button>
+            </Link>
+            <p className="mt-4 text-sm text-primary/60 font-sans">
+              Set up in 3 minutes • No credit card required
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 border-t border-border/50">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+            <div className="space-y-6">
+              <h2 className="text-4xl md:text-5xl font-display text-primary leading-tight">
+                A plan that respects your peace of mind
+              </h2>
+              <p className="text-primary/80 text-lg leading-relaxed font-sans max-w-xl">
+                For about $30/month, CarePilot handles the complexity of coordination so you can focus on what matters most: being present for your loved one.
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Badge variant="outline">Free trial available</Badge>
-                <Badge variant="outline">WhatsApp-native</Badge>
-                <Badge variant="outline">Caregiver-friendly setup</Badge>
+              <div className="flex flex-wrap gap-3">
+                <Badge variant="outline" className="border-primary/20 text-primary bg-primary/5 px-4 py-1 rounded-full">Free trial included</Badge>
+                <Badge variant="outline" className="border-primary/20 text-primary bg-primary/5 px-4 py-1 rounded-full">WhatsApp-native</Badge>
+                <Badge variant="outline" className="border-primary/20 text-primary bg-primary/5 px-4 py-1 rounded-full">Human-centered AI</Badge>
               </div>
             </div>
-            <Card className="bg-gradient-to-br from-primary/10 via-background to-background border-border/50">
-              <CardContent className="p-8">
-                <div className="flex items-center justify-between mb-6">
+
+            <Card className="bg-[#fff8d7] border-2 border-primary/10 rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,151,178,0.08)] overflow-hidden">
+              <CardContent className="p-10">
+                <div className="flex items-center justify-between mb-8">
                   <div>
-                    <p className="text-sm uppercase tracking-wide text-muted-foreground">CarePilot Plus</p>
-                    <p className="text-3xl font-semibold">$30/mo</p>
+                    <p className="text-xs uppercase tracking-widest text-primary/60 font-semibold mb-1">CarePilot Plus</p>
+                    <p className="text-4xl font-display text-primary">$30<span className="text-xl">/mo</span></p>
                   </div>
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                    <Star className="h-4 w-4 text-primary" />
-                    4.9 caregiver rating
+                  <div className="flex flex-col items-end gap-1">
+                    <div className="flex items-center gap-1 text-primary">
+                      <Star className="h-4 w-4 fill-primary" />
+                      <span className="font-bold">4.9</span>
+                    </div>
+                    <span className="text-[10px] text-primary/60 uppercase font-bold">Caregiver rating</span>
                   </div>
                 </div>
-                <ul className="text-sm text-muted-foreground space-y-3">
-                  <li>Unlimited WhatsApp check-ins</li>
-                  <li>Medication reminders and refill tracking</li>
-                  <li>Appointment coordination assistance</li>
-                  <li>Weekly care summaries and insights</li>
+
+                <ul className="text-sm text-primary/80 space-y-4 font-sans list-none">
+                  {["Unlimited WhatsApp coordination", "Medication tracking & proactive refills", "Appointment organization assistance", "Weekly insights & care summaries"].map((feature) => (
+                    <li key={feature} className="flex items-center gap-3">
+                      <div className="h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <CheckCircle className="h-3 w-3 text-primary" />
+                      </div>
+                      {feature}
+                    </li>
+                  ))}
                 </ul>
-                <Link href="/signup" className="block mt-8">
-                  <Button className="w-full">Start Your Free Trial</Button>
+
+                <Link href="/signup" className="block mt-10">
+                  <Button className="w-full py-7 text-lg rounded-2xl shadow-lg hover:scale-[1.02] transition-transform">
+                    Start Your Free Trial
+                  </Button>
                 </Link>
+                <p className="text-center mt-4 text-xs text-primary/50">Cancel anytime. No hidden fees.</p>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
 
-      <section className="py-16 border-t border-border/50">
+      <section className="py-24 border-t border-border/50 bg-[#fff8d7]/20">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 items-start">
-            <Card className="bg-card/60 border-border/40">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-semibold mb-3">Caregiver trust signals</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  We design CarePilot to follow HIPAA-adjacent practices, limit data access, and give you
-                  control over what is shared.
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">
-                  <Badge variant="secondary">Encrypted data</Badge>
-                  <Badge variant="secondary">Consent-first workflows</Badge>
-                  <Badge variant="secondary">Audit-ready logging</Badge>
-                </div>
-              </CardContent>
-            </Card>
-            <div className="space-y-4">
+          <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-16 items-start">
+            <div className="bg-[#fff8d7] p-10 rounded-[2.5rem] border-2 border-primary/10 shadow-sm">
+              <h3 className="text-2xl font-display text-primary mb-4">Built on trust</h3>
+              <p className="text-primary/70 font-sans leading-relaxed mb-6">
+                We design CarePilot with privacy at the core. Your data is encrypted, access is limited, and you always maintain full control.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="secondary" className="bg-primary/10 text-primary border-none">Encrypted data</Badge>
+                <Badge variant="secondary" className="bg-primary/10 text-primary border-none">Consent-first</Badge>
+                <Badge variant="secondary" className="bg-primary/10 text-primary border-none">Audit-ready</Badge>
+              </div>
+            </div>
+
+            <div className="grid gap-6">
               {proofItems.map((item) => (
-                <div key={item} className="flex items-start gap-3">
-                  <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                    <ShieldCheck className="h-4 w-4 text-primary" />
+                <div key={item} className="flex items-start gap-4 p-4 rounded-2xl transition-colors hover:bg-primary/5">
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <ShieldCheck className="h-5 w-5 text-primary" />
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item}</p>
+                  <p className="text-primary/80 font-sans leading-relaxed pt-1">{item}</p>
                 </div>
               ))}
             </div>
@@ -173,24 +276,25 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-16 border-t border-border/50">
+      <section className="py-32 border-t border-border/50 bg-[#aee4ff]/20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold">Ready to lighten the load?</h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            Start your free trial and meet your CarePilot on WhatsApp in minutes.
+          <h2 className="text-4xl md:text-6xl font-display text-primary mb-6">Ready to lighten the load?</h2>
+          <p className="mt-4 text-xl text-primary/70 font-sans max-w-2xl mx-auto">
+            Join thousands of families finding their peace with CarePilot. Meet your assistant on WhatsApp today.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
             <Link href="/signup">
-              <Button size="lg" className="px-10">
+              <Button size="lg" className="px-12 py-8 text-xl rounded-2xl shadow-xl hover:scale-105 transition-transform">
                 Start Your Free Trial
               </Button>
             </Link>
             <Link href="/login">
-              <Button size="lg" variant="outline" className="px-10">
+              <Button size="lg" variant="outline" className="px-12 py-8 text-xl rounded-2xl border-2 border-primary/20 text-primary hover:bg-primary/5">
                 Sign in
               </Button>
             </Link>
           </div>
+          <p className="mt-8 text-sm text-primary/50">Setup takes less than 3 minutes.</p>
         </div>
       </section>
 

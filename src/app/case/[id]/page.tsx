@@ -173,7 +173,7 @@ export default function CaseDetailPage() {
         const error = await response.json();
         throw new Error(error.message || "Failed to generate plan");
       }
-      toast.success("Plan generated successfully");
+      toast.success("Excellent decision! I'm getting started right now so you can rest a bit.");
       await fetchCase();
       setFeedbackGiven(null);
     } catch (error) {
@@ -197,7 +197,7 @@ export default function CaseDetailPage() {
       });
       if (!response.ok) throw new Error("Failed to submit feedback");
       setFeedbackGiven(helpful);
-      toast.success("Thanks for your feedback!");
+      toast.success("Thanks for your feedback! Your dedication makes this possible.");
     } catch (error) {
       toast.error("Failed to submit feedback");
     }
@@ -220,7 +220,7 @@ export default function CaseDetailPage() {
         }),
       });
       if (!response.ok) throw new Error("Failed to submit check-in");
-      toast.success("Check-in saved!");
+      toast.success("Check-in saved! Your consistency builds trust.");
       setCheckInOpen(false);
       setSelectedAction(null);
       setCheckInDone(false);
