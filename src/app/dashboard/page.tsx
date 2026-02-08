@@ -87,13 +87,34 @@ export default async function DashboardOverviewPage() {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm text-muted-foreground">Active cases</CardTitle>
           </CardHeader>
-          <CardContent className="text-3xl font-semibold">{activeCases}</CardContent>
+          <CardContent className="text-3xl font-semibold">
+            {activeCases === 0 ? (
+              <div className="space-y-2">
+                <p className="text-sm font-medium">Looks like you don't have a support network yet.</p>
+                <p className="text-sm text-muted-foreground">Would you like us to meet who you're caring for?</p>
+                <Link href="/case/new">
+                  <Button size="sm" className="mt-2">Start my first case</Button>
+                </Link>
+              </div>
+            ) : (
+              activeCases
+            )}
+          </CardContent>
         </Card>
         <Card className="bg-background/80 border-border/50">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm text-muted-foreground">Pending actions</CardTitle>
           </CardHeader>
-          <CardContent className="text-3xl font-semibold">{pendingActions}</CardContent>
+          <CardContent className="text-3xl font-semibold">
+            {pendingActions === 0 ? (
+              <div className="space-y-2">
+                <p className="text-sm font-medium">Everything's under control for now.</p>
+                <p className="text-sm text-muted-foreground">Take a breath, your Otter Guide will let you know if anything changes.</p>
+              </div>
+            ) : (
+              pendingActions
+            )}
+          </CardContent>
         </Card>
         <Card className="bg-background/80 border-border/50">
           <CardHeader className="pb-2">
@@ -113,7 +134,10 @@ export default async function DashboardOverviewPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             {recentMessages.length === 0 ? (
-              <p className="text-sm text-muted-foreground">No recent messages yet.</p>
+              <div className="space-y-2">
+                <p className="text-sm font-medium">Your conversation hasn't started yet.</p>
+                <p className="text-sm text-muted-foreground">Your Otter Guide is ready when you are.</p>
+              </div>
             ) : (
               recentMessages.map((message) => (
                 <div key={message.id} className="rounded-lg border border-border/50 p-4">

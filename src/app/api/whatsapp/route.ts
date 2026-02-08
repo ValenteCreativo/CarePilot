@@ -7,16 +7,16 @@ import { geminiService } from "@/lib/gemini";
 import { buildTwimlMessage, verifyTwilioSignature } from "@/lib/twilio";
 
 const HELP_TEXT =
-  "Comandos disponibles:\n" +
-  "- plan: resumen del plan actual\n" +
-  "- status: próximas 3 acciones aprobadas\n" +
-  "- update [mensaje]: actualiza tu contexto y regenera el plan\n" +
-  "- help: ver esta ayuda";
+  "Available commands:\n" +
+  "- plan: Get your current care plan summary\n" +
+  "- status: See next 3 approved actions\n" +
+  "- update [message]: Update your context and regenerate plan\n" +
+  "- help: See this help message";
 
 const ONBOARDING_QUESTIONS = {
-  step1: "Para empezar, cuéntame: ¿a quién cuidas y cuál es la situación principal?",
-  step2: "Gracias. ¿Cuánto tiempo disponible tienes por semana para cuidar?",
-  step3: "Entendido. ¿Qué presupuesto o limitaciones debemos considerar?",
+  step1: "To get started, tell me: Who are you caring for and what's their situation?",
+  step2: "Thanks for sharing. How much time can you dedicate each week to caregiving?",
+  step3: "Got it. What's your weekly budget for care-related expenses?",
 };
 
 type Command =
@@ -174,11 +174,17 @@ async function generateEmpatheticResponse(input: {
 }): Promise<string> {
   try {
     const prompt =
-      `Redacta un mensaje corto, cálido y empático en español.\n` +
-      `Resumen: ${input.summary}\n` +
-      `Siguiente paso: ${input.nextStep}\n` +
-      `Tono: ${input.tone ?? "acompañamiento"}.\n` +
-      `Máximo 4 frases.`;
+      `Generate a warm, supportive response in English that acknowledges the caregiver's effort and provides clear next steps.
+
+Context: ${input.summary}
+Next step: ${input.nextStep}
+Tone: ${input.tone ?? "supportive"}
+
+Keep it to 2-3 sentences maximum. Sound like a caring friend who's also knowledgeable.
+
+Examples:
+- "Got it! I've scheduled that appointment and will send you a reminder. One less thing to worry about."
+- "That's a great update. I've updated your care plan with this new information. You're doing an amazing job staying on top of everything."`;
 
     const result = await geminiService.generateText(prompt);
     return result.content.trim() || input.nextStep;
