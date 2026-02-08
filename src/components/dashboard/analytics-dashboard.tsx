@@ -58,13 +58,13 @@ export function AnalyticsDashboard({ initialData }: { initialData?: AnalyticsPay
   return (
     <div className="space-y-6">
       <div className="grid md:grid-cols-3 gap-4">
-        <Card className="bg-background/80 border-border/50">
+        <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm text-muted-foreground">Action completion rate</CardTitle>
           </CardHeader>
           <CardContent className="text-3xl font-semibold">{data.completionRate}%</CardContent>
         </Card>
-        <Card className="bg-background/80 border-border/50">
+        <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm text-muted-foreground">Avg response time</CardTitle>
           </CardHeader>
@@ -72,7 +72,7 @@ export function AnalyticsDashboard({ initialData }: { initialData?: AnalyticsPay
             {data.avgResponseMinutes}m
           </CardContent>
         </Card>
-        <Card className="bg-background/80 border-border/50">
+        <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm text-muted-foreground">Data freshness</CardTitle>
           </CardHeader>
@@ -82,7 +82,7 @@ export function AnalyticsDashboard({ initialData }: { initialData?: AnalyticsPay
         </Card>
       </div>
 
-      <Card className="bg-background/80 border-border/50">
+      <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg">Message volume</CardTitle>
           <Badge variant="secondary">Last 7 days</Badge>

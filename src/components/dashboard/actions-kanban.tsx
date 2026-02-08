@@ -81,12 +81,12 @@ export function ActionsKanban({ initialActions }: { initialActions: ActionRow[] 
           </div>
           <div className="space-y-3">
             {grouped[column.key].length === 0 ? (
-              <Card className="bg-background/60 border-dashed border-border/60">
+              <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg border-dashed">
                 <CardContent className="p-4 text-xs text-muted-foreground">Nothing here yet.</CardContent>
               </Card>
             ) : (
               grouped[column.key].map((action) => (
-                <Card key={action.id} className="bg-background/80 border-border/50">
+                <Card key={action.id} className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg hover:bg-card/70 hover:-translate-y-0.5 transition-all duration-300">
                   <CardContent className="p-4 space-y-3">
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span>{action.caseTitle ?? "Care case"}</span>

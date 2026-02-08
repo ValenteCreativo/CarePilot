@@ -67,7 +67,7 @@ export function AuthForm({ mode }: AuthFormProps) {
   };
 
   return (
-    <Card className="border-border/50 bg-card/70 backdrop-blur">
+    <Card className="bg-card/70 backdrop-blur-md border border-white/20 shadow-xl hover:bg-card/75 transition-all duration-300">
       <CardHeader>
         <CardTitle className="text-2xl font-semibold">
           {isSignup ? "Start your free trial" : "Welcome back"}
