@@ -194,6 +194,23 @@ export default function LandingPage() {
             <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
               CarePilot organizes the chaos of care through WhatsApp. Share your routine and your loved one&apos;s needs; we handle the reminders, appointments, and daily tasks so you can simply be present.
             </p>
+            
+            {/* WhatsApp Interface Demo */}
+            <div className="mt-12 mb-12 relative group">
+              <div className="max-w-2xl mx-auto">
+                <div className="relative rounded-[2rem] overflow-hidden shadow-[0_20px_60px_rgb(0,151,178,0.15)] hover:shadow-[0_25px_70px_rgb(0,151,178,0.2)] transition-all duration-500">
+                  <Image
+                    src="/images/Whatsapp-Interfaz.png"
+                    alt="CarePilot WhatsApp interface showing AI assistant interaction"
+                    width={800}
+                    height={500}
+                    className="w-full h-auto object-cover"
+                  />
+                  {/* Glass overlay effect */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#aee4ff]/10 to-transparent pointer-events-none rounded-[2rem]" />
+                </div>
+              </div>
+            </div>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Link href="/signup">
                 <Button size="lg" className="px-8">
