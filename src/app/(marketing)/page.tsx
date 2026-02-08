@@ -17,6 +17,14 @@ import {
   Bot,
   CheckCircle,
   Smartphone,
+  Sparkles,
+  Lock,
+  FileText,
+  HeartHandshake,
+  Activity,
+  Briefcase,
+  ClipboardList,
+  Clock,
 } from "lucide-react";
 
 function ScrollRotatingLogo() {
@@ -62,6 +70,24 @@ function ScrollRotatingLogo() {
   );
 }
 
+const caregiverPersonas = [
+  {
+    title: "The Double Shift",
+    description: "You balance a high-performance career with the demanding reality of full-time caregiving.",
+    icon: Briefcase,
+  },
+  {
+    title: "The Logistics Lead",
+    description: "You manage the complex web of medications, appointments, and health records.",
+    icon: ClipboardList,
+  },
+  {
+    title: "The 24/7 Mindset",
+    description: "You feel like you're permanently 'on call,' even when you're officially off the clock.",
+    icon: Clock,
+  },
+];
+
 const valueProps = [
   {
     title: "24/7 Support in your pocket",
@@ -89,6 +115,57 @@ const proofItems = [
   "Trusted by caregiving families across 20+ states",
   "HIPAA-adjacent privacy practices and secure data handling",
   "Built with clinicians and experienced caregivers",
+];
+
+const differentiators = [
+  {
+    title: "Not just reminders. A care agent that thinks ahead.",
+    description: "Unlike simple alarm apps, CarePilot anticipates needs before they become crises. It tracks patterns, predicts conflicts, and surfaces what matters—before you even ask.",
+    icon: Sparkles,
+  },
+  {
+    title: "Understands context, not just commands",
+    description: "Tell it 'Mom seems agitated after lunch' and it connects the dots: medication timing, sleep quality, recent appointments. No need to spell everything out.",
+    icon: Bot,
+  },
+  {
+    title: "Proposes actions — you stay in control",
+    description: "CarePilot suggests: 'Shall I reschedule pharmacy pickup to Thursday?' You approve with a tap. It executes. You're always the decision-maker, never a task-juggler.",
+    icon: CheckCircle,
+  },
+  {
+    title: "Learns from your feedback",
+    description: "Every 'yes', 'no', or 'not now' refines how it helps you. The more you use it, the more it feels like a partner who actually knows your routine.",
+    icon: ShieldCheck,
+  },
+];
+
+const trustStackItems = [
+  {
+    title: "Built for real care situations",
+    description: "Designed from actual caregiver experiences, not theoretical scenarios. Handles medication conflicts, appointment overlaps, and emergency coordination.",
+    icon: HeartHandshake,
+  },
+  {
+    title: "Human-in-the-loop approval",
+    description: "AI suggests, you decide. Every action requires your explicit approval. No automatic changes without your consent.",
+    icon: Users,
+  },
+  {
+    title: "Full audit trail",
+    description: "Every suggestion, reminder, and coordination is logged. Complete transparency of what was proposed, when, and your response.",
+    icon: FileText,
+  },
+  {
+    title: "Privacy-first by design",
+    description: "End-to-end encryption. Minimal data collection. You control what's shared and can delete anything, anytime.",
+    icon: Lock,
+  },
+  {
+    title: "Not a medical replacement",
+    description: "Augments professional care, never replaces it. Works alongside doctors, nurses, and healthcare providers.",
+    icon: Activity,
+  },
 ];
 
 const howItWorksSteps = [
@@ -138,6 +215,23 @@ export default function LandingPage() {
             <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
               CarePilot organizes the chaos of care through WhatsApp. Share your routine and your loved one&apos;s needs; we handle the reminders, appointments, and daily tasks so you can simply be present.
             </p>
+            
+            {/* WhatsApp Interface Demo */}
+            <div className="mt-12 mb-12 relative group">
+              <div className="max-w-2xl mx-auto">
+                <div className="relative rounded-[2rem] overflow-hidden shadow-[0_20px_60px_rgb(0,151,178,0.15)] hover:shadow-[0_25px_70px_rgb(0,151,178,0.2)] transition-all duration-500">
+                  <Image
+                    src="/images/Whatsapp-Interfaz.png"
+                    alt="CarePilot WhatsApp interface showing AI assistant interaction"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover"
+                  />
+                  {/* Glass overlay effect */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#aee4ff]/10 to-transparent pointer-events-none rounded-[2rem]" />
+                </div>
+              </div>
+            </div>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <Link href="/signup">
                 <Button size="lg" className="px-8">
@@ -157,6 +251,66 @@ export default function LandingPage() {
               </span>
               <span>Subscription: ~$30/mo after trial</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CarePilot is for you if - Caregiver Personas */}
+      <section className="py-16 border-t border-border/50 bg-[#aee4ff]/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-display text-foreground mb-4">CarePilot is for you if:</h2>
+            <p className="text-lg text-foreground/90 max-w-2xl mx-auto font-sans">
+              Recognize yourself in these stories? You're not alone.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {caregiverPersonas.map((persona, index) => (
+              <div key={persona.title} className="relative group persona-card" style={{ animationDelay: `${index * 100}ms` }}>
+                <div className="bg-[#fff8d7]/90 backdrop-blur-md p-8 rounded-[2.5rem] border-2 border-primary/20 shadow-[0_8px_30px_rgb(0,151,178,0.12)] hover:backdrop-blur-xl hover:-translate-y-2 hover:shadow-[0_16px_40px_rgb(0,151,178,0.18)] hover:rotate-1 transition-all duration-500 ease-out h-full">
+                  {/* Icon Container */}
+                  <div className="mb-6 relative">
+                    <div className="w-16 h-16 mx-auto relative">
+                      <div className="absolute inset-0 bg-[#aee4ff]/60 backdrop-blur-sm rounded-[50%_50%_50%_50%_/_60%_60%_40%_40%] border border-white/30 shadow-lg" style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}/>
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#aee4ff] to-[#7dd3fc] rounded-full shadow-inner" style={{ clipPath: 'ellipse(48% 55% at 50% 45%)' }}/>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <persona.icon className="h-7 w-7 text-[#0097b2] drop-shadow-sm" strokeWidth={1.5}/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-display text-[#007a8f] mb-4 leading-tight tracking-tight text-center">
+                    {persona.title}
+                  </h3>
+
+                  <p className="text-[#006b7d] font-sans leading-relaxed text-sm text-center" style={{ lineHeight: '1.75' }}>
+                    {persona.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <style jsx>{`
+            .persona-card {
+              opacity: 0;
+              transform: translateY(20px);
+              animation: personaFloatIn 0.6s ease-out forwards;
+            }
+            
+            @keyframes personaFloatIn {
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+          `}</style>
+
+          <div className="mt-12 text-center">
+            <p className="text-sm text-primary/60 font-sans">
+              If any of these resonate, you're in the right place.
+            </p>
           </div>
         </div>
       </section>
@@ -274,6 +428,126 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Why CarePilot is Different - AI Agent Differentiators */}
+      <section className="py-24 border-t border-border/50 bg-[#aee4ff]/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display text-foreground mb-6">
+              Why CarePilot is Different
+            </h2>
+            <p className="text-lg text-foreground/90 max-w-2xl mx-auto font-sans">
+              This isn't a chatbot with a calendar. It's an AI Agent built for the chaos of real caregiving.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {differentiators.map((item, index) => (
+              <div key={item.title} className="relative group differentiator-card" style={{ animationDelay: `${index * 100}ms` }}>
+                <div className="bg-[#fff8d7]/90 backdrop-blur-md p-8 rounded-[2.5rem] border-2 border-primary/20 shadow-[0_8px_30px_rgb(0,151,178,0.12)] hover:backdrop-blur-xl hover:-translate-y-2 hover:shadow-[0_16px_40px_rgb(0,151,178,0.18)] hover:rotate-1 transition-all duration-500 ease-out h-full">
+                  {/* Icon Container - Teardrop with glassmorphism */}
+                  <div className="mb-6 relative">
+                    <div className="w-16 h-16 relative">
+                      <div className="absolute inset-0 bg-[#aee4ff]/60 backdrop-blur-sm rounded-[50%_50%_50%_50%_/_60%_60%_40%_40%] border border-white/30 shadow-lg" style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}/>
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#aee4ff] to-[#7dd3fc] rounded-full shadow-inner" style={{ clipPath: 'ellipse(48% 55% at 50% 45%)' }}/>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <item.icon className="h-6 w-6 text-[#0097b2] drop-shadow-sm" strokeWidth={1.5}/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-display text-[#007a8f] mb-3 leading-tight tracking-tight">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-[#006b7d] font-sans leading-relaxed text-sm" style={{ lineHeight: '1.7' }}>
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <style jsx>{`
+            .differentiator-card {
+              opacity: 0;
+              transform: translateY(20px);
+              animation: differentiatorFloatIn 0.6s ease-out forwards;
+            }
+            
+            @keyframes differentiatorFloatIn {
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+          `}</style>
+
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-[#007a8f]/10 rounded-full border border-[#007a8f]/20">
+              <span className="text-sm font-semibold text-[#007a8f]">Built for Hackathon 2026</span>
+              <span className="text-[#007a8f]/40">|</span>
+              <span className="text-sm text-[#006b7d]">Evaluated with Opik</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Stack - 5 Pillars of Trust */}
+      <section className="py-24 border-t border-border/50 bg-[#fff8d7]/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display text-foreground mb-6">
+              Trust Stack
+            </h2>
+            <p className="text-lg text-foreground/90 max-w-2xl mx-auto font-sans">
+              Built on transparency, control, and real-world caregiving experience.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {trustStackItems.map((item, index) => (
+              <div key={item.title} className="relative group trust-card" style={{ animationDelay: `${index * 100}ms` }}>
+                <div className="bg-[#fff8d7]/90 backdrop-blur-md p-8 rounded-[2.5rem] border-2 border-primary/20 shadow-[0_8px_30px_rgb(0,151,178,0.12)] hover:backdrop-blur-xl hover:-translate-y-2 hover:shadow-[0_16px_40px_rgb(0,151,178,0.18)] hover:rotate-1 transition-all duration-500 ease-out h-full">
+                  {/* Icon Container - Teardrop with glassmorphism */}
+                  <div className="mb-6 relative">
+                    <div className="w-16 h-16 relative">
+                      <div className="absolute inset-0 bg-[#aee4ff]/60 backdrop-blur-sm border border-white/30 shadow-lg" style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}/>
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#aee4ff] to-[#7dd3fc] shadow-inner" style={{ clipPath: 'ellipse(48% 55% at 50% 45%)' }}/>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <item.icon className="h-6 w-6 text-[#0097b2] drop-shadow-sm" strokeWidth={1.5}/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-display text-[#007a8f] mb-3 leading-tight tracking-tight">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-[#006b7d] font-sans leading-relaxed text-sm" style={{ lineHeight: '1.7' }}>
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <style jsx>{`
+            .trust-card {
+              opacity: 0;
+              transform: translateY(20px);
+              animation: trustFloatIn 0.6s ease-out forwards;
+            }
+            
+            @keyframes trustFloatIn {
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+          `}</style>
+        </div>
+      </section>
+
       <section className="py-24 border-t border-border/50">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
@@ -295,23 +569,23 @@ export default function LandingPage() {
               <CardContent className="p-10">
                 <div className="flex items-center justify-between mb-8">
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-foreground/70 font-semibold mb-1">CarePilot Plus</p>
-                    <p className="text-4xl font-display text-foreground">$30<span className="text-xl">/mo</span></p>
+                    <p className="text-xs uppercase tracking-widest text-[#007a8f] font-semibold mb-1">CarePilot Plus</p>
+                    <p className="text-4xl font-display text-[#007a8f]">$30<span className="text-xl">/mo</span></p>
                   </div>
                   <div className="flex flex-col items-end gap-1">
-                    <div className="flex items-center gap-1 text-foreground">
-                      <Star className="h-4 w-4 fill-foreground" />
+                    <div className="flex items-center gap-1 text-[#007a8f]">
+                      <Star className="h-4 w-4 fill-[#007a8f]" />
                       <span className="font-bold">4.9</span>
                     </div>
-                    <span className="text-[10px] text-foreground/60 uppercase font-bold">Caregiver rating</span>
+                    <span className="text-[10px] text-[#006b7d] uppercase font-bold">Caregiver rating</span>
                   </div>
                 </div>
 
-                <ul className="text-sm text-foreground/90 space-y-4 font-sans list-none">
+                <ul className="text-sm text-[#006b7d] space-y-4 font-sans list-none">
                   {["Unlimited WhatsApp coordination", "Medication tracking & proactive refills", "Appointment organization assistance", "Weekly insights & care summaries"].map((feature) => (
                     <li key={feature} className="flex items-center gap-3">
-                      <div className="h-5 w-5 rounded-full bg-foreground/10 flex items-center justify-center flex-shrink-0">
-                        <CheckCircle className="h-3 w-3 text-foreground" />
+                      <div className="h-5 w-5 rounded-full bg-[#007a8f]/20 flex items-center justify-center flex-shrink-0">
+                        <CheckCircle className="h-3 w-3 text-[#007a8f]" />
                       </div>
                       {feature}
                     </li>
@@ -323,7 +597,7 @@ export default function LandingPage() {
                     Start Your Free Trial
                   </Button>
                 </Link>
-                <p className="text-center mt-4 text-xs text-foreground/50">Cancel anytime. No hidden fees.</p>
+                <p className="text-center mt-4 text-xs text-[#006b7d]">Cancel anytime. No hidden fees.</p>
               </CardContent>
             </Card>
           </div>
@@ -333,25 +607,25 @@ export default function LandingPage() {
       <section className="py-24 border-t border-border/50 bg-[#fff8d7]/20">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-16 items-start">
-            <div className="bg-[#fff8d7] p-10 rounded-[2.5rem] border-2 border-foreground/20 shadow-sm">
-              <h3 className="text-2xl font-display text-foreground mb-4">Built on trust</h3>
-              <p className="text-foreground/80 font-sans leading-relaxed mb-6">
+            <div className="bg-[#fff8d7] p-10 rounded-[2.5rem] border-2 border-[#007a8f]/20 shadow-sm">
+              <h3 className="text-2xl font-display text-[#007a8f] mb-4">Built on trust</h3>
+              <p className="text-[#006b7d] font-sans leading-relaxed mb-6">
                 We design CarePilot with privacy at the core. Your data is encrypted, access is limited, and you always maintain full control.
               </p>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className="bg-foreground/10 text-foreground border-none">Encrypted data</Badge>
-                <Badge variant="secondary" className="bg-foreground/10 text-foreground border-none">Consent-first</Badge>
-                <Badge variant="secondary" className="bg-foreground/10 text-foreground border-none">Audit-ready</Badge>
+                <Badge variant="secondary" className="bg-[#007a8f]/10 text-[#007a8f] border-none">Encrypted data</Badge>
+                <Badge variant="secondary" className="bg-[#007a8f]/10 text-[#007a8f] border-none">Consent-first</Badge>
+                <Badge variant="secondary" className="bg-[#007a8f]/10 text-[#007a8f] border-none">Audit-ready</Badge>
               </div>
             </div>
 
             <div className="grid gap-6">
               {proofItems.map((item) => (
-                <div key={item} className="flex items-start gap-4 p-4 rounded-2xl transition-colors hover:bg-foreground/5">
-                  <div className="h-10 w-10 rounded-full bg-foreground/10 flex items-center justify-center flex-shrink-0">
-                    <ShieldCheck className="h-5 w-5 text-foreground" />
+                <div key={item} className="flex items-start gap-4 p-4 rounded-2xl transition-colors hover:bg-white/10">
+                  <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <ShieldCheck className="h-5 w-5 text-white" />
                   </div>
-                  <p className="text-foreground/90 font-sans leading-relaxed pt-1">{item}</p>
+                  <p className="text-white/90 font-sans leading-relaxed pt-1">{item}</p>
                 </div>
               ))}
             </div>
