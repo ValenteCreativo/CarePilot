@@ -202,8 +202,8 @@ export default function LandingPage() {
                   <Image
                     src="/images/Whatsapp-Interfaz.png"
                     alt="CarePilot WhatsApp interface showing AI assistant interaction"
-                    width={300}
-                    height={200}
+                    width={600}
+                    height={400}
                     className="w-full h-auto object-cover"
                   />
                   {/* Glass overlay effect */}
