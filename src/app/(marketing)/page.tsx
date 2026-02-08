@@ -18,6 +18,10 @@ import {
   CheckCircle,
   Smartphone,
   Sparkles,
+  Lock,
+  FileText,
+  HeartHandshake,
+  Activity,
 } from "lucide-react";
 
 function ScrollRotatingLogo() {
@@ -105,13 +109,41 @@ const differentiators = [
   },
   {
     title: "Proposes actions — you stay in control",
-    description: "CarePilot suggests: 'Shall I reschedule the pharmacy pickup to Thursday?' You approve with a tap. It executes. You're always the decision-maker, never the task-juggler.",
+    description: "CarePilot suggests: 'Shall I reschedule pharmacy pickup to Thursday?' You approve with a tap. It executes. You're always the decision-maker, never a task-juggler.",
     icon: CheckCircle,
   },
   {
     title: "Learns from your feedback",
     description: "Every 'yes', 'no', or 'not now' refines how it helps you. The more you use it, the more it feels like a partner who actually knows your routine.",
     icon: ShieldCheck,
+  },
+];
+
+const trustStackItems = [
+  {
+    title: "Built for real care situations",
+    description: "Designed from actual caregiver experiences, not theoretical scenarios. Handles medication conflicts, appointment overlaps, and emergency coordination.",
+    icon: HeartHandshake,
+  },
+  {
+    title: "Human-in-the-loop approval",
+    description: "AI suggests, you decide. Every action requires your explicit approval. No automatic changes without your consent.",
+    icon: Users,
+  },
+  {
+    title: "Full audit trail",
+    description: "Every suggestion, reminder, and coordination is logged. Complete transparency of what was proposed, when, and your response.",
+    icon: FileText,
+  },
+  {
+    title: "Privacy-first by design",
+    description: "End-to-end encryption. Minimal data collection. You control what's shared and can delete anything, anytime.",
+    icon: Lock,
+  },
+  {
+    title: "Not a medical replacement",
+    description: "Augments professional care, never replaces it. Works alongside doctors, nurses, and healthcare providers.",
+    icon: Activity,
   },
 ];
 
@@ -359,6 +391,62 @@ export default function LandingPage() {
               <span className="text-sm text-[#006b7d]">Evaluated with Opik</span>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Trust Stack - 5 Pillars of Trust */}
+      <section className="py-24 border-t border-border/50 bg-[#fff8d7]/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display text-foreground mb-6">
+              Trust Stack
+            </h2>
+            <p className="text-lg text-foreground/90 max-w-2xl mx-auto font-sans">
+              Built on transparency, control, and real-world caregiving experience.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {trustStackItems.map((item, index) => (
+              <div key={item.title} className="relative group trust-card" style={{ animationDelay: `${index * 100}ms` }}>
+                <div className="bg-[#fff8d7]/90 backdrop-blur-md p-8 rounded-[2.5rem] border-2 border-primary/20 shadow-[0_8px_30px_rgb(0,151,178,0.12)] hover:backdrop-blur-xl hover:-translate-y-2 hover:shadow-[0_16px_40px_rgb(0,151,178,0.18)] transition-all duration-500 ease-out h-full">
+                  {/* Icon Container - Teardrop with glassmorphism */}
+                  <div className="mb-6 relative">
+                    <div className="w-16 h-16 relative">
+                      <div className="absolute inset-0 bg-[#aee4ff]/60 backdrop-blur-sm border border-white/30 shadow-lg" style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}/>
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#aee4ff] to-[#7dd3fc] shadow-inner" style={{ clipPath: 'ellipse(48% 55% at 50% 45%)' }}/>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <item.icon className="h-6 w-6 text-[#0097b2] drop-shadow-sm" strokeWidth={1.5}/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-display text-[#007a8f] mb-3 leading-tight tracking-tight">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-[#006b7d] font-sans leading-relaxed text-sm" style={{ lineHeight: '1.7' }}>
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <style jsx>{`
+            .trust-card {
+              opacity: 0;
+              transform: translateY(20px);
+              animation: trustFloatIn 0.6s ease-out forwards;
+            }
+            
+            @keyframes trustFloatIn {
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+          `}</style>
         </div>
       </section>
 
