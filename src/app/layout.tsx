@@ -1,6 +1,32 @@
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner";
+import localFont from "next/font/local";
 import "./globals.css";
+import "./fonts/font-classes.css";
+
+const dmSans = localFont({
+  src: "./fonts/DMSans-VariableFont_opsz,wght.ttf",
+  variable: "--font-dm-sans",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
+});
+
+const parisienne = localFont({
+  src: "./fonts/Parisienne-Regular.ttf",
+  variable: "--font-parisienne",
+  weight: "400",
+  style: "normal",
+  display: "swap",
+});
+
+const ultra = localFont({
+  src: "./fonts/Ultra-Regular.ttf",
+  variable: "--font-ultra",
+  weight: "400",
+  style: "normal",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "CarePilot - AI Care Assistant for WhatsApp",
@@ -14,8 +40,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className="font-sans antialiased min-h-screen bg-background">
+    <html lang="en" className={`dark ${dmSans.variable} ${parisienne.variable} ${ultra.variable}`}>
+      <body className="font-dm-sans antialiased min-h-screen bg-background">
         {children}
         <Toaster />
       </body>
