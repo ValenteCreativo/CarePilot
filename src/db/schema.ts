@@ -4,6 +4,9 @@ import { relations, type InferSelectModel } from "drizzle-orm";
 // Users table - anonymous users identified by cookie
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
+  email: text("email").unique(),
+  passwordHash: text("password_hash"),
+  name: text("name"),
   phoneNumber: text("phone_number").unique(),
   whatsappState: text("whatsapp_state").$type<"NUEVO" | "ACTIVO">(),
   whatsappStep: integer("whatsapp_step"),

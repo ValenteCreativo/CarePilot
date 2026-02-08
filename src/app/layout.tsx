@@ -3,8 +3,9 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CarePilot - Caregiver's Command Center",
-  description: "Turn care into a plan. A practical tool for caregivers managing complex care situations.",
+  title: "CarePilot - AI Care Assistant for WhatsApp",
+  description:
+    "CarePilot helps caregivers manage care with WhatsApp-based scheduling, medication reminders, and appointments.",
 };
 
 export default function RootLayout({

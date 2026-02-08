@@ -15,13 +15,13 @@ export default function MarketingLayout({
           </Link>
           <nav className="flex items-center gap-4">
             <Link
-              href="/app"
+              href="/login"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              Dashboard
+              Sign in
             </Link>
-            <Link href="/case/new">
-              <Button size="sm">Get Started</Button>
+            <Link href="/signup">
+              <Button size="sm">Start Free Trial</Button>
             </Link>
           </nav>
         </div>
