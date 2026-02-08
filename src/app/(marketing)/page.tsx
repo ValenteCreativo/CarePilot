@@ -17,6 +17,7 @@ import {
   Bot,
   CheckCircle,
   Smartphone,
+  Sparkles,
 } from "lucide-react";
 
 function ScrollRotatingLogo() {
@@ -89,6 +90,29 @@ const proofItems = [
   "Trusted by caregiving families across 20+ states",
   "HIPAA-adjacent privacy practices and secure data handling",
   "Built with clinicians and experienced caregivers",
+];
+
+const differentiators = [
+  {
+    title: "Not just reminders. A care agent that thinks ahead.",
+    description: "Unlike simple alarm apps, CarePilot anticipates needs before they become crises. It tracks patterns, predicts conflicts, and surfaces what matters—before you even ask.",
+    icon: Sparkles,
+  },
+  {
+    title: "Understands context, not just commands",
+    description: "Tell it 'Mom seems agitated after lunch' and it connects the dots: medication timing, sleep quality, recent appointments. No need to spell everything out.",
+    icon: Bot,
+  },
+  {
+    title: "Proposes actions — you stay in control",
+    description: "CarePilot suggests: 'Shall I reschedule the pharmacy pickup to Thursday?' You approve with a tap. It executes. You're always the decision-maker, never the task-juggler.",
+    icon: CheckCircle,
+  },
+  {
+    title: "Learns from your feedback",
+    description: "Every 'yes', 'no', or 'not now' refines how it helps you. The more you use it, the more it feels like a partner who actually knows your routine.",
+    icon: ShieldCheck,
+  },
 ];
 
 const howItWorksSteps = [
@@ -270,6 +294,70 @@ export default function LandingPage() {
             <p className="mt-4 text-sm text-primary/60 font-sans">
               Set up in 3 minutes • No credit card required
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Why CarePilot is Different - AI Agent Differentiators */}
+      <section className="py-24 border-t border-border/50 bg-[#aee4ff]/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display text-foreground mb-6">
+              Why CarePilot is Different
+            </h2>
+            <p className="text-lg text-foreground/90 max-w-2xl mx-auto font-sans">
+              This isn't a chatbot with a calendar. It's an AI Agent built for the chaos of real caregiving.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {differentiators.map((item, index) => (
+              <div key={item.title} className="relative group differentiator-card" style={{ animationDelay: `${index * 100}ms` }}>
+                <div className="bg-[#fff8d7]/90 backdrop-blur-md p-8 rounded-[2.5rem] border-2 border-primary/20 shadow-[0_8px_30px_rgb(0,151,178,0.12)] hover:backdrop-blur-xl hover:-translate-y-2 hover:shadow-[0_16px_40px_rgb(0,151,178,0.18)] transition-all duration-500 ease-out h-full">
+                  {/* Icon Container - Teardrop with glassmorphism */}
+                  <div className="mb-6 relative">
+                    <div className="w-16 h-16 relative">
+                      <div className="absolute inset-0 bg-[#aee4ff]/60 backdrop-blur-sm rounded-[50%_50%_50%_50%_/_60%_60%_40%_40%] border border-white/30 shadow-lg" style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}/>
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#aee4ff] to-[#7dd3fc] rounded-full shadow-inner" style={{ clipPath: 'ellipse(48% 55% at 50% 45%)' }}/>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <item.icon className="h-6 w-6 text-[#0097b2] drop-shadow-sm" strokeWidth={1.5}/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-display text-[#007a8f] mb-3 leading-tight tracking-tight">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-[#006b7d] font-sans leading-relaxed text-sm" style={{ lineHeight: '1.7' }}>
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <style jsx>{`
+            .differentiator-card {
+              opacity: 0;
+              transform: translateY(20px);
+              animation: differentiatorFloatIn 0.6s ease-out forwards;
+            }
+            
+            @keyframes differentiatorFloatIn {
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+          `}</style>
+
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-3 px-6 py-3 bg-[#007a8f]/10 rounded-full border border-[#007a8f]/20">
+              <span className="text-sm font-semibold text-[#007a8f]">Built for Hackathon 2026</span>
+              <span className="text-[#007a8f]/40">|</span>
+              <span className="text-sm text-[#006b7d]">Evaluated with Opik</span>
+            </div>
           </div>
         </div>
       </section>
