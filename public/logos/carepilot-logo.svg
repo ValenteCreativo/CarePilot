@@ -1,0 +1,14 @@
+<svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo Amarillo Crema con bordes redondeados -->
+  <rect width="180" height="40" fill="#fff8d7" rx="8"/>
+  <!-- Texto "CarePilot" en Azul Letras con tipografía Ultra -->
+  <text x="90" y="25" 
+        font-family="Ultra, system-ui, sans-serif" 
+        font-size="16" 
+        font-weight="400"
+        fill="#0097b2" 
+        text-anchor="middle" 
+        dominant-baseline="middle">
+    CarePilot
+  </text>
+</svg>

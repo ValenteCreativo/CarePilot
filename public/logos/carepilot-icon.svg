@@ -1,0 +1,14 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo circular Azul Letras -->
+  <circle cx="16" cy="16" r="16" fill="#0097b2"/>
+  <!-- Letra "C" estilizada en Amarillo Crema -->
+  <text x="16" y="22" 
+        font-family="Ultra, system-ui, sans-serif" 
+        font-size="14" 
+        font-weight="700"
+        fill="#fff8d7" 
+        text-anchor="middle" 
+        dominant-baseline="middle">
+    C
+  </text>
+</svg>
