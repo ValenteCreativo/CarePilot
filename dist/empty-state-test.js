@@ -1,0 +1,88 @@
+"use strict";
+/**
+ * Property test for empty state glassmorphism
+ * Tests empty states have proper glassmorphism styling
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.validateEmptyStateGlassmorphism = validateEmptyStateGlassmorphism;
+exports.runEmptyStateValidation = runEmptyStateValidation;
+const fs_1 = require("fs");
+// Empty state indicators to look for
+const EMPTY_STATE_SELECTORS = [
+    '.empty',
+    'Nothing here yet',
+    'No message data yet',
+    'border-dashed'
+];
+// Glassmorphism patterns for empty states
+const EMPTY_STATE_GLASSMORPHISM = [
+    'bg-card/60',
+    'backdrop-blur-md',
+    'border-primary/10',
+    'shadow-lg'
+];
+// Validate empty state glassmorphism
+function validateEmptyStateGlassmorphism(cssContent) {
+    const hasEmptyStateIndicators = EMPTY_STATE_SELECTORS.some(selector => cssContent.includes(selector));
+    const hasGlassmorphismPatterns = EMPTY_STATE_GLASSMORPHISM.every(pattern => cssContent.includes(pattern));
+    const missingGlassmorphism = [];
+    if (!hasGlassmorphismPatterns) {
+        EMPTY_STATE_GLASSMORPHISM.forEach(pattern => {
+            if (!cssContent.includes(pattern)) {
+                missingGlassmorphism.push(pattern);
+            }
+        });
+    }
+    const issues = [];
+    if (!hasEmptyStateIndicators) {
+        issues.push('No empty state indicators found');
+    }
+    if (!hasGlassmorphismPatterns) {
+        issues.push(`Missing glassmorphism patterns: ${missingGlassmorphism.join(', ')}`);
+    }
+    return {
+        hasEmptyStateIndicators,
+        hasGlassmorphismPatterns,
+        missingGlassmorphism,
+        issues
+    };
+}
+// Run property validation
+function runEmptyStateValidation() {
+    console.log('🎯 Empty State Glassmorphism Property Test');
+    console.log('====================================\n');
+    const validation = validateEmptyStateGlassmorphism((0, fs_1.readFileSync)('./src/components/dashboard/actions-kanban.tsx', 'utf8'));
+    const isCompliant = validation.hasEmptyStateIndicators && validation.hasGlassmorphismPatterns;
+    const message = isCompliant
+        ? 'Empty state glassmorphism properly implemented'
+        : 'Empty state glassmorphism needs improvement';
+    const recommendations = [];
+    if (!isCompliant) {
+        recommendations.push('Add empty state indicators like "Nothing here yet"');
+        recommendations.push('Apply glassmorphism patterns to empty states');
+        recommendations.push('Use border-dashed for visual distinction');
+    }
+    console.log('Empty State Indicators:');
+    console.log(`Present: ${validation.hasEmptyStateIndicators ? '✅' : '❌'}`);
+    console.log(`Glassmorphism Patterns: ${validation.hasGlassmorphismPatterns ? '✅' : '❌'}`);
+    console.log(`\nProperty 13 Validation: ${isCompliant ? '✅' : '❌'}`);
+    console.log(`Status: ${message}`);
+    if (recommendations.length > 0) {
+        console.log('\n💡 Recommendations:');
+        recommendations.forEach((rec, index) => {
+            console.log(`${index + 1}. ${rec}`);
+        });
+    }
+    return {
+        validation,
+        overall: {
+            compliant: isCompliant,
+            message,
+            recommendations
+        }
+    };
+}
+// Run if called directly
+if (typeof require !== 'undefined' && require.main === module) {
+    runEmptyStateValidation();
+}

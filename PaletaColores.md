@@ -74,6 +74,18 @@ Para que sepas qué clase usar en cada momento según el diseño de Juliana:
 </div>
 ```
 
+### Tarjeta con Texto de Alto Contraste (How It Works)
+```tsx
+<div className="bg-[#fff8d7]/90 backdrop-blur-md p-8 rounded-[2.5rem] border-2 border-[#0097b2]/20">
+  <h3 className="text-xl font-display text-[#007a8f] mb-4 leading-tight">
+    Tell Us Your Story
+  </h3>
+  <p className="text-[#006b7d] font-sans leading-relaxed text-sm">
+    Share your loved one's context and your routine through WhatsApp...
+  </p>
+</div>
+```
+
 ### Navbar / Logo
 ```tsx
 <h1 className="text-[#0097b2] font-ultra text-2xl">
@@ -113,6 +125,10 @@ Referencia rápida de todas las variables de color:
 --input: #0097b233;                /* Azul con 20% opacidad - Inputs */
 --ring: #0097b2;                   /* Azul Letras - Anillos de enfoque */
 --radius: 1.5rem;                   /* Bordes muy redondeados */
+
+/* Colores de Alto Contraste para Fondos Claros */
+--text-dark-primary: #007a8f;       /* Azul verdoso oscuro - Títulos sobre fondos claros */
+--text-dark-secondary: #006b7d;      /* Azul más oscuro - Descripciones sobre fondos claros */
 ```
 
 ## 6. Uso Semántico de Colores
@@ -130,6 +146,9 @@ Referencia rápida de todas las variables de color:
 ### Jerarquía de Texto
 - **Principal**: `text-foreground` - Azul brillante
 - **Secundario**: `text-muted-foreground` - Azul para texto de apoyo
+- **Texto sobre fondos claros**: Usar tonos oscuros derivados del primario
+  - **Títulos**: `text-[#007a8f]` - Azul verdoso oscuro (máximo contraste)
+  - **Descripciones**: `text-[#006b7d]` - Azul más oscuro (lectura cómoda)
 
 ### Bordes y Separadores
 - **Estándar**: `border-border` - Azul transparente

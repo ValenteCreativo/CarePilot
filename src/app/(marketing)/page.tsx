@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -15,6 +18,49 @@ import {
   CheckCircle,
   Smartphone,
 } from "lucide-react";
+
+function ScrollRotatingLogo() {
+  const [rotation, setRotation] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // 0.5 degrees per pixel of scroll
+      setRotation(window.scrollY * 0.5);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className="relative w-32 h-32 md:w-40 md:h-40">
+      {/* STATIC LAYER: Medical Cross */}
+      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+        <Image
+          src="/images/logos/cross.png"
+          alt="Medical cross"
+          width={80}
+          height={80}
+          className="object-contain"
+          style={{ width: "55%", height: "55%" }}
+        />
+      </div>
+      {/* DYNAMIC LAYER: Otters Ring */}
+      <div
+        className="absolute inset-0 pointer-events-none logo-rotate"
+        style={{
+          transform: `rotate(${rotation}deg)`,
+        }}
+      >
+        <Image
+          src="/images/logos/otters.png"
+          fill
+          alt="Otters"
+          className="object-contain"
+        />
+      </div>
+    </div>
+  );
+}
 
 const valueProps = [
   {
@@ -81,14 +127,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 py-24 md:py-32 relative">
           <div className="max-w-3xl">
             <div className="mb-6">
-              <Image
-                src="/images/logos/CarePilot.jpg"
-                alt="CarePilot Logo"
-                width={120}
-                height={120}
-                priority
-                className="rounded-xl shadow-lg"
-              />
+              <ScrollRotatingLogo />
             </div>
             <Badge variant="secondary" className="mb-6">
               Compassionate AI support for caregivers
@@ -126,13 +165,13 @@ export default function LandingPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             {valueProps.map((item) => (
-              <Card key={item.title} className="bg-card/60 border-border/40">
+              <Card key={item.title} className="bg-card/90 backdrop-blur-md border border-primary/20 shadow-lg hover:bg-card hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                 <CardContent className="p-6">
-                  <div className="h-11 w-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <div className="h-11 w-11 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
                     <item.icon className="h-5 w-5 text-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">{item.title}</h3>
+                  <p className="text-sm text-foreground/90 leading-relaxed">{item.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -143,40 +182,84 @@ export default function LandingPage() {
       <section className="py-24 border-t border-border/50 bg-[#aee4ff]/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display text-primary mb-6">How It Works</h2>
-            <p className="text-lg text-primary/80 max-w-2xl mx-auto font-sans">
+            <h2 className="text-4xl md:text-5xl font-display text-foreground mb-6">How It Works</h2>
+            <p className="text-lg text-foreground/90 max-w-2xl mx-auto font-sans">
               Get started in minutes with a process designed to give you peace. No complex setups, everything happens where you already are: WhatsApp.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
-            {/* Decorative Connection Line (Desktop) */}
-            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 border-t-2 border-dashed border-primary/20 -translate-y-8" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 relative" id="how-it-works-grid">
+            {/* Curved Connection Lines - Cadena de Apoyo */}
+            <svg className="hidden lg:block absolute top-1/2 left-0 w-full h-32 -translate-y-16 pointer-events-none" style={{ zIndex: 1 }}>
+              {/* Curved line from card 1 to card 2 */}
+              <path d="M 22% 50% Q 30% 20%, 38% 50%" fill="none" stroke="#0097b2" strokeWidth="2" strokeDasharray="8,6" opacity="0.2" strokeLinecap="round"/>
+              {/* Curved line from card 2 to card 3 */}
+              <path d="M 47% 50% Q 55% 80%, 63% 50%" fill="none" stroke="#0097b2" strokeWidth="2" strokeDasharray="8,6" opacity="0.2" strokeLinecap="round"/>
+              {/* Curved line from card 3 to card 4 */}
+              <path d="M 72% 50% Q 80% 20%, 88% 50%" fill="none" stroke="#0097b2" strokeWidth="2" strokeDasharray="8,6" opacity="0.2" strokeLinecap="round"/>
+            </svg>
 
-            {howItWorksSteps.map((item) => (
-              <div key={item.step} className="relative group">
-                <div className="bg-[#fff8d7] p-8 rounded-[2.5rem] border-2 border-primary/10 flex flex-col items-center text-center shadow-[0_8px_30px_rgb(0,151,178,0.08)] transition-all duration-300 hover:shadow-[0_12px_40px_rgb(0,151,178,0.12)] hover:-translate-y-1 h-full z-10 relative">
-                  {/* Step Badge */}
-                  <span className="absolute -top-4 -left-4 w-12 h-12 bg-[#FF0000] text-white rounded-full flex items-center justify-center font-display text-xl shadow-lg z-20">
-                    {item.step}
+            {howItWorksSteps.map((item, index) => (
+              <div key={item.step} className="relative group how-it-works-card" style={{ animationDelay: `${index * 150}ms` }}>
+                <div className="bg-[#fff8d7]/90 backdrop-blur-md p-8 rounded-[2.5rem] border-2 border-primary/20 shadow-[0_8px_30px_rgb(0,151,178,0.12)] hover:backdrop-blur-xl hover:-translate-y-3 hover:shadow-[0_16px_50px_rgb(0,151,178,0.2)] transition-all duration-500 ease-out h-full z-10 relative">
+                  {/* Organic Step Badge - Mancha de agua/piedra de río */}
+                  <span className="absolute -top-3 -left-3 w-11 h-11 flex items-center justify-center font-display text-lg z-20 how-it-works-badge">
+                    <svg viewBox="0 0 44 44" className="absolute inset-0 w-full h-full">
+                      <path d="M22 2C28 2 38 8 38 22C38 36 28 42 22 42C16 42 6 36 6 22C6 8 16 2 22 2Z" fill="#FF0000" fillOpacity="0.9"/>
+                      <path d="M22 5C27 5 35 10 35 22C35 34 27 39 22 39C17 39 9 34 9 22C9 10 17 5 22 5Z" fill="#FF3333" fillOpacity="0.6"/>
+                    </svg>
+                    <span className="relative z-10 text-white font-bold">{item.step}</span>
                   </span>
 
-                  {/* Icon Container */}
-                  <div className="mb-8 p-5 bg-[#aee4ff] rounded-2xl text-primary shadow-inner">
-                    <item.icon className="h-8 w-8" />
+                  {/* Icon Container - Forma de gota con glassmorphism */}
+                  <div className="mb-8 relative">
+                    <div className="w-20 h-20 mx-auto relative">
+                      {/* Glassmorphism background */}
+                      <div className="absolute inset-0 bg-[#aee4ff]/60 backdrop-blur-sm rounded-[50%_50%_50%_50%_/_60%_60%_40%_40%] border border-white/30 shadow-lg" style={{ borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%' }}/>
+                      {/* Drop shape overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#aee4ff] to-[#7dd3fc] rounded-full shadow-inner" style={{ clipPath: 'ellipse(48% 55% at 50% 45%)' }}/>
+                      {/* Icon */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <item.icon className="h-8 w-8 text-[#0097b2] drop-shadow-sm" strokeWidth={1.5}/>
+                      </div>
+                    </div>
                   </div>
 
-                  <h3 className="text-xl font-display text-primary mb-4 leading-tight">
+                  <h3 className="text-xl font-display text-[#007a8f] mb-4 leading-tight tracking-tight">
                     {item.title}
                   </h3>
 
-                  <p className="text-primary/70 font-sans leading-relaxed text-sm">
+                  <p className="text-[#006b7d] font-sans leading-relaxed text-sm" style={{ lineHeight: '1.75' }}>
                     {item.description}
                   </p>
                 </div>
               </div>
             ))}
           </div>
+
+          <style jsx>{`
+            .how-it-works-card {
+              opacity: 0;
+              transform: translateY(20px);
+              animation: otterFloatIn 0.6s ease-out forwards;
+            }
+            
+            @keyframes otterFloatIn {
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+            
+            .how-it-works-badge {
+              filter: drop-shadow(0 2px 4px rgba(255, 0, 0, 0.3));
+              transition: transform 0.3s ease;
+            }
+            
+            .how-it-works-card:hover .how-it-works-badge {
+              transform: scale(1.05) rotate(-3deg);
+            }
+          `}</style>
 
           <div className="mt-20 text-center">
             <Link href="/signup">
@@ -195,40 +278,40 @@ export default function LandingPage() {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-4xl md:text-5xl font-display text-primary leading-tight">
+              <h2 className="text-4xl md:text-5xl font-display text-foreground leading-tight">
                 A plan that respects your peace of mind
               </h2>
-              <p className="text-primary/80 text-lg leading-relaxed font-sans max-w-xl">
+              <p className="text-foreground/90 text-lg leading-relaxed font-sans max-w-xl">
                 For about $30/month, CarePilot handles the complexity of coordination so you can focus on what matters most: being present for your loved one.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Badge variant="outline" className="border-primary/20 text-primary bg-primary/5 px-4 py-1 rounded-full">Free trial included</Badge>
-                <Badge variant="outline" className="border-primary/20 text-primary bg-primary/5 px-4 py-1 rounded-full">WhatsApp-native</Badge>
-                <Badge variant="outline" className="border-primary/20 text-primary bg-primary/5 px-4 py-1 rounded-full">Human-centered AI</Badge>
+                <Badge variant="outline" className="border-foreground/30 text-foreground bg-foreground/5 px-4 py-1 rounded-full">Free trial included</Badge>
+                <Badge variant="outline" className="border-foreground/30 text-foreground bg-foreground/5 px-4 py-1 rounded-full">WhatsApp-native</Badge>
+                <Badge variant="outline" className="border-foreground/30 text-foreground bg-foreground/5 px-4 py-1 rounded-full">Human-centered AI</Badge>
               </div>
             </div>
 
-            <Card className="bg-[#fff8d7] border-2 border-primary/10 rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,151,178,0.08)] overflow-hidden">
+            <Card className="bg-[#fff8d7]/90 backdrop-blur-lg border-2 border-primary/30 rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,151,178,0.12)] overflow-hidden hover:backdrop-blur-xl hover:shadow-[0_12px_40px_rgb(0,151,178,0.16)] transition-all duration-300">
               <CardContent className="p-10">
                 <div className="flex items-center justify-between mb-8">
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-primary/60 font-semibold mb-1">CarePilot Plus</p>
-                    <p className="text-4xl font-display text-primary">$30<span className="text-xl">/mo</span></p>
+                    <p className="text-xs uppercase tracking-widest text-foreground/70 font-semibold mb-1">CarePilot Plus</p>
+                    <p className="text-4xl font-display text-foreground">$30<span className="text-xl">/mo</span></p>
                   </div>
                   <div className="flex flex-col items-end gap-1">
-                    <div className="flex items-center gap-1 text-primary">
-                      <Star className="h-4 w-4 fill-primary" />
+                    <div className="flex items-center gap-1 text-foreground">
+                      <Star className="h-4 w-4 fill-foreground" />
                       <span className="font-bold">4.9</span>
                     </div>
-                    <span className="text-[10px] text-primary/60 uppercase font-bold">Caregiver rating</span>
+                    <span className="text-[10px] text-foreground/60 uppercase font-bold">Caregiver rating</span>
                   </div>
                 </div>
 
-                <ul className="text-sm text-primary/80 space-y-4 font-sans list-none">
+                <ul className="text-sm text-foreground/90 space-y-4 font-sans list-none">
                   {["Unlimited WhatsApp coordination", "Medication tracking & proactive refills", "Appointment organization assistance", "Weekly insights & care summaries"].map((feature) => (
                     <li key={feature} className="flex items-center gap-3">
-                      <div className="h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <CheckCircle className="h-3 w-3 text-primary" />
+                      <div className="h-5 w-5 rounded-full bg-foreground/10 flex items-center justify-center flex-shrink-0">
+                        <CheckCircle className="h-3 w-3 text-foreground" />
                       </div>
                       {feature}
                     </li>
@@ -240,7 +323,7 @@ export default function LandingPage() {
                     Start Your Free Trial
                   </Button>
                 </Link>
-                <p className="text-center mt-4 text-xs text-primary/50">Cancel anytime. No hidden fees.</p>
+                <p className="text-center mt-4 text-xs text-foreground/50">Cancel anytime. No hidden fees.</p>
               </CardContent>
             </Card>
           </div>
@@ -250,25 +333,25 @@ export default function LandingPage() {
       <section className="py-24 border-t border-border/50 bg-[#fff8d7]/20">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-16 items-start">
-            <div className="bg-[#fff8d7] p-10 rounded-[2.5rem] border-2 border-primary/10 shadow-sm">
-              <h3 className="text-2xl font-display text-primary mb-4">Built on trust</h3>
-              <p className="text-primary/70 font-sans leading-relaxed mb-6">
+            <div className="bg-[#fff8d7] p-10 rounded-[2.5rem] border-2 border-foreground/20 shadow-sm">
+              <h3 className="text-2xl font-display text-foreground mb-4">Built on trust</h3>
+              <p className="text-foreground/80 font-sans leading-relaxed mb-6">
                 We design CarePilot with privacy at the core. Your data is encrypted, access is limited, and you always maintain full control.
               </p>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className="bg-primary/10 text-primary border-none">Encrypted data</Badge>
-                <Badge variant="secondary" className="bg-primary/10 text-primary border-none">Consent-first</Badge>
-                <Badge variant="secondary" className="bg-primary/10 text-primary border-none">Audit-ready</Badge>
+                <Badge variant="secondary" className="bg-foreground/10 text-foreground border-none">Encrypted data</Badge>
+                <Badge variant="secondary" className="bg-foreground/10 text-foreground border-none">Consent-first</Badge>
+                <Badge variant="secondary" className="bg-foreground/10 text-foreground border-none">Audit-ready</Badge>
               </div>
             </div>
 
             <div className="grid gap-6">
               {proofItems.map((item) => (
-                <div key={item} className="flex items-start gap-4 p-4 rounded-2xl transition-colors hover:bg-primary/5">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <ShieldCheck className="h-5 w-5 text-primary" />
+                <div key={item} className="flex items-start gap-4 p-4 rounded-2xl transition-colors hover:bg-foreground/5">
+                  <div className="h-10 w-10 rounded-full bg-foreground/10 flex items-center justify-center flex-shrink-0">
+                    <ShieldCheck className="h-5 w-5 text-foreground" />
                   </div>
-                  <p className="text-primary/80 font-sans leading-relaxed pt-1">{item}</p>
+                  <p className="text-foreground/90 font-sans leading-relaxed pt-1">{item}</p>
                 </div>
               ))}
             </div>
@@ -278,8 +361,8 @@ export default function LandingPage() {
 
       <section className="py-32 border-t border-border/50 bg-[#aee4ff]/20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-6xl font-display text-primary mb-6">Ready to lighten the load?</h2>
-          <p className="mt-4 text-xl text-primary/70 font-sans max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-display text-foreground mb-6">Ready to lighten the load?</h2>
+          <p className="mt-4 text-xl text-foreground/90 font-sans max-w-2xl mx-auto">
             Join thousands of families finding their peace with CarePilot. Meet your assistant on WhatsApp today.
           </p>
           <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
@@ -289,12 +372,12 @@ export default function LandingPage() {
               </Button>
             </Link>
             <Link href="/login">
-              <Button size="lg" variant="outline" className="px-12 py-8 text-xl rounded-2xl border-2 border-primary/20 text-primary hover:bg-primary/5">
+              <Button size="lg" variant="outline" className="px-12 py-8 text-xl rounded-2xl border-2 border-foreground/30 text-foreground hover:bg-foreground/5">
                 Sign in
               </Button>
             </Link>
           </div>
-          <p className="mt-8 text-sm text-primary/50">Setup takes less than 3 minutes.</p>
+          <p className="mt-8 text-sm text-foreground/50">Setup takes less than 3 minutes.</p>
         </div>
       </section>
 
