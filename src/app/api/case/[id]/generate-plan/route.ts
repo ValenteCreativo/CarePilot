@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUserId } from "@/lib/auth";
-import { db, cases } from "@/db";
+import { db, cases, actions } from "@/db";
 import { eq, and } from "drizzle-orm";
 import { generatePlan } from "@/lib/pipeline";
 
@@ -11,6 +11,8 @@ export async function POST(
   try {
     const { id } = await params;
     const userId = await getCurrentUserId();
+    
+    await request.json().catch(() => ({}));
 
     if (!userId) {
       return NextResponse.json(
@@ -38,10 +40,46 @@ export async function POST(
       caseData.caregiverContext
     );
 
+    const caregiverContext = (caseData.caregiverContext ?? {}) as Record<string, unknown>;
+    const phoneNumber =
+      (caregiverContext.phoneNumber as string | undefined) ||
+      (caregiverContext.phone as string | undefined) ||
+      process.env.TWILIO_DEFAULT_NUMBER ||
+      "";
+
+    const now = new Date();
+    const createdActions = await Promise.all(
+      result.plan.actions.map((planAction, index) => {
+        const actionDay = index + 1;
+        const scheduledFor = new Date(now);
+        scheduledFor.setDate(now.getDate() + actionDay);
+
+        return db
+          .insert(actions)
+          .values({
+            caseId: caseData.id,
+            type: "reminder",
+            status: "pending",
+            payload: {
+              message: planAction.title,
+              phoneNumber,
+              actionDay,
+              actionIndex: index,
+            },
+            scheduledFor,
+          })
+          .returning({ id: actions.id });
+      })
+    );
+
+    const actionIds = createdActions.flatMap((rows) => rows.map((row) => row.id));
+
     return NextResponse.json({
       plan: result.plan,
       planId: result.planId,
       triageResult: result.triageResult,
+      actionsGenerated: actionIds.length > 0,
+      actionCount: actionIds.length,
     });
   } catch (error) {
     console.error("Error generating plan:", error);

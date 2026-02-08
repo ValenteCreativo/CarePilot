@@ -11,6 +11,7 @@ CarePilot is a practical tool for caregivers managing complex care situations. I
 - **Check-ins & Progress Tracking**: Log action completion, stress levels, and costs with visual charts
 - **Quality Metrics**: View LLM evaluation scores for actionability, feasibility, empathy, and safety
 - **Opik Integration**: Full tracing and evaluation logging for LLM observability
+- **🆕 Autonomous Actions** (v2.0): AI agent executes actions (SMS/WhatsApp reminders) with approval workflow
 
 ## Demo Flow
 
@@ -59,22 +60,30 @@ Visit `/case/[id]/quality` to see:
 
 ### Environment Variables
 
-Create a `.env.local` file:
+Create a `.env.local` file (see `.env.example` for full reference):
 
 ```bash
 # Database
 DATABASE_URL=postgresql://user:password@host/database?sslmode=require
 
-# OpenAI
+# OpenAI (legacy) or Gemini (hackathon sponsor)
 OPENAI_API_KEY=sk-...
 OPENAI_MODEL=gpt-4o-mini
+# OR
+GEMINI_API_KEY=your-gemini-api-key
+GEMINI_MODEL=gemini-pro
 
-# Opik
+# Opik (LLM observability)
 OPIK_API_KEY=your-opik-api-key
 OPIK_PROJECT_NAME=carepilot
-
-# Optional: Public Opik URL for quality page links
 NEXT_PUBLIC_OPIK_PROJECT_URL=https://www.comet.com/opik/your-project
+
+# Twilio (for autonomous SMS/WhatsApp actions in v2.0)
+TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TWILIO_AUTH_TOKEN=your-auth-token
+TWILIO_FROM_NUMBER=+1234567890
+# WhatsApp Sandbox: Send "join your-code" to +1 415 523 8886
+TWILIO_WHATSAPP_FROM=whatsapp:+14155238886
 ```
 
 ### Installation
@@ -117,6 +126,10 @@ This will:
 | `/api/case/[id]/checkin` | POST | Save a check-in entry |
 | `/api/case/[id]/quality` | GET | Get LLM quality metrics |
 | `/api/feedback` | POST | Submit plan helpfulness feedback |
+| `/api/case/[id]/actions` | GET | List actions for a case |
+| `/api/case/[id]/actions/generate` | POST | Generate autonomous actions from plan |
+| `/api/actions/execute` | POST | Execute a specific action |
+| `/api/actions/approve` | POST | Approve a pending action |
 
 ## Database Schema
 
@@ -127,6 +140,44 @@ This will:
 - **llm_runs**: Pipeline execution logs
 - **llm_evals**: Evaluation metrics
 - **human_feedback**: User feedback on plans
+- **actions** (v2.0): Autonomous actions (reminders, messages) with approval workflow
+
+## Autonomous Actions (v2.0)
+
+CarePilot v2.0 introduces **agent-driven execution**: instead of just suggesting actions, the AI can execute them with caregiver approval.
+
+### How it works
+
+1. **Generate Actions**: After creating a 7-day plan, visit `/case/[id]/actions` and click "Generate Actions"
+2. **AI proposes actions**: System creates SMS/WhatsApp reminders for each planned action
+3. **Approval Workflow**: Review pending actions and approve/reject them
+4. **Execution**: Approved actions are sent via Twilio SMS or WhatsApp
+5. **Tracking**: View execution history with Opik traces
+
+### Action Types
+
+- **reminder**: Scheduled SMS/WhatsApp reminder for a specific action
+- **checkin_prompt**: Daily check-in reminder
+- **message**: Custom message to caregiver
+
+### Setup for Autonomous Actions
+
+1. Configure Twilio credentials in `.env.local` (see Environment Variables section)
+2. For WhatsApp: Join sandbox by texting your join code to `+1 415 523 8886`
+3. Run `npm run db:push` to create the `actions` table
+4. Generate a plan, then generate actions from it
+
+### Demo Flow (WhatsApp Bot)
+
+**Vision**: Install CarePilot bot on WhatsApp → receive proactive reminders → check in via chat → AI adapts plan.
+
+Current implementation:
+- ✅ Action generation from plans
+- ✅ Approval workflow UI
+- ✅ SMS/WhatsApp execution via Twilio
+- ✅ Opik tracing for all actions
+- 🚧 Conversational check-ins (coming soon)
+- 🚧 Adaptive scheduling based on engagement
 
 ## Deploying to Vercel
 
@@ -134,10 +185,13 @@ This will:
 2. Import the repo in Vercel
 3. Add environment variables in Vercel dashboard:
    - `DATABASE_URL`
-   - `OPENAI_API_KEY`
-   - `OPENAI_MODEL`
+   - `OPENAI_API_KEY` or `GEMINI_API_KEY`
+   - `OPENAI_MODEL` or `GEMINI_MODEL`
    - `OPIK_API_KEY`
    - `OPIK_PROJECT_NAME`
+   - `TWILIO_ACCOUNT_SID` (for v2.0 autonomous actions)
+   - `TWILIO_AUTH_TOKEN`
+   - `TWILIO_FROM_NUMBER`
 4. Deploy!
 
 ## Safety Note

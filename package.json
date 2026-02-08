@@ -11,7 +11,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "eval": "tsx eval/run-eval.ts"
+    "eval": "tsx eval/run-eval.ts",
+    "cron": "node --loader tsx/esm src/lib/actions/cron-cli.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
