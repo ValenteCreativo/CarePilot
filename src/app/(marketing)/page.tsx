@@ -295,23 +295,23 @@ export default function LandingPage() {
               <CardContent className="p-10">
                 <div className="flex items-center justify-between mb-8">
                   <div>
-                    <p className="text-xs uppercase tracking-widest text-foreground/70 font-semibold mb-1">CarePilot Plus</p>
-                    <p className="text-4xl font-display text-foreground">$30<span className="text-xl">/mo</span></p>
+                    <p className="text-xs uppercase tracking-widest text-[#007a8f] font-semibold mb-1">CarePilot Plus</p>
+                    <p className="text-4xl font-display text-[#007a8f]">$30<span className="text-xl">/mo</span></p>
                   </div>
                   <div className="flex flex-col items-end gap-1">
-                    <div className="flex items-center gap-1 text-foreground">
-                      <Star className="h-4 w-4 fill-foreground" />
+                    <div className="flex items-center gap-1 text-[#007a8f]">
+                      <Star className="h-4 w-4 fill-[#007a8f]" />
                       <span className="font-bold">4.9</span>
                     </div>
-                    <span className="text-[10px] text-foreground/60 uppercase font-bold">Caregiver rating</span>
+                    <span className="text-[10px] text-[#006b7d] uppercase font-bold">Caregiver rating</span>
                   </div>
                 </div>
 
-                <ul className="text-sm text-foreground/90 space-y-4 font-sans list-none">
+                <ul className="text-sm text-[#006b7d] space-y-4 font-sans list-none">
                   {["Unlimited WhatsApp coordination", "Medication tracking & proactive refills", "Appointment organization assistance", "Weekly insights & care summaries"].map((feature) => (
                     <li key={feature} className="flex items-center gap-3">
-                      <div className="h-5 w-5 rounded-full bg-foreground/10 flex items-center justify-center flex-shrink-0">
-                        <CheckCircle className="h-3 w-3 text-foreground" />
+                      <div className="h-5 w-5 rounded-full bg-[#007a8f]/20 flex items-center justify-center flex-shrink-0">
+                        <CheckCircle className="h-3 w-3 text-[#007a8f]" />
                       </div>
                       {feature}
                     </li>
@@ -323,7 +323,7 @@ export default function LandingPage() {
                     Start Your Free Trial
                   </Button>
                 </Link>
-                <p className="text-center mt-4 text-xs text-foreground/50">Cancel anytime. No hidden fees.</p>
+                <p className="text-center mt-4 text-xs text-[#006b7d]">Cancel anytime. No hidden fees.</p>
               </CardContent>
             </Card>
           </div>
@@ -333,25 +333,25 @@ export default function LandingPage() {
       <section className="py-24 border-t border-border/50 bg-[#fff8d7]/20">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-16 items-start">
-            <div className="bg-[#fff8d7] p-10 rounded-[2.5rem] border-2 border-foreground/20 shadow-sm">
-              <h3 className="text-2xl font-display text-foreground mb-4">Built on trust</h3>
-              <p className="text-foreground/80 font-sans leading-relaxed mb-6">
+            <div className="bg-[#fff8d7] p-10 rounded-[2.5rem] border-2 border-[#007a8f]/20 shadow-sm">
+              <h3 className="text-2xl font-display text-[#007a8f] mb-4">Built on trust</h3>
+              <p className="text-[#006b7d] font-sans leading-relaxed mb-6">
                 We design CarePilot with privacy at the core. Your data is encrypted, access is limited, and you always maintain full control.
               </p>
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className="bg-foreground/10 text-foreground border-none">Encrypted data</Badge>
-                <Badge variant="secondary" className="bg-foreground/10 text-foreground border-none">Consent-first</Badge>
-                <Badge variant="secondary" className="bg-foreground/10 text-foreground border-none">Audit-ready</Badge>
+                <Badge variant="secondary" className="bg-[#007a8f]/10 text-[#007a8f] border-none">Encrypted data</Badge>
+                <Badge variant="secondary" className="bg-[#007a8f]/10 text-[#007a8f] border-none">Consent-first</Badge>
+                <Badge variant="secondary" className="bg-[#007a8f]/10 text-[#007a8f] border-none">Audit-ready</Badge>
               </div>
             </div>
 
             <div className="grid gap-6">
               {proofItems.map((item) => (
-                <div key={item} className="flex items-start gap-4 p-4 rounded-2xl transition-colors hover:bg-foreground/5">
-                  <div className="h-10 w-10 rounded-full bg-foreground/10 flex items-center justify-center flex-shrink-0">
-                    <ShieldCheck className="h-5 w-5 text-foreground" />
+                <div key={item} className="flex items-start gap-4 p-4 rounded-2xl transition-colors hover:bg-[#007a8f]/5">
+                  <div className="h-10 w-10 rounded-full bg-[#007a8f]/10 flex items-center justify-center flex-shrink-0">
+                    <ShieldCheck className="h-5 w-5 text-[#007a8f]" />
                   </div>
-                  <p className="text-foreground/90 font-sans leading-relaxed pt-1">{item}</p>
+                  <p className="text-[#006b7d] font-sans leading-relaxed pt-1">{item}</p>
                 </div>
               ))}
             </div>
