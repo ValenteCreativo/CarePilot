@@ -347,11 +347,11 @@ export default function LandingPage() {
 
             <div className="grid gap-6">
               {proofItems.map((item) => (
-                <div key={item} className="flex items-start gap-4 p-4 rounded-2xl transition-colors hover:bg-[#007a8f]/5">
-                  <div className="h-10 w-10 rounded-full bg-[#007a8f]/10 flex items-center justify-center flex-shrink-0">
-                    <ShieldCheck className="h-5 w-5 text-[#007a8f]" />
+                <div key={item} className="flex items-start gap-4 p-4 rounded-2xl transition-colors hover:bg-white/10">
+                  <div className="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <ShieldCheck className="h-5 w-5 text-white" />
                   </div>
-                  <p className="text-[#006b7d] font-sans leading-relaxed pt-1">{item}</p>
+                  <p className="text-white/90 font-sans leading-relaxed pt-1">{item}</p>
                 </div>
               ))}
             </div>
