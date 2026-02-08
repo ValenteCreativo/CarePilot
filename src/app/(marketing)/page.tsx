@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,10 @@ import {
   Stethoscope,
   ShieldCheck,
   Star,
+  Users,
+  Bot,
+  CheckCircle,
+  Smartphone,
 } from "lucide-react";
 
 const valueProps = [
@@ -40,6 +45,33 @@ const proofItems = [
   "Built with clinicians and experienced caregivers",
 ];
 
+const howItWorksSteps = [
+  {
+    step: 1,
+    title: "Share Your Context",
+    description: "Tell CarePilot about your loved one's needs and your schedule through a simple WhatsApp conversation.",
+    icon: MessageSquare,
+  },
+  {
+    step: 2,
+    title: "AI Creates Your Plan",
+    description: "CarePilot analyzes your situation and generates a personalized 7-day care plan with actionable tasks.",
+    icon: Bot,
+  },
+  {
+    step: 3,
+    title: "Approve & Execute",
+    description: "Review proposed actions in your dashboard and approve with one tap. We handle the rest.",
+    icon: CheckCircle,
+  },
+  {
+    step: 4,
+    title: "Ongoing Support",
+    description: "Get 24/7 WhatsApp assistance, continuous plan adjustments, and weekly care summaries.",
+    icon: Smartphone,
+  },
+];
+
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
@@ -48,6 +80,16 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(14,116,144,0.18),_transparent_60%)]" />
         <div className="container mx-auto px-4 py-24 md:py-32 relative">
           <div className="max-w-3xl">
+            <div className="mb-6">
+              <Image
+                src="/images/logos/CarePilot.jpg"
+                alt="CarePilot Logo"
+                width={120}
+                height={120}
+                priority
+                className="rounded-xl shadow-lg"
+              />
+            </div>
             <Badge variant="secondary" className="mb-6">
               Compassionate AI support for caregivers
             </Badge>
@@ -96,6 +138,46 @@ export default function LandingPage() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 border-t border-border/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">How It Works</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Get started in minutes with our simple 4-step process. No complex setup, no new apps to learn.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {howItWorksSteps.map((item) => (
+              <div key={item.step} className="text-center space-y-4">
+                <div className="relative mx-auto w-16 h-16">
+                  <div className="absolute inset-0 bg-primary/10 rounded-full" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <item.icon className="h-8 w-8 text-primary" />
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-semibold">
+                    {item.step}
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <Link href="/signup">
+              <Button size="lg" className="px-8">
+                Start Your Free Trial
+              </Button>
+            </Link>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Set up in minutes • No credit card required
+            </p>
           </div>
         </div>
       </section>
