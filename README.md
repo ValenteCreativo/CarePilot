@@ -1,92 +1,142 @@
 # CarePilot
 
-**A caregiver's command center.** Turn care into a plan.
+**Your AI Care Assistant** — Taking care of the ones you love, made easier.
 
-CarePilot is a practical tool for caregivers managing complex care situations. It helps you create structured 7-day action plans tailored to your time, budget, and energy constraints.
+CarePilot is a WhatsApp-based AI agent that helps caregivers manage complex care situations. Give it context about yourself, your schedule, and your loved one's needs — and it helps you execute the small but critical tasks that keep care running smoothly.
+
+## What is CarePilot?
+
+A **subscription service** ($30/mo) that gives you an AI assistant in your WhatsApp that:
+- **Schedules appointments** and sends reminders
+- **Tracks medications** and alerts you when it's time
+- **Pays bills** and handles logistics
+- **Answers questions** about care tasks
+- **Adapts to your life** based on your work schedule, capacity, and patient needs
+
+### Why WhatsApp?
+
+Because caregivers are busy. You shouldn't need another app — CarePilot meets you where you already are.
 
 ## Features
 
-- **Care Case Management**: Create and manage care cases for different situations (elder care, recovery, mental health, addiction, debt, legal, and more)
-- **AI-Powered Planning**: Generate realistic 7-day plans using a 3-stage AI pipeline (triage → plan → critic)
-- **Check-ins & Progress Tracking**: Log action completion, stress levels, and costs with visual charts
-- **Quality Metrics**: View LLM evaluation scores for actionability, feasibility, empathy, and safety
-- **Opik Integration**: Full tracing and evaluation logging for LLM observability
-- **🆕 Autonomous Actions** (v2.0): AI agent executes actions (SMS/WhatsApp reminders) with approval workflow
+### 🤖 WhatsApp Bot (Primary Interface)
+- **Conversational onboarding**: Tell the bot about your patient and your situation in natural language
+- **Smart reminders**: Medication times, appointment prep, bill due dates
+- **Command system**:
+  - `status` — See your next 3 approved actions
+  - `plan` — View your full 7-day care plan
+  - `update [message]` — Adjust context or plans
+  - `help` — Get command list
 
-## Demo Flow
+### 📊 Web Dashboard
+- **Overview**: Active cases, pending actions, recent activity
+- **Actions Kanban**: Visual workflow (Pending → Approved → In Progress → Completed)
+- **WhatsApp Config**: Bot setup, personality settings, notification preferences
+- **Analytics**: Message volume, action completion rates, response times (powered by Opik)
+- **Settings**: Profile, subscription status, billing
 
-1. **Create a Case**: Enter details about your care situation and your capacity as a caregiver
-2. **Generate a Plan**: AI creates a tailored 7-day plan with 3 goals and concrete actions
-3. **Track Progress**: Check in on actions, record stress levels, and monitor spending
-4. **Review Quality**: View LLM quality metrics and Opik traces
+### 🔄 Autonomous Actions
+- AI proposes actions based on your care plan
+- You approve/reject via dashboard or WhatsApp
+- Approved actions execute automatically (SMS/WhatsApp reminders, scheduling)
+- Full audit trail with Opik tracing
+
+### 🧠 AI-Powered Planning
+- **Gemini 2.0 Flash** as primary LLM (with OpenAI fallback)
+- Context-aware: Understands your work schedule, patient conditions, constraints
+- Generates realistic 7-day action plans
+- Learns from your feedback and adjusts
+
+### 📈 Quality & Observability
+- **Opik integration** for full LLM tracing
+- Evaluation metrics: Actionability, Feasibility, Empathy, Safety
+- Response time monitoring
+- Action completion tracking
 
 ## Tech Stack
 
-- **Framework**: Next.js 16 (App Router) with TypeScript
-- **UI**: TailwindCSS + shadcn/ui components
-- **Database**: Neon Postgres with Drizzle ORM
-- **AI**: OpenAI GPT-4o-mini with Opik tracing
-- **Charts**: Recharts for progress visualization
+- **Frontend**: Next.js 15 (App Router), TypeScript, TailwindCSS, shadcn/ui
+- **Backend**: Next.js API Routes, Drizzle ORM
+- **Database**: Neon Postgres
+- **AI**: Google Gemini 2.0 Flash (primary), OpenAI GPT-4o-mini (fallback)
+- **Messaging**: Twilio (SMS + WhatsApp)
+- **Observability**: Opik (LLM tracing + evals)
+- **Auth**: Cookie-based sessions (NextAuth-ready)
 
-## Opik Integration
+## Project Structure
 
-CarePilot integrates with [Opik](https://www.comet.com/opik) for LLM observability:
-
-### Tracing
-- All OpenAI calls are automatically traced via `opik-openai`
-- Each pipeline stage (triage, plan, critic) creates a separate trace
-- Traces include input/output, latency, and metadata
-
-### Evaluation Metrics
-After generating a plan, the system runs LLM-as-judge evaluations:
-- **Actionability** (1-5): Are steps concrete enough to act on today?
-- **Feasibility** (1-5): Does the plan fit time/budget/energy constraints?
-- **Empathy Tone** (1-5): Is the language warm and supportive?
-- **Safety** (pass/fail): Does the plan avoid medical/legal advice?
-
-### Quality Page
-Visit `/case/[id]/quality` to see:
-- Aggregate scores from recent evaluations
-- Individual LLM run metrics with latency
-- Links to Opik traces for detailed analysis
+```
+CarePilot/
+├── src/
+│   ├── app/
+│   │   ├── (marketing)/         # Landing page
+│   │   ├── login/               # Auth pages
+│   │   ├── signup/
+│   │   ├── dashboard/           # Protected dashboard
+│   │   │   ├── page.tsx         # Overview
+│   │   │   ├── actions/         # Kanban board
+│   │   │   ├── whatsapp/        # Bot config
+│   │   │   ├── analytics/       # Opik metrics
+│   │   │   └── settings/        # User settings
+│   │   └── api/
+│   │       ├── actions/         # Action CRUD + execution
+│   │       ├── cases/           # Case management
+│   │       ├── messages/        # Message history
+│   │       ├── analytics/       # Stats endpoint
+│   │       ├── whatsapp/        # Twilio webhook
+│   │       └── auth/            # Login/signup/logout
+│   ├── components/
+│   │   ├── dashboard/           # Dashboard components
+│   │   ├── auth/                # Auth forms
+│   │   └── ui/                  # shadcn/ui components
+│   ├── db/                      # Drizzle schema + client
+│   ├── lib/
+│   │   ├── actions/             # Action generator + executor
+│   │   ├── ai/                  # LLM clients (Gemini, OpenAI)
+│   │   ├── twilio.ts            # Twilio integration
+│   │   └── password.ts          # Auth helpers
+├── scripts/
+│   ├── seed.ts                  # Demo data seeding
+│   └── simulate-whatsapp-webhook.ts  # Local testing
+├── drizzle/                     # DB migrations
+└── eval/                        # LLM eval suite
+```
 
 ## Setup
 
 ### Prerequisites
 - Node.js 18+
 - Neon Postgres database
-- OpenAI API key
-- Opik API key (from [Comet](https://www.comet.com/opik))
+- Google Gemini API key
+- Opik API key ([get one here](https://www.comet.com/opik))
+- Twilio account (SMS + WhatsApp)
 
 ### Environment Variables
 
-Create a `.env.local` file (see `.env.example` for full reference):
+Create `.env.local` with:
 
 ```bash
 # Database
 DATABASE_URL=postgresql://user:password@host/database?sslmode=require
 
-# OpenAI (legacy) or Gemini (hackathon sponsor)
-OPENAI_API_KEY=sk-...
-OPENAI_MODEL=gpt-4o-mini
-# OR
-GEMINI_API_KEY=your-gemini-api-key
-GEMINI_MODEL=gemini-pro
+# Google Gemini (primary LLM)
+GOOGLE_AI_API_KEY=your_google_gemini_api_key
 
 # Opik (LLM observability)
-OPIK_API_KEY=your-opik-api-key
+OPIK_API_KEY=your_opik_api_key
 OPIK_PROJECT_NAME=carepilot
 NEXT_PUBLIC_OPIK_PROJECT_URL=https://www.comet.com/opik/your-project
 
-# Twilio (for autonomous SMS/WhatsApp actions + webhook bot)
-TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-TWILIO_AUTH_TOKEN=your-auth-token
-# SMS sender
+# Twilio (SMS + WhatsApp)
+TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
 TWILIO_FROM_NUMBER=+1234567890
-# WhatsApp sender (recommended; whatsapp:+E164)
 TWILIO_WHATSAPP_NUMBER=whatsapp:+14155238886
-# Backward-compatible alias
 TWILIO_WHATSAPP_FROM=whatsapp:+14155238886
+
+# Optional: OpenAI fallback
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4o-mini
 ```
 
 ### Installation
@@ -95,134 +145,219 @@ TWILIO_WHATSAPP_FROM=whatsapp:+14155238886
 # Install dependencies
 npm install
 
-# Push database schema to Neon
+# Push database schema
 npm run db:push
+
+# Seed demo data (optional)
+npm run db:seed
 
 # Start development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
+Open [http://localhost:3000](http://localhost:3000) to see the landing page.
 
-### Running Evaluations
+### WhatsApp Setup
 
-The eval script runs the pipeline against 10 synthetic test cases:
+1. **Twilio Sandbox** (for testing):
+   - Open WhatsApp
+   - Send `join four-mission` to `+1 415 523 8886`
+   - You're connected to the bot
 
-```bash
-npm run eval
-```
+2. **Configure Webhook**:
+   - Go to Twilio Console → Messaging → Settings → WhatsApp Sandbox
+   - Set webhook URL: `https://your-deployment.vercel.app/api/whatsapp`
+   - Method: `POST`
 
-This will:
-- Load fixtures from `eval/fixtures/`
-- Run the full pipeline (triage → plan → critic) for each
-- Run LLM-as-judge evaluations
-- Log traces to Opik
-- Print aggregate metrics to console
+3. **Test Locally**:
+   ```bash
+   npm run whatsapp:simulate
+   ```
 
-### Simulate Twilio Webhook
+## User Flows
 
-Send a local test webhook to `/api/whatsapp`:
+### 1. Web Dashboard Flow
+1. Visit landing page at `/`
+2. Click "Start Your Free Trial" → `/signup`
+3. Create account (email, password, name, phone)
+4. Redirected to `/dashboard`
+5. Configure WhatsApp bot in `/dashboard/whatsapp`
+6. Create a care case (patient context)
+7. Generate 7-day plan
+8. Review/approve actions in `/dashboard/actions`
+9. Bot executes approved actions via WhatsApp
 
-```bash
-TWILIO_AUTH_TOKEN=your-auth-token \\
-WEBHOOK_URL=http://localhost:3000/api/whatsapp \\
-TWILIO_TEST_BODY=\"status\" \\
-npm run whatsapp:simulate
-```
+### 2. WhatsApp Bot Flow
+1. User messages `+1 415 523 8886` with `join four-mission`
+2. Bot: "Hola! Soy CarePilot. Cuéntame: ¿a quién cuidas y qué necesita?"
+3. User: "Mi papá, tuvo un derrame cerebral, necesita ayuda con medicinas y citas"
+4. Bot: "Entiendo. ¿Cuánto tiempo puedes dedicarle por semana?"
+5. User: "2-3 horas diarias, trabajo full-time"
+6. Bot generates plan and asks for approval
+7. User: "sí"
+8. Bot: "Listo. Mañana a las 9am te recordaré dar el medicamento."
+9. Bot sends proactive reminders at scheduled times
+
+### 3. Commands (WhatsApp)
+- `status` → Next 3 approved actions
+- `plan` → Full 7-day plan summary
+- `update [mensaje]` → Adjust context/plan
+- `help` → Command list
 
 ## API Routes
 
 | Route | Method | Description |
 |-------|--------|-------------|
-| `/api/case` | POST | Create a new care case |
-| `/api/case/[id]` | GET | Get case details with plan and stats |
-| `/api/case/[id]/generate-plan` | POST | Generate/update 7-day plan |
-| `/api/case/[id]/checkin` | POST | Save a check-in entry |
-| `/api/case/[id]/quality` | GET | Get LLM quality metrics |
-| `/api/feedback` | POST | Submit plan helpfulness feedback |
-| `/api/case/[id]/actions` | GET | List actions for a case |
-| `/api/case/[id]/actions/generate` | POST | Generate autonomous actions from plan |
-| `/api/actions/execute` | POST | Execute a specific action |
-| `/api/actions/approve` | POST | Approve a pending action |
-| `/api/whatsapp` | POST | Twilio WhatsApp webhook (bot) |
+| `/api/login` | POST | User login |
+| `/api/signup` | POST | User registration |
+| `/api/logout` | POST | User logout |
+| `/api/cases` | GET, POST | List/create care cases |
+| `/api/actions` | GET, POST | List/create actions |
+| `/api/actions` | PATCH | Update action status |
+| `/api/messages` | GET | Recent message history |
+| `/api/analytics` | GET | Dashboard stats |
+| `/api/whatsapp` | POST | Twilio webhook (bot) |
+| `/api/whatsapp/test` | POST | Test webhook locally |
 
 ## Database Schema
 
-- **users**: Anonymous users (cookie-based)
-- **cases**: Care cases with context
-- **plans**: Generated plans (JSON)
-- **checkins**: Progress check-ins
-- **llm_runs**: Pipeline execution logs
-- **llm_evals**: Evaluation metrics
-- **human_feedback**: User feedback on plans
-- **actions** (v2.0): Autonomous actions (reminders, messages) with approval workflow
+- **users**: User accounts (email, password_hash, name, phone)
+- **cases**: Care cases with loved one context
+- **plans**: Generated 7-day plans (JSON)
+- **actions**: Autonomous actions (pending/approved/completed)
+- **messages**: WhatsApp conversation history
+- **checkins**: Progress tracking
+- **llm_runs**: LLM execution logs
+- **llm_evals**: Quality metrics
+- **human_feedback**: User feedback
 
-## Autonomous Actions (v2.0)
+## Development Scripts
 
-CarePilot v2.0 introduces **agent-driven execution**: instead of just suggesting actions, the AI can execute them with caregiver approval.
+```bash
+# Start dev server
+npm run dev
 
-### How it works
+# Database
+npm run db:push          # Push schema changes
+npm run db:seed          # Seed demo data
+npm run db:studio        # Drizzle Studio UI
 
-1. **Generate Actions**: After creating a 7-day plan, visit `/case/[id]/actions` and click "Generate Actions"
-2. **AI proposes actions**: System creates SMS/WhatsApp reminders for each planned action
-3. **Approval Workflow**: Review pending actions and approve/reject them
-4. **Execution**: Approved actions are sent via Twilio SMS or WhatsApp
-5. **Tracking**: View execution history with Opik traces
+# Testing
+npm run whatsapp:simulate  # Simulate Twilio webhook
+npm run eval              # Run LLM eval suite
 
-### Action Types
-
-- **reminder**: Scheduled SMS/WhatsApp reminder for a specific action
-- **checkin_prompt**: Daily check-in reminder
-- **message**: Custom message to caregiver
-
-### Setup for Autonomous Actions
-
-1. Configure Twilio credentials in `.env.local` (see Environment Variables section)
-2. For WhatsApp: Join sandbox by texting your join code to `+1 415 523 8886`
-3. Run `npm run db:push` to create the `actions` table
-4. Generate a plan, then generate actions from it
-5. Configure Twilio webhook URL to `https://your-deployment.vercel.app/api/whatsapp`
-
-### Demo Flow (WhatsApp Bot)
-
-**Vision**: Install CarePilot bot on WhatsApp → receive proactive reminders → check in via chat → AI adapts plan.
-
-Current implementation:
-- ✅ Action generation from plans
-- ✅ Approval workflow UI
-- ✅ SMS/WhatsApp execution via Twilio
-- ✅ Opik tracing for all actions
-- 🚧 Conversational check-ins (coming soon)
-- 🚧 Adaptive scheduling based on engagement
+# Build
+npm run build
+npm start                # Production server
+```
 
 ## Deploying to Vercel
 
-1. Push your code to GitHub
-2. Import the repo in Vercel
-3. Add environment variables in Vercel dashboard:
+1. Push code to GitHub
+2. Import repo in Vercel dashboard
+3. Add environment variables:
    - `DATABASE_URL`
-   - `OPENAI_API_KEY` or `GEMINI_API_KEY`
-   - `OPENAI_MODEL` or `GEMINI_MODEL`
+   - `GOOGLE_AI_API_KEY`
    - `OPIK_API_KEY`
    - `OPIK_PROJECT_NAME`
-   - `TWILIO_ACCOUNT_SID` (for v2.0 autonomous actions)
+   - `TWILIO_ACCOUNT_SID`
    - `TWILIO_AUTH_TOKEN`
    - `TWILIO_FROM_NUMBER`
    - `TWILIO_WHATSAPP_NUMBER`
+   - (Optional) `OPENAI_API_KEY`, `NEXT_PUBLIC_OPIK_PROJECT_URL`
 4. Deploy!
+5. Configure Twilio webhook URL to your Vercel domain
 
-## Safety Note
+### Production WhatsApp
+
+To move from Twilio sandbox to production:
+1. Request WhatsApp Business API access in Twilio Console
+2. Register your business phone number
+3. Update `TWILIO_WHATSAPP_NUMBER` to your approved number
+4. Configure webhook URL as above
+
+## Architecture
+
+```
+User (WhatsApp)
+    ↓
+Twilio Webhook → /api/whatsapp
+    ↓
+Parse message (From, Body, MessageSid)
+    ↓
+Check command (status/plan/help)
+    OR
+    ↓
+Conversational AI (Gemini 2.0 Flash)
+    ↓
+Update context → Generate/adjust plan
+    ↓
+Create actions → Await approval
+    ↓
+User approves (web dashboard or WhatsApp)
+    ↓
+Vercel Cron (/api/actions/cron every 10min)
+    ↓
+Execute approved actions (Twilio SMS/WhatsApp)
+    ↓
+Log to Opik (full tracing)
+```
+
+## Safety & Privacy
 
 **CarePilot is NOT a substitute for professional medical, legal, or therapeutic advice.**
 
-The tool helps with organization and planning only:
-- Medication reminder schedules (based on existing doctor instructions)
-- Questions to ask professionals
-- Logistics, budgeting, and coordination
-- Appointment tracking
+What CarePilot does:
+- ✅ Organize schedules based on existing doctor instructions
+- ✅ Send reminders for medications, appointments
+- ✅ Track logistics, budgeting, coordination
+- ✅ Suggest questions to ask professionals
 
-If you or someone you care for is in immediate danger, please contact emergency services.
+What CarePilot does NOT do:
+- ❌ Diagnose conditions
+- ❌ Prescribe medications
+- ❌ Provide legal or financial advice
+- ❌ Replace professional care
+
+**Privacy**:
+- All data encrypted in transit (TLS)
+- Database: Neon Postgres with SSL
+- No data sold to third parties
+- Conversation history stored securely
+- User can delete account + data anytime
+
+**If you or someone you care for is in immediate danger, please contact emergency services (911 in US).**
+
+## Roadmap
+
+### v2.1 (Next)
+- [ ] Stripe billing integration
+- [ ] Multi-patient support (multiple cases per user)
+- [ ] Voice messages (WhatsApp audio → transcription)
+- [ ] Adaptive scheduling (learns from your engagement patterns)
+- [ ] Calendar integration (Google/Apple)
+
+### v3.0 (Future)
+- [ ] Caregiver community (anonymous support groups)
+- [ ] Professional network (connect with vetted services)
+- [ ] Insurance claim tracking
+- [ ] Multi-language support (español, português, français)
+- [ ] iOS/Android native apps
+
+## Contributing
+
+Contributions welcome! Please open an issue first to discuss major changes.
+
+1. Fork the repo
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT
+MIT License - see LICENSE file for details
+
+---
+
+Built with ❤️ for caregivers everywhere. You're not alone.
