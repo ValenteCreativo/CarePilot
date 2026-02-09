@@ -295,9 +295,9 @@ export default function LandingPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             {valueProps.map((item) => (
-              <Card key={item.title} className="bg-white backdrop-blur-md border border-[#0097b2]/20 shadow-lg hover:bg-card hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+              <Card key={item.title} className="bg-white backdrop-blur-md border-2 border-[#0097b2]/20 shadow-lg hover:bg-[#fff8d7] hover:border-[#0097b2] hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
                 <CardContent className="p-6">
-                  <div className="h-11 w-11 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
+                  <div className="h-11 w-11 rounded-lg bg-[#aee4ff] flex items-center justify-center mb-4">
                     <item.icon className="h-5 w-5 text-[#0097b2]" />
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-[#004d6d]">{item.title}</h3>
