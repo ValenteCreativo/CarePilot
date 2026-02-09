@@ -247,18 +247,20 @@ export default function CaseDetailPage() {
   const plan = latestPlan?.planJson;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-[#004d6d]">
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <Link href="/app" className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 mb-2">
+          <Link href="/dashboard/cases" className="text-sm text-[#0097b2] hover:underline flex items-center gap-1 mb-2 font-semibold">
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
           </Link>
-          <h1 className="text-3xl font-bold tracking-tight">{caseData.title}</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-[#004d6d]">{caseData.title}</h1>
           <div className="flex items-center gap-2 mt-2">
-            <Badge variant="outline">{getSituationLabel(caseData.lovedOneContext.situationType)}</Badge>
-            <span className="text-sm text-muted-foreground">
+            <Badge variant="outline" className="border-[#0097b2] text-[#0097b2] font-bold">
+              {getSituationLabel(caseData.lovedOneContext.situationType)}
+            </Badge>
+            <span className="text-sm text-[#004d6d]/80 font-medium">
               Created {new Date(caseData.createdAt).toLocaleDateString()}
             </span>
           </div>

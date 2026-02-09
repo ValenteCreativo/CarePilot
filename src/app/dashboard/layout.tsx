@@ -4,6 +4,7 @@ import { getCurrentUserId } from "@/lib/auth";
 import { SignOutButton } from "@/components/auth/signout-button";
 import {
   LayoutGrid,
+  FolderKanban,
   KanbanSquare,
   MessageSquare,
   BarChart3,
@@ -11,6 +12,7 @@ import {
 } from "lucide-react";
 
 const navItems = [
+  { label: "Cases", href: "/dashboard/cases", icon: FolderKanban },
   { label: "Overview", href: "/dashboard", icon: LayoutGrid },
   { label: "Actions", href: "/dashboard/actions", icon: KanbanSquare },
   { label: "WhatsApp Config", href: "/dashboard/whatsapp", icon: MessageSquare },

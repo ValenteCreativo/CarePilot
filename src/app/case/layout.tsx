@@ -16,10 +16,10 @@ export default function CaseLayout({
               <span className="text-xl font-semibold tracking-tight">CarePilot</span>
             </Link>
             <nav className="hidden sm:flex items-center gap-1">
-              <Link href="/app">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                  <Home className="w-4 h-4 mr-1.5" />
-                  Dashboard
+              <Link href="/dashboard/cases">
+                <Button variant="ghost" size="sm" className="text-[#004d6d] hover:bg-[#fff8d7] hover:text-[#004d6d]">
+                  <Home className="w-4 h-4 mr-1.5 text-[#0097b2]" />
+                  Cases
                 </Button>
               </Link>
             </nav>
