@@ -68,15 +68,30 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
         <CardContent className="grid md:grid-cols-3 gap-4">
           <div className="space-y-2">
             <Label htmlFor="tone" className="text-[#004d6d] font-semibold">Tone</Label>
-            <Input id="tone" value={tone} onChange={(event) => setTone(event.target.value)} className="border-[#0097b2]/30" />
+            <Input
+              id="tone"
+              value={tone}
+              onChange={(event) => setTone(event.target.value)}
+              className="border-[#0097b2]/30 text-[#004d6d] placeholder:text-[#004d6d]/60"
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="language" className="text-[#004d6d] font-semibold">Language</Label>
-            <Input id="language" value={language} onChange={(event) => setLanguage(event.target.value)} className="border-[#0097b2]/30" />
+            <Input
+              id="language"
+              value={language}
+              onChange={(event) => setLanguage(event.target.value)}
+              className="border-[#0097b2]/30 text-[#004d6d] placeholder:text-[#004d6d]/60"
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="style" className="text-[#004d6d] font-semibold">Response Style</Label>
-            <Input id="style" value={responseStyle} onChange={(event) => setResponseStyle(event.target.value)} className="border-[#0097b2]/30" />
+            <Input
+              id="style"
+              value={responseStyle}
+              onChange={(event) => setResponseStyle(event.target.value)}
+              className="border-[#0097b2]/30 text-[#004d6d] placeholder:text-[#004d6d]/60"
+            />
           </div>
         </CardContent>
       </Card>
@@ -90,7 +105,11 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="notify-window" className="text-[#004d6d] font-semibold">Quiet Hours</Label>
-            <Input id="notify-window" placeholder="9pm - 7am" className="border-[#0097b2]/30" />
+            <Input
+              id="notify-window"
+              placeholder="9pm - 7am"
+              className="border-[#0097b2]/30 text-[#004d6d] placeholder:text-[#004d6d]/60"
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="alerts" className="text-[#004d6d] font-semibold">High Priority Alerts</Label>
@@ -98,7 +117,7 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
               id="alerts"
               placeholder="Example: urgent medical issues, missed medications"
               rows={3}
-              className="border-[#0097b2]/30"
+              className="border-[#0097b2]/30 text-[#004d6d] placeholder:text-[#004d6d]/60"
             />
           </div>
         </CardContent>

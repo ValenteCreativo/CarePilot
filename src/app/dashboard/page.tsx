@@ -127,7 +127,7 @@ export default async function DashboardOverviewPage() {
       <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-6">
         <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl hover:shadow-2xl hover:border-[#fff8d7] transition-all duration-300">
           <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
+            <CardTitle className="text-lg flex items-center gap-2 text-[#004d6d]">
               <MessageSquare className="h-4 w-4 text-[#0097b2]" />
               Recent activity
             </CardTitle>
@@ -154,7 +154,7 @@ export default async function DashboardOverviewPage() {
 
         <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl hover:shadow-2xl hover:border-[#fff8d7] transition-all duration-300">
           <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
+            <CardTitle className="text-lg flex items-center gap-2 text-[#004d6d]">
               <ClipboardCheck className="h-4 w-4 text-[#0097b2]" />
               Quick actions
             </CardTitle>
@@ -162,16 +162,22 @@ export default async function DashboardOverviewPage() {
           <CardContent className="space-y-4 text-sm text-[#0097b2] font-bold">
             <div className="rounded-lg border border-border/40 p-4">
               <p className="font-medium text-[#004d6d]">New case intake</p>
-              <p className="mt-1">Capture medical context, caregiver schedule, and priorities.</p>
+              <p className="mt-1 text-[#004d6d]">Capture medical context, caregiver schedule, and priorities.</p>
               <Link href="/case/new">
                 <Button size="sm" className="mt-3">Start case</Button>
               </Link>
             </div>
             <div className="rounded-lg border border-border/40 p-4">
               <p className="font-medium text-[#004d6d]">WhatsApp check-in</p>
-              <p className="mt-1">Send a quick update or test message to the caregiver.</p>
+              <p className="mt-1 text-[#004d6d]">Send a quick update or test message to the caregiver.</p>
               <Link href="/dashboard/whatsapp">
-                <Button size="sm" variant="outline" className="mt-3">Open WhatsApp config</Button>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="mt-3 border-[#0097b2] text-[#0097b2] hover:bg-[#0097b2]/10"
+                >
+                  Open WhatsApp config
+                </Button>
               </Link>
             </div>
           </CardContent>
