@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${dmSans.variable} ${parisienne.variable} ${ultra.variable}`}>
+    <html lang="en" className={`dark ${dmSans.variable} ${parisienne.variable} ${ultra.variable}`} suppressHydrationWarning>
       <body className="font-dm-sans antialiased min-h-screen bg-background">
         {children}
         <Toaster />

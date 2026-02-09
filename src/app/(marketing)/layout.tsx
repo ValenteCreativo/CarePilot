@@ -11,7 +11,7 @@ export default function MarketingLayout({
     <>
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-2 md:gap-3">
             <Image
               src="/images/logos/CarePilot.jpg"
               alt="CarePilot"
@@ -19,9 +19,9 @@ export default function MarketingLayout({
               height={32}
               className="object-contain"
             />
-            <span className="text-xl font-semibold tracking-tight">CarePilot</span>
+            <span className="text-lg md:text-xl font-semibold tracking-tight">CarePilot</span>
           </Link>
-          <nav className="flex items-center gap-4">
+          <nav className="flex items-center gap-2 md:gap-4">
             <Link
               href="/login"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -29,7 +29,7 @@ export default function MarketingLayout({
               Sign in
             </Link>
             <Link href="/signup">
-              <Button size="sm">Start Free Trial</Button>
+              <Button size="sm" className="px-3 md:px-4">Start Free Trial</Button>
             </Link>
           </nav>
         </div>

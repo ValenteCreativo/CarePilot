@@ -37,15 +37,15 @@ export function AuthForm({ mode }: AuthFormProps) {
     startTransition(async () => {
       const payload = isSignup
         ? {
-            name: formState.name,
-            phone: formState.phone,
-            email: formState.email,
-            password: formState.password,
-          }
+          name: formState.name,
+          phone: formState.phone,
+          email: formState.email,
+          password: formState.password,
+        }
         : {
-            email: formState.email,
-            password: formState.password,
-          };
+          email: formState.email,
+          password: formState.password,
+        };
 
       const response = await fetch(isSignup ? "/api/signup" : "/api/login", {
         method: "POST",
@@ -68,8 +68,8 @@ export function AuthForm({ mode }: AuthFormProps) {
 
   return (
     <Card className="bg-card/70 backdrop-blur-md border border-white/20 shadow-xl hover:bg-card/75 transition-all duration-300">
-      <CardHeader>
-        <CardTitle className="text-2xl font-semibold">
+      <CardHeader className="pt-8">
+        <CardTitle className="text-3xl font-parisienne text-primary text-center">
           {isSignup ? "Start your free trial" : "Welcome back"}
         </CardTitle>
       </CardHeader>
@@ -77,8 +77,8 @@ export function AuthForm({ mode }: AuthFormProps) {
         <form className="space-y-4" onSubmit={handleSubmit}>
           {isSignup && (
             <>
-              <div className="space-y-2">
-                <Label htmlFor="name">Full name</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="name" className="text-xs font-medium opacity-70">Full name</Label>
                 <Input
                   id="name"
                   placeholder="Jordan Lee"
@@ -87,8 +87,8 @@ export function AuthForm({ mode }: AuthFormProps) {
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone">WhatsApp number</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="phone" className="text-xs font-medium opacity-70">WhatsApp number</Label>
                 <Input
                   id="phone"
                   placeholder="+1 555 123 4567"
@@ -100,8 +100,8 @@ export function AuthForm({ mode }: AuthFormProps) {
             </>
           )}
 
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+          <div className="space-y-1.5">
+            <Label htmlFor="email" className="text-xs font-medium opacity-70">Email</Label>
             <Input
               id="email"
               type="email"
@@ -111,8 +111,8 @@ export function AuthForm({ mode }: AuthFormProps) {
               required
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+          <div className="space-y-1.5">
+            <Label htmlFor="password" className="text-xs font-medium opacity-70">Password</Label>
             <Input
               id="password"
               type="password"
@@ -123,7 +123,11 @@ export function AuthForm({ mode }: AuthFormProps) {
             />
           </div>
 
-          <Button type="submit" className="w-full" disabled={isPending}>
+          <Button
+            type="submit"
+            className="w-full bg-[#FF0000] hover:bg-[#CC0000] text-white font-ultra rounded-full py-6 text-lg transition-all duration-300 shadow-lg hover:shadow-red-500/20"
+            disabled={isPending}
+          >
             {isSignup ? "Create account" : "Sign in"}
           </Button>
         </form>
