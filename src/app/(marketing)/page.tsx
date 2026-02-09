@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import ScrollRotatingLogo from "@/components/ScrollRotatingLogo";
 import {
   MessageSquare,
   CalendarClock,
@@ -27,49 +27,6 @@ import {
   Clock,
   Shield,
 } from "lucide-react";
-
-function ScrollRotatingLogo() {
-  const [rotation, setRotation] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // 0.5 degrees per pixel of scroll
-      setRotation(window.scrollY * 0.5);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <div className="relative w-48 h-48 md:w-56 md:h-56">
-      {/* STATIC LAYER: Medical Cross */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-        <Image
-          src="/images/logos/cross.png"
-          alt="Medical cross"
-          width={120}
-          height={120}
-          className="object-contain"
-          style={{ width: "55%", height: "55%" }}
-        />
-      </div>
-      {/* DYNAMIC LAYER: Otters Ring */}
-      <div
-        className="absolute inset-0 pointer-events-none logo-rotate"
-        style={{
-          transform: `rotate(${rotation}deg)`,
-        }}
-      >
-        <Image
-          src="/images/logos/otters.png"
-          fill
-          alt="Otters"
-          className="object-contain"
-        />
-      </div>
-    </div>
-  );
-}
 
 const caregiverPersonas = [
   {
@@ -268,7 +225,7 @@ export default function LandingPage() {
 
             {/* Logo Column */}
             <div className="flex justify-center lg:justify-end">
-              <ScrollRotatingLogo />
+              <ScrollRotatingLogo size="xxl" />
             </div>
           </div>
         </div>

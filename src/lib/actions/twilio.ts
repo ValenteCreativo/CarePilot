@@ -70,7 +70,7 @@ class TwilioService {
   }
 
   async sendWhatsAppMessage(
-    config: TwilioMessageConfig,
+    config: TwilioConfig,
     to: string,
     body: string
   ): Promise<{ success: boolean; sid?: string; error?: string }> {

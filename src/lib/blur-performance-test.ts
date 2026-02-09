@@ -140,8 +140,3 @@ export function runBlurPerformanceValidation(): {
   };
 }
 
-// Export for use in tests
-export { 
-  validateBlurPerformance, 
-  getRecommendedClass
-};

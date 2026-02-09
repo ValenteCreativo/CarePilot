@@ -36,7 +36,7 @@ export function testKanbanCardsGlassmorphism(): {
   // Read the kanban component
   const kanbanContent = readFileSync('./src/components/dashboard/actions-kanban.tsx', 'utf8');
   
-  const totalIssues = 0;
+  let totalIssues = 0;
   const recommendations: string[] = [];
   
   // Test action cards
@@ -146,7 +146,7 @@ export function testKanbanCardsGlassmorphism(): {
   console.log(`\n📊 Overall Results:`);
   console.log('-------------------');
   console.log(`Total Issues: ${totalIssues}`);
-  console.log(`Overall Status: ${allTestsPass ? 'ALL TESTS PASS' : `${totalIssues} TESTS FAIL'}`);
+  console.log(`Overall Status: ${allTestsPass ? 'ALL TESTS PASS' : `${totalIssues} TESTS FAIL`}`);
   
   if (!allTestsPass) {
     console.log('\n❌ Issues Found:');
@@ -162,6 +162,7 @@ export function testKanbanCardsGlassmorphism(): {
       hasCorrectBackground: actionCardTests[0].check && actionCardTests[1].check && actionCardTests[2].check && actionCardTests[3].check && actionCardTests[4].check,
       hasCorrectBlur: actionCardTests[0].check && actionCardTests[1].check && actionCardTests[2].check && actionCardTests[3].check && actionCardTests[4].check,
       hasCorrectBorder: actionCardTests[1].check && actionCardTests[2].check && actionCardTests[3].check && actionCardTests[4].check && actionCardTests[5].check,
+      hasCorrectShadow: actionCardTests[2] && actionCardTests[2].check,
       hasCorrectHover: actionCardTests[3].check && actionCardTests[4].check && actionCardTests[5].check && actionCardTests[6].check,
       hasCorrectTransition: actionCardTests[6].check,
       issues: totalIssues > 0 ? recommendations.filter((_, i) => i < 7) : []
@@ -191,6 +192,7 @@ export function testKanbanRequirements(): {
   allRequirementsMet: boolean;
 } {
   const test = testKanbanCardsGlassmorphism();
+  const kanbanContent = readFileSync('./src/components/dashboard/actions-kanban.tsx', 'utf8');
   
   return {
     requirement_7_1: test.actionCards.hasCorrectBackground,
@@ -204,9 +206,6 @@ export function testKanbanRequirements(): {
                      !kanbanContent.includes('bg-background/80')
   };
 }
-
-// Export for use in tests
-export { testKanbanCardsGlassmorphism, testKanbanRequirements };
 
 // Run if called directly
 if (typeof require !== 'undefined' && require.main === module) {

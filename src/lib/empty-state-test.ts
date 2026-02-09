@@ -117,8 +117,6 @@ export function runEmptyStateValidation(): {
   };
 }
 
-// Export for use in tests
-export { validateEmptyStateGlassmorphism, runEmptyStateValidation };
 
 // Run if called directly
 if (typeof require !== 'undefined' && require.main === module) {

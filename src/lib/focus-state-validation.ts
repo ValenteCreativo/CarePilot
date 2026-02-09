@@ -197,7 +197,6 @@ export function validateGlassmorphismFocusStates(cssContent: string): {
 }
 
 // Export for use in tests
-export { validateGlassmorphismFocusStates };
 
 // Run if called directly
 if (typeof require !== 'undefined' && require.main === module) {

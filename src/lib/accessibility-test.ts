@@ -3,7 +3,7 @@
  * Tests WCAG AA compliance across all color combinations
  */
 
-import { validateGlassmorphismAccessibility } from './accessibility';
+import { validateGlassmorphismAccessibility } from './accessibility-validation-enhanced';
 
 // Run accessibility validation
 function runAccessibilityValidation() {
@@ -83,8 +83,6 @@ function runAccessibilityValidation() {
   };
 }
 
-// Export for use in tests
-export { runAccessibilityValidation };
 
 // Run if called directly
 if (require.main === module) {

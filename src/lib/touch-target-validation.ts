@@ -66,6 +66,8 @@ export function validateInteractiveTouchTargets(cssContent: string): {
     }
   });
   
+  const hasTouchTargets = elementsWithoutTouchTargets.length === 0;
+  
   return {
     hasTouchTargets,
     elementsWithoutTouchTargets
@@ -144,9 +146,3 @@ export function runTouchTargetValidation(): {
   };
 }
 
-// Export for use in tests
-export { 
-  validateTouchTargets, 
-  validateInteractiveTouchTargets, 
-  runTouchTargetValidation 
-};

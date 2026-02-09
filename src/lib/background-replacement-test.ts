@@ -86,7 +86,7 @@ export function runBackgroundReplacementValidation(): {
   
   const validation = validateBackgroundReplacement(
     readFileSync('./src/app/globals.css', 'utf8'),
-    DASHBOARD_COMPONENTS
+    [...DASHBOARD_COMPONENTS]
   );
   
   const isCompliant = validation.hasReplacedAll;
@@ -126,8 +126,6 @@ export function runBackgroundReplacementValidation(): {
   };
 }
 
-// Export for use in tests
-export { validateBackgroundReplacement, runBackgroundReplacementValidation };
 
 // Run if called directly
 if (typeof require !== 'undefined' && require.main === module) {

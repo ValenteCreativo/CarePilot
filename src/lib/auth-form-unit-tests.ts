@@ -30,6 +30,12 @@ export function testAuthFormGlassmorphism(): {
     issues.push('Missing bg-card/70 backdrop-blur-md');
   }
   
+  // Test 1b: Blur effect
+  const hasCorrectBlur = authFormContent.includes('backdrop-blur-md') || authFormContent.includes('backdrop-blur-lg');
+  if (!hasCorrectBlur) {
+    issues.push('Missing backdrop blur effect');
+  }
+  
   // Test 2: Border styling (border-white/20)
   const hasCorrectBorder = authFormContent.includes('border-white/20');
   if (!hasCorrectBorder) {
@@ -122,8 +128,6 @@ export function testAuthFormRequirements(): {
   };
 }
 
-// Export for use in tests
-export { testAuthFormGlassmorphism, testAuthFormRequirements };
 
 // Run if called directly
 if (typeof require !== 'undefined' && require.main === module) {
