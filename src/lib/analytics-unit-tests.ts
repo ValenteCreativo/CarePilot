@@ -33,7 +33,7 @@ export function testAnalyticsWidgetsGlassmorphism(): {
   // Read the analytics dashboard component
   const analyticsContent = readFileSync('./src/components/dashboard/analytics-dashboard.tsx', 'utf8');
   
-  const totalIssues = 0;
+  let totalIssues = 0;
   const recommendations: string[] = [];
   
   // Test metric cards (3 cards)
@@ -172,6 +172,7 @@ export function testAnalyticsRequirements(): {
   allRequirementsMet: boolean;
 } {
   const test = testAnalyticsWidgetsGlassmorphism();
+  const analyticsContent = readFileSync('./src/components/dashboard/analytics-dashboard.tsx', 'utf8');
   
   return {
     requirement_6_1: test.metricCards.hasCorrectBackground,
@@ -185,9 +186,6 @@ export function testAnalyticsRequirements(): {
                      !analyticsContent.includes('bg-background/80')
   };
 }
-
-// Export for use in tests
-export { testAnalyticsWidgetsGlassmorphism, testAnalyticsRequirements };
 
 // Run if called directly
 if (typeof require !== 'undefined' && require.main === module) {

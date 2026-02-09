@@ -112,5 +112,3 @@ export function testAccessibilityContrastProperty(): {
   };
 }
 
-// Export for use in tests
-export { testAccessibilityContrastProperty };

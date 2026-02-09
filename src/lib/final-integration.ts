@@ -3,14 +3,14 @@
  * Comprehensive validation across all components and requirements
  */
 
-import { validateGlassmorphismAccessibility } from './accessibility-validation-enhanced';
+import { testAllGlassmorphismAccessibility } from './accessibility-validation-enhanced';
 import { runPerformanceValidation } from './performance-validation';
 import { runDarkModeValidation } from './dark-mode-test';
 import { readFileSync } from 'fs';
 
 // Test all glassmorphism components
 export function runGlassmorphismFinalIntegration(): {
-  accessibility: ReturnType<typeof validateGlassmorphismAccessibility>;
+  accessibility: ReturnType<typeof testAllGlassmorphismAccessibility>;
   performance: ReturnType<typeof runPerformanceValidation>;
   darkMode: ReturnType<typeof runDarkModeValidation>;
   overall: {
@@ -26,7 +26,7 @@ export function runGlassmorphismFinalIntegration(): {
   const cssContent = readFileSync('./src/app/globals.css', 'utf8');
   
   // Run all validation tests
-  const accessibility = validateGlassmorphismAccessibility();
+  const accessibility = testAllGlassmorphismAccessibility();
   const performance = runPerformanceValidation(cssContent);
   const darkMode = runDarkModeValidation(cssContent);
   
@@ -35,12 +35,12 @@ export function runGlassmorphismFinalIntegration(): {
   
   const totalTests = 3; // accessibility, performance, dark mode
   const passedTests = [
-    accessibility.summary.compliant,
+    accessibility.overall.compliant,
     performance.overall.compliant,
     darkMode.overall.compliant
   ].filter(Boolean).length;
   
-  console.log(`Accessibility: ${accessibility.summary.compliant ? '✅' : '❌'} (${accessibility.summary.compliant}/${accessibility.summary.total})`);
+  console.log(`Accessibility: ${accessibility.overall.compliant ? '✅' : '❌'} (${accessibility.overall.compliant})`);
   console.log(`Performance: ${performance.overall.compliant ? '✅' : '❌'} (${performance.overall.issues.length === 0 ? '1' : '0'}/1)`);
   console.log(`Dark Mode: ${darkMode.overall.compliant ? '✅' : '❌'} (${darkMode.classes.hasAllClasses && darkMode.colors.hasCorrectColors ? '1' : '0'}/2)`);
   
@@ -52,9 +52,8 @@ export function runGlassmorphismFinalIntegration(): {
   // Generate recommendations
   const recommendations: string[] = [];
   
-  if (!accessibility.summary.compliant) {
-    recommendations.push('Increase background opacity for better contrast ratios');
-    recommendations.push('Consider darker text variants for light mode');
+  if (!accessibility.overall.compliant) {
+    recommendations.push(...accessibility.overall.recommendations);
   }
   
   if (!performance.overall.compliant) {

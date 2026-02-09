@@ -83,8 +83,6 @@ function runAccessibilityValidation() {
   };
 }
 
-// Export for use in tests
-export { runAccessibilityValidation };
 
 // Run if called directly
 if (require.main === module) {

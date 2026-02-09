@@ -69,7 +69,7 @@ export function validateDarkModeTransitions(cssContent: string): {
   const transitionProperties: string[] = [];
   
   // Look for transition properties in all dark mode classes
-  const darkModeClasses = cssContent.match(/\.dark\s+\.glass[^{]*\{([^}]+)\}/gs) || [];
+  const darkModeClasses = cssContent.match(/\.dark\s+\.glass[^{]*\{([^}]+)\}/g) || [];
   
   darkModeClasses.forEach((match) => {
     const darkModeCSS = match[1];
