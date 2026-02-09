@@ -89,17 +89,18 @@ export function AnalyticsDashboard({ initialData }: { initialData?: AnalyticsPay
           </CardTitle>
           <Badge variant="secondary" className="bg-[#0097b2] text-white">Last 7 days</Badge>
         </CardHeader>
-        <CardContent className="h-64">
+        <CardContent>
           {data.messageVolume.length === 0 ? (
-            <div className="h-full flex items-center justify-center bg-[#aee4ff]/20 rounded-lg border-2 border-dashed border-[#0097b2]/30">
+            <div className="h-64 flex items-center justify-center bg-[#aee4ff]/20 rounded-lg border-2 border-dashed border-[#0097b2]/30">
               <p className="text-sm text-[#004d6d] font-semibold">No message data yet.</p>
             </div>
           ) : (
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={data.messageVolume}>
+            <div className="h-64 min-h-[256px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={data.messageVolume}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#0097b2" opacity={0.2} />
-                <XAxis dataKey="date" stroke="#004d6d" fontSize={12} fontWeight="600" />
-                <YAxis stroke="#004d6d" fontSize={12} fontWeight="600" allowDecimals={false} />
+                <XAxis dataKey="date" stroke="#004d6d" fontSize={12} tick={{ fill: "#004d6d", fontWeight: 600 }} />
+                <YAxis stroke="#004d6d" fontSize={12} tick={{ fill: "#004d6d", fontWeight: 600 }} allowDecimals={false} />
                 <Tooltip
                   contentStyle={{
                     background: "#ffffff",
@@ -110,8 +111,9 @@ export function AnalyticsDashboard({ initialData }: { initialData?: AnalyticsPay
                   }}
                 />
                 <Line type="monotone" dataKey="count" stroke="#0097b2" strokeWidth={3} dot={{ fill: "#f66", r: 5 }} />
-              </LineChart>
-            </ResponsiveContainer>
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           )}
         </CardContent>
       </Card>

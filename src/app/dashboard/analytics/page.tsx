@@ -35,15 +35,24 @@ export default function AnalyticsPage() {
         </CardHeader>
         <CardContent className="space-y-4 text-sm text-[#004d6d]/90">
           {opikUrl ? (
-            <div className="space-y-3">
-              <p className="text-xs text-[#004d6d]/90">
-                If the embed doesn&apos;t load (some dashboards block iframes), use the link above.
-              </p>
-              <iframe
-                title="Opik Dashboard"
-                src={opikUrl}
-                className="w-full h-[520px] rounded-lg border-2 border-[#0097b2]/20 bg-white"
-              />
+            <div className="space-y-4">
+              <div className="rounded-lg border-2 border-[#fff8d7] bg-[#fff8d7]/20 p-5">
+                <p className="text-sm text-[#004d6d] font-semibold">
+                  Opik blocks embedding via iframe (CSP: <code className="bg-white px-1 rounded">frame-ancestors 'none'</code>), so we can&apos;t render it inside CarePilot.
+                </p>
+                <p className="text-sm text-[#004d6d]/90 mt-2">
+                  Use the link above to open the dashboard in a new tab.
+                </p>
+              </div>
+
+              <a
+                href={opikUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-md bg-[#0097b2] px-4 py-2 text-sm font-bold text-white hover:bg-[#0097b2]/90"
+              >
+                Open Opik Dashboard
+              </a>
             </div>
           ) : (
             <div className="rounded-lg border-2 border-dashed border-[#fff8d7] bg-[#fff8d7]/20 p-8 text-center">
