@@ -312,8 +312,8 @@ export default function LandingPage() {
       <section className="py-24 border-t border-border/50 bg-[#aee4ff]/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display text-foreground mb-6">How It Works</h2>
-            <p className="text-lg text-foreground/90 max-w-2xl mx-auto font-sans">
+            <h2 className="text-4xl md:text-5xl font-display text-[#003d5c] mb-6">How It Works</h2>
+            <p className="text-lg text-[#003d5c]/90 max-w-2xl mx-auto font-sans">
               Get started in minutes with a process designed to give you peace. No complex setups, everything happens where you already are: WhatsApp.
             </p>
           </div>
@@ -348,12 +348,14 @@ export default function LandingPage() {
 
                 {/* Text Side */}
                 <div className="w-full md:w-1/2 text-center md:text-left z-10">
-                  <h3 className="text-3xl md:text-4xl font-display text-[#0097b2] mb-6 leading-tight">
-                    {item.title}
-                  </h3>
-                  <p className="text-lg text-[#0097b2]/80 font-sans leading-relaxed">
-                    {item.description}
-                  </p>
+                  <div className="bg-white/70 backdrop-blur-sm p-8 rounded-3xl border border-[#0097b2]/10 shadow-lg">
+                    <h3 className="text-3xl md:text-4xl font-display text-[#003d5c] mb-6 leading-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-lg text-[#003d5c]/90 font-sans leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
 
               </div>
@@ -366,7 +368,7 @@ export default function LandingPage() {
                 Start Your Free Trial
               </Button>
             </Link>
-            <p className="mt-4 text-sm text-[#0097b2]/60 font-sans">
+            <p className="mt-4 text-sm text-[#003d5c]/70 font-sans font-medium">
               Set up in 3 minutes • No credit card required
             </p>
           </div>
@@ -418,38 +420,38 @@ export default function LandingPage() {
             {/* Right: Content */}
             <div className="order-1 lg:order-2">
               <div className="mb-10">
-                <Badge variant="outline" className="border-[#0097b2]/20 text-[#0097b2] bg-[#0097b2]/5 mb-4 px-4 py-1">
+                <Badge variant="outline" className="border-[#003d5c]/30 text-[#003d5c] bg-[#aee4ff]/40 mb-4 px-4 py-1 font-semibold">
                   Beyond Simple Reminders
                 </Badge>
-                <h2 className="text-4xl md:text-5xl font-display text-[#0097b2] mb-6 leading-tight">
+                <h2 className="text-4xl md:text-5xl font-display text-[#003d5c] mb-6 leading-tight">
                   Why CarePilot is Different
                 </h2>
-                <p className="text-lg text-[#0097b2]/80 font-sans leading-relaxed">
+                <p className="text-lg text-[#003d5c]/90 font-sans leading-relaxed">
                   This isn't a chatbot with a calendar. It's an AI Agent built for the chaos of real caregiving.
                 </p>
               </div>
 
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {differentiators.map((item, index) => (
-                  <div key={item.title} className="flex gap-5 group">
+                  <div key={item.title} className="flex gap-5 group bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-[#0097b2]/10 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     <div className="flex-shrink-0 mt-1">
-                      <div className="w-12 h-12 rounded-2xl bg-[#fff8d7] border border-[#0097b2]/20 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
-                        <item.icon className="h-6 w-6 text-[#0097b2]" />
+                      <div className="w-12 h-12 rounded-2xl bg-[#0097b2] border border-[#0097b2]/20 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                        <item.icon className="h-6 w-6 text-white" />
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-display text-[#0097b2] mb-2">{item.title}</h3>
-                      <p className="text-[#0097b2]/70 font-sans leading-relaxed text-sm">{item.description}</p>
+                      <h3 className="text-xl font-display text-[#003d5c] mb-2">{item.title}</h3>
+                      <p className="text-[#003d5c]/85 font-sans leading-relaxed text-sm">{item.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
               <div className="mt-12">
-                <div className="inline-flex items-center gap-3 px-6 py-3 bg-[#0097b2]/5 rounded-full border border-[#0097b2]/10">
-                  <span className="text-sm font-semibold text-[#0097b2]">Built for Hackathon 2026</span>
-                  <span className="text-[#0097b2]/20">|</span>
-                  <span className="text-sm text-[#0097b2]/80">Evaluated with Opik</span>
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/60 backdrop-blur-sm rounded-full border border-[#0097b2]/20 shadow-sm">
+                  <span className="text-sm font-semibold text-[#003d5c]">Built for Hackathon 2026</span>
+                  <span className="text-[#0097b2]/30">|</span>
+                  <span className="text-sm text-[#003d5c]/80">Evaluated with Opik</span>
                 </div>
               </div>
             </div>
