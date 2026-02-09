@@ -78,30 +78,32 @@ export function AuthForm({ mode }: AuthFormProps) {
           {isSignup && (
             <>
               <div className="space-y-1.5">
-                <Label htmlFor="name" className="text-xs font-medium opacity-70">Full name</Label>
+                <Label htmlFor="name" className="text-xs font-medium text-[#004d6d]">Full name</Label>
                 <Input
                   id="name"
                   placeholder="Jordan Lee"
                   value={formState.name}
                   onChange={handleChange("name")}
                   required
+                  className="text-[#004d6d] bg-white border-[#0097b2]/30 placeholder:text-[#004d6d]/40"
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="phone" className="text-xs font-medium opacity-70">WhatsApp number</Label>
+                <Label htmlFor="phone" className="text-xs font-medium text-[#004d6d]">WhatsApp number</Label>
                 <Input
                   id="phone"
                   placeholder="+1 555 123 4567"
                   value={formState.phone}
                   onChange={handleChange("phone")}
                   required
+                  className="text-[#004d6d] bg-white border-[#0097b2]/30 placeholder:text-[#004d6d]/40"
                 />
               </div>
             </>
           )}
 
           <div className="space-y-1.5">
-            <Label htmlFor="email" className="text-xs font-medium opacity-70">Email</Label>
+            <Label htmlFor="email" className="text-xs font-medium text-[#004d6d]">Email</Label>
             <Input
               id="email"
               type="email"
@@ -109,10 +111,11 @@ export function AuthForm({ mode }: AuthFormProps) {
               value={formState.email}
               onChange={handleChange("email")}
               required
+              className="text-[#004d6d] bg-white border-[#0097b2]/30 placeholder:text-[#004d6d]/40"
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="password" className="text-xs font-medium opacity-70">Password</Label>
+            <Label htmlFor="password" className="text-xs font-medium text-[#004d6d]">Password</Label>
             <Input
               id="password"
               type="password"
@@ -120,6 +123,7 @@ export function AuthForm({ mode }: AuthFormProps) {
               value={formState.password}
               onChange={handleChange("password")}
               required
+              className="text-[#004d6d] bg-white border-[#0097b2]/30 placeholder:text-[#004d6d]/40"
             />
           </div>
 
