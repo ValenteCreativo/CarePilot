@@ -87,10 +87,10 @@ export default async function DashboardOverviewPage() {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm text-[#0097b2] font-bold">Active cases</CardTitle>
           </CardHeader>
-          <CardContent className="text-3xl font-semibold">
+          <CardContent className="text-3xl font-semibold text-[#004d6d]">
             {activeCases === 0 ? (
               <div className="space-y-2">
-                <p className="text-sm font-medium">Looks like you don't have a support network yet.</p>
+                <p className="text-sm font-medium text-[#004d6d]">Looks like you don't have a support network yet.</p>
                 <p className="text-sm text-[#0097b2] font-bold">Would you like us to meet who you're caring for?</p>
                 <Link href="/case/new">
                   <Button size="sm" className="mt-2">Start my first case</Button>
@@ -105,10 +105,10 @@ export default async function DashboardOverviewPage() {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm text-[#0097b2] font-bold">Pending actions</CardTitle>
           </CardHeader>
-          <CardContent className="text-3xl font-semibold">
+          <CardContent className="text-3xl font-semibold text-[#004d6d]">
             {pendingActions === 0 ? (
               <div className="space-y-2">
-                <p className="text-sm font-medium">Everything's under control for now.</p>
+                <p className="text-sm font-medium text-[#004d6d]">Everything's under control for now.</p>
                 <p className="text-sm text-[#0097b2] font-bold">Take a breath, your Otter Guide will let you know if anything changes.</p>
               </div>
             ) : (
@@ -120,7 +120,7 @@ export default async function DashboardOverviewPage() {
           <CardHeader className="pb-2">
             <CardTitle className="text-sm text-[#0097b2] font-bold">Messages today</CardTitle>
           </CardHeader>
-          <CardContent className="text-3xl font-semibold">{messagesToday}</CardContent>
+          <CardContent className="text-3xl font-semibold text-[#004d6d]">{messagesToday}</CardContent>
         </Card>
       </div>
 
@@ -135,17 +135,17 @@ export default async function DashboardOverviewPage() {
           <CardContent className="space-y-4">
             {recentMessages.length === 0 ? (
               <div className="space-y-2">
-                <p className="text-sm font-medium">Your conversation hasn't started yet.</p>
+                <p className="text-sm font-medium text-[#004d6d]">Your conversation hasn't started yet.</p>
                 <p className="text-sm text-[#0097b2] font-bold">Your Otter Guide is ready when you are.</p>
               </div>
             ) : (
               recentMessages.map((message) => (
-                <div key={message.id} className="rounded-lg border border-border/50 p-4">
+                <div key={message.id} className="rounded-lg border border-border/50 p-4 bg-[#aee4ff]/20">
                   <div className="flex items-center justify-between text-xs text-[#004d6d]/90 mb-2">
-                    <span>{message.direction === "inbound" ? "Inbound" : "Outbound"}</span>
+                    <span className="font-semibold">{message.direction === "inbound" ? "Inbound" : "Outbound"}</span>
                     <span>{message.createdAt.toLocaleString()}</span>
                   </div>
-                  <p className="text-sm">{message.body}</p>
+                  <p className="text-sm text-[#004d6d]">{message.body}</p>
                 </div>
               ))
             )}

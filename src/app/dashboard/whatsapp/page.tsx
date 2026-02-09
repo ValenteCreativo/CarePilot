@@ -10,14 +10,16 @@ export default function WhatsAppPage() {
   const masked = maskAccountSid(process.env.TWILIO_ACCOUNT_SID ?? null);
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-semibold">WhatsApp configuration</h1>
-        <p className="text-[#004d6d]/90 mt-2">
+    <div className="space-y-8">
+      <div className="flex flex-col gap-4">
+        <h1 className="text-4xl font-bold text-[#004d6d]">WhatsApp Configuration</h1>
+        <p className="text-[#004d6d]/90 text-lg">
           Connect Twilio sandbox, personalize the bot, and test message delivery.
         </p>
       </div>
-      <WhatsAppConfig accountSidMasked={masked} />
+      <div className="bg-white border-2 border-[#0097b2]/30 rounded-xl shadow-xl p-6">
+        <WhatsAppConfig accountSidMasked={masked} />
+      </div>
     </div>
   );
 }

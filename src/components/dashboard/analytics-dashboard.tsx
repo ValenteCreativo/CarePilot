@@ -58,54 +58,58 @@ export function AnalyticsDashboard({ initialData }: { initialData?: AnalyticsPay
   return (
     <div className="space-y-6">
       <div className="grid md:grid-cols-3 gap-4">
-        <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
+        <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl hover:shadow-2xl hover:border-[#fff8d7] transition-all duration-300">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-[#004d6d]/90">Action completion rate</CardTitle>
+            <CardTitle className="text-sm text-[#0097b2] font-bold">Action Completion Rate</CardTitle>
           </CardHeader>
-          <CardContent className="text-3xl font-semibold">{data.completionRate}%</CardContent>
+          <CardContent className="text-3xl font-bold text-[#004d6d]">{data.completionRate}%</CardContent>
         </Card>
-        <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
+        <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl hover:shadow-2xl hover:border-[#fff8d7] transition-all duration-300">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-[#004d6d]/90">Avg response time</CardTitle>
+            <CardTitle className="text-sm text-[#0097b2] font-bold">Avg Response Time</CardTitle>
           </CardHeader>
-          <CardContent className="text-3xl font-semibold">
+          <CardContent className="text-3xl font-bold text-[#004d6d]">
             {data.avgResponseMinutes}m
           </CardContent>
         </Card>
-        <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
+        <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl hover:shadow-2xl hover:border-[#fff8d7] transition-all duration-300">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-[#004d6d]/90">Data freshness</CardTitle>
+            <CardTitle className="text-sm text-[#0097b2] font-bold">Data Freshness</CardTitle>
           </CardHeader>
-          <CardContent className="text-sm text-[#004d6d]/90">
+          <CardContent className="text-sm text-[#004d6d] font-semibold">
             {loading ? "Refreshing..." : "Updated just now"}
           </CardContent>
         </Card>
       </div>
 
-      <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
+      <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl hover:shadow-2xl hover:border-[#fff8d7] transition-all duration-300">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-lg">Message volume</CardTitle>
-          <Badge variant="secondary">Last 7 days</Badge>
+          <CardTitle className="text-lg text-[#004d6d] flex items-center gap-2">
+            <span className="text-[#0097b2]">📊</span> Message Volume
+          </CardTitle>
+          <Badge variant="secondary" className="bg-[#0097b2] text-white">Last 7 days</Badge>
         </CardHeader>
         <CardContent className="h-64">
           {data.messageVolume.length === 0 ? (
-            <div className="h-full flex items-center justify-center text-sm text-[#004d6d]/90">
-              No message data yet.
+            <div className="h-full flex items-center justify-center bg-[#aee4ff]/20 rounded-lg border-2 border-dashed border-[#0097b2]/30">
+              <p className="text-sm text-[#004d6d] font-semibold">No message data yet.</p>
             </div>
           ) : (
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data.messageVolume}>
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                <XAxis dataKey="date" stroke="hsl(var(--muted-foreground))" fontSize={12} />
-                <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} allowDecimals={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#0097b2" opacity={0.2} />
+                <XAxis dataKey="date" stroke="#004d6d" fontSize={12} fontWeight="600" />
+                <YAxis stroke="#004d6d" fontSize={12} fontWeight="600" allowDecimals={false} />
                 <Tooltip
                   contentStyle={{
-                    background: "hsl(var(--background))",
-                    borderColor: "hsl(var(--border))",
-                    color: "hsl(var(--foreground))",
+                    background: "#ffffff",
+                    borderColor: "#0097b2",
+                    color: "#004d6d",
+                    fontWeight: "600",
+                    borderWidth: "2px",
                   }}
                 />
-                <Line type="monotone" dataKey="count" stroke="hsl(var(--primary))" strokeWidth={2} />
+                <Line type="monotone" dataKey="count" stroke="#0097b2" strokeWidth={3} dot={{ fill: "#f66", r: 5 }} />
               </LineChart>
             </ResponsiveContainer>
           )}

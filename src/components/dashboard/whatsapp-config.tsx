@@ -32,66 +32,73 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
 
   return (
     <div className="space-y-6">
-      <Card className="bg-background/80 border-border/50">
+      <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl hover:shadow-2xl hover:border-[#fff8d7] transition-all duration-300">
         <CardHeader>
-          <CardTitle className="text-lg">Connect WhatsApp (Twilio sandbox)</CardTitle>
+          <CardTitle className="text-lg text-[#004d6d] flex items-center gap-2">
+            <span className="text-[#0097b2]">📱</span> Connect WhatsApp (Twilio Sandbox)
+          </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4 text-sm text-[#004d6d]/90">
-          <ol className="list-decimal list-inside space-y-2">
-            <li>
+        <CardContent className="space-y-4 text-sm">
+          <ol className="list-decimal list-inside space-y-3 text-[#004d6d]">
+            <li className="font-medium">
               Open WhatsApp and send the message:{" "}
-              <span className="font-medium text-[#004d6d]">join four-mission</span>
+              <span className="font-bold text-[#0097b2] bg-[#aee4ff]/30 px-2 py-1 rounded">join four-mission</span>
             </li>
-            <li>Send to the Twilio sandbox number listed in your Twilio console.</li>
-            <li>Once connected, CarePilot will start logging messages here.</li>
+            <li className="font-medium">Send to the Twilio sandbox number listed in your Twilio console.</li>
+            <li className="font-medium">Once connected, CarePilot will start logging messages here.</li>
           </ol>
-          <div className="rounded-lg border border-border/40 p-4 text-xs">
-            <p className="text-[#004d6d]/90">
+          <div className="rounded-lg border-2 border-[#0097b2]/20 bg-[#aee4ff]/20 p-4 text-xs">
+            <p className="text-[#004d6d] font-semibold">
               TWILIO_ACCOUNT_SID:{" "}
-              <span className="font-medium text-[#004d6d]">{accountSidMasked ?? "Not configured"}</span>
+              <span className="font-bold text-[#0097b2]">{accountSidMasked ?? "Not configured"}</span>
             </p>
           </div>
-          <Button onClick={handleTest} disabled={isPending}>
-            Test webhook
+          <Button onClick={handleTest} disabled={isPending} className="bg-[#f66] hover:bg-[#f66]/90">
+            Test Webhook
           </Button>
         </CardContent>
       </Card>
 
-      <Card className="bg-background/80 border-border/50">
+      <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl hover:shadow-2xl hover:border-[#fff8d7] transition-all duration-300">
         <CardHeader>
-          <CardTitle className="text-lg">Bot personality</CardTitle>
+          <CardTitle className="text-lg text-[#004d6d] flex items-center gap-2">
+            <span className="text-[#0097b2]">🤖</span> Bot Personality
+          </CardTitle>
         </CardHeader>
         <CardContent className="grid md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="tone">Tone</Label>
-            <Input id="tone" value={tone} onChange={(event) => setTone(event.target.value)} />
+            <Label htmlFor="tone" className="text-[#004d6d] font-semibold">Tone</Label>
+            <Input id="tone" value={tone} onChange={(event) => setTone(event.target.value)} className="border-[#0097b2]/30" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="language">Language</Label>
-            <Input id="language" value={language} onChange={(event) => setLanguage(event.target.value)} />
+            <Label htmlFor="language" className="text-[#004d6d] font-semibold">Language</Label>
+            <Input id="language" value={language} onChange={(event) => setLanguage(event.target.value)} className="border-[#0097b2]/30" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="style">Response style</Label>
-            <Input id="style" value={responseStyle} onChange={(event) => setResponseStyle(event.target.value)} />
+            <Label htmlFor="style" className="text-[#004d6d] font-semibold">Response Style</Label>
+            <Input id="style" value={responseStyle} onChange={(event) => setResponseStyle(event.target.value)} className="border-[#0097b2]/30" />
           </div>
         </CardContent>
       </Card>
 
-      <Card className="bg-background/80 border-border/50">
+      <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl hover:shadow-2xl hover:border-[#fff8d7] transition-all duration-300">
         <CardHeader>
-          <CardTitle className="text-lg">Notification preferences</CardTitle>
+          <CardTitle className="text-lg text-[#004d6d] flex items-center gap-2">
+            <span className="text-[#0097b2]">🔔</span> Notification Preferences
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="notify-window">Quiet hours</Label>
-            <Input id="notify-window" placeholder="9pm - 7am" />
+            <Label htmlFor="notify-window" className="text-[#004d6d] font-semibold">Quiet Hours</Label>
+            <Input id="notify-window" placeholder="9pm - 7am" className="border-[#0097b2]/30" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="alerts">High priority alerts</Label>
+            <Label htmlFor="alerts" className="text-[#004d6d] font-semibold">High Priority Alerts</Label>
             <Textarea
               id="alerts"
               placeholder="Example: urgent medical issues, missed medications"
               rows={3}
+              className="border-[#0097b2]/30"
             />
           </div>
         </CardContent>

@@ -40,14 +40,16 @@ export default async function ActionsPage() {
   }));
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-semibold">Actions</h1>
-        <p className="text-[#004d6d]/90 mt-2">
+    <div className="space-y-8">
+      <div className="flex flex-col gap-4">
+        <h1 className="text-4xl font-bold text-[#004d6d]">Actions</h1>
+        <p className="text-[#004d6d]/90 text-lg">
           Review and approve automation tasks before they run for caregivers.
         </p>
       </div>
-      <ActionsKanban initialActions={initialActions} />
+      <div className="bg-white border-2 border-[#0097b2]/30 rounded-xl shadow-xl p-6">
+        <ActionsKanban initialActions={initialActions} />
+      </div>
     </div>
   );
 }
