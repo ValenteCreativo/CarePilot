@@ -244,7 +244,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {caregiverPersonas.map((persona, index) => (
               <div key={persona.title} className="relative group persona-card" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="bg-[#fff8d7]/90 backdrop-blur-md p-8 rounded-[2.5rem] border-2 border-[#0097b2]/20 shadow-[0_8px_30px_rgb(0,151,178,0.12)] hover:backdrop-blur-xl hover:-translate-y-2 hover:shadow-[0_16px_40px_rgb(0,151,178,0.18)] hover:rotate-1 transition-all duration-500 ease-out h-full">
+                <div className="bg-white p-8 rounded-[2.5rem] border-3 border-[#fff8d7] shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:rotate-1 transition-all duration-500 ease-out h-full">
                   {/* Icon Container */}
                   <div className="mb-6 relative">
                     <div className="w-16 h-16 mx-auto relative">
@@ -256,7 +256,7 @@ export default function LandingPage() {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-display text-[#0097b2] mb-4 leading-tight tracking-tight text-center">
+                  <h3 className="text-xl font-display text-[#004d6d] mb-4 leading-tight tracking-tight text-center">
                     {persona.title}
                   </h3>
 
@@ -329,7 +329,7 @@ export default function LandingPage() {
                 {/* Visual Side (Icon/Card) */}
                 <div className="w-full md:w-1/2 flex justify-center z-10">
                   <div className="relative w-64 h-64 md:w-72 md:h-72">
-                    <div className="absolute inset-0 bg-[#fff8d7]/80 backdrop-blur-xl rounded-[3rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 shadow-2xl border border-[#0097b2]/10" />
+                    <div className="absolute inset-0 bg-white backdrop-blur-xl rounded-[3rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 shadow-2xl border border-[#0097b2]/10" />
                     <div className="absolute inset-0 bg-white/40 backdrop-blur-md rounded-[3rem] -rotate-3 group-hover:-rotate-6 transition-transform duration-500 shadow-lg" />
 
                     <div className="absolute inset-4 bg-gradient-to-br from-[#aee4ff]/30 to-[#0097b2]/5 rounded-[2.5rem] flex items-center justify-center border border-white/50">
@@ -376,7 +376,7 @@ export default function LandingPage() {
       </section>
 
       {/* Why CarePilot is Different - Feature Section */}
-      <section className="py-24 border-t border-[#0097b2]/10 bg-[#fff8d7]/30 overflow-hidden">
+      <section className="py-24 border-t border-[#0097b2]/10 bg-white overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-[1fr_0.8fr] gap-12 items-center">
 
@@ -464,7 +464,7 @@ export default function LandingPage() {
       <section className="py-24 border-t border-[#0097b2]/10 bg-[#aee4ff]/20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-display text-[#0097b2] mb-6">
+            <h2 className="text-4xl md:text-5xl font-display text-[#004d6d] mb-6">
               Safe, Secure, and Trusted
             </h2>
             <p className="text-lg text-[#004d6d]/90 max-w-2xl mx-auto font-sans">
@@ -514,7 +514,7 @@ export default function LandingPage() {
                 <div className="w-12 h-12 bg-[#0097b2]/10 rounded-full flex items-center justify-center mx-auto mb-4 text-[#0097b2]">
                   <item.icon className="h-6 w-6" />
                 </div>
-                <h3 className="text-lg font-display text-[#0097b2] mb-2">{item.title}</h3>
+                <h3 className="text-lg font-display text-[#004d6d] mb-2">{item.title}</h3>
                 <p className="text-[#004d6d]/90 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
@@ -523,10 +523,10 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing - Centered Card */}
-      <section className="py-24 border-t border-[#0097b2]/10 bg-[#fff8d7]/20">
+      <section className="py-24 border-t border-[#0097b2]/10 bg-[#aee4ff]">
         <div className="container mx-auto px-4">
           <div className="max-w-xl mx-auto text-center">
-            <h2 className="text-3xl md:text-5xl font-display text-[#0097b2] mb-6 leading-tight">
+            <h2 className="text-3xl md:text-5xl font-display text-[#004d6d] mb-6 leading-tight">
               One plan to help you sleep peacefully again
             </h2>
             <p className="text-lg text-[#004d6d]/90 mb-10 font-sans">
