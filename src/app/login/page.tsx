@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { AuthForm } from "@/components/auth/auth-form";
 import { ShieldCheck } from "lucide-react";
+import ScrollRotatingLogo from "@/components/ScrollRotatingLogo";
 
 export default function LoginPage() {
   return (
@@ -13,14 +13,7 @@ export default function LoginPage() {
             ← Back to home
           </Link>
           <div className="mb-2">
-            <Image
-              src="/images/logos/CarePilot.jpg"
-              alt="CarePilot Logo"
-              width={80}
-              height={80}
-              priority
-              className="rounded-xl shadow-lg"
-            />
+            <ScrollRotatingLogo size="lg" className="rounded-xl shadow-lg" />
           </div>
           <h1 className="text-4xl md:text-5xl font-ultra text-foreground leading-[1.1]">
             Keep caregiving aligned, one message at a time.
