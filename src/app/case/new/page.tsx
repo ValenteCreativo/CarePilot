@@ -216,55 +216,55 @@ export default function NewCasePage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="max-w-3xl mx-auto space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Create Care Case</h1>
-        <p className="text-muted-foreground mt-1">
+      <div className="space-y-2">
+        <h1 className="text-4xl font-bold tracking-tight text-[#004d6d]">Create Care Case</h1>
+        <p className="text-[#004d6d]/90 text-lg">
           We&apos;ll help you build a structured plan for managing care.
         </p>
       </div>
 
       {/* Enhanced Stepper */}
       <div className="relative">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between bg-white border-2 border-[#0097b2]/30 rounded-xl p-5 shadow-xl">
           {/* Step 1 */}
           <div className="flex items-center gap-3 flex-1">
             <div
               className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ${
                 step >= 1
-                  ? "bg-primary border-primary text-primary-foreground"
-                  : "border-muted-foreground/30 text-muted-foreground"
+                  ? "bg-[#f66] border-[#f66] text-white shadow"
+                  : "border-[#0097b2]/30 text-[#004d6d]/70"
               }`}
             >
               {step > 1 ? <Check className="w-5 h-5" /> : <span className="font-semibold">1</span>}
             </div>
             <div className="hidden sm:block">
-              <p className={`text-sm font-medium ${step >= 1 ? "text-foreground" : "text-muted-foreground"}`}>
+              <p className={`text-sm font-bold ${step >= 1 ? "text-[#004d6d]" : "text-[#004d6d]/70"}`}>
                 Step 1
               </p>
-              <p className="text-xs text-muted-foreground">About the situation</p>
+              <p className="text-xs text-[#0097b2] font-semibold">About the situation</p>
             </div>
           </div>
 
           {/* Connector */}
           <div className="flex-1 mx-4">
-            <div className={`h-0.5 rounded-full transition-all ${step >= 2 ? "bg-primary" : "bg-muted"}`} />
+            <div className={`h-1 rounded-full transition-all ${step >= 2 ? "bg-[#f66]" : "bg-[#aee4ff]"}`} />
           </div>
 
           {/* Step 2 */}
           <div className="flex items-center gap-3 flex-1 justify-end">
             <div className="hidden sm:block text-right">
-              <p className={`text-sm font-medium ${step >= 2 ? "text-foreground" : "text-muted-foreground"}`}>
+              <p className={`text-sm font-bold ${step >= 2 ? "text-[#004d6d]" : "text-[#004d6d]/70"}`}>
                 Step 2
               </p>
-              <p className="text-xs text-muted-foreground">About you as caregiver</p>
+              <p className="text-xs text-[#0097b2] font-semibold">About you as caregiver</p>
             </div>
             <div
               className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ${
                 step >= 2
-                  ? "bg-primary border-primary text-primary-foreground"
-                  : "border-muted-foreground/30 text-muted-foreground"
+                  ? "bg-[#f66] border-[#f66] text-white shadow"
+                  : "border-[#0097b2]/30 text-[#004d6d]/70"
               }`}
             >
               <span className="font-semibold">2</span>
@@ -274,32 +274,32 @@ export default function NewCasePage() {
       </div>
 
       {step === 1 ? (
-        <Card className="border-border/60">
+        <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Heart className="w-5 h-5 text-primary" />
+            <CardTitle className="flex items-center gap-2 text-[#004d6d]">
+              <Heart className="w-5 h-5 text-[#0097b2]" />
               Loved One Context
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-[#004d6d]/90">
               Describe the care situation at a high level. Avoid including personally identifiable information.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Title */}
             <div className="space-y-2">
-              <Label htmlFor="title">Case Title</Label>
+              <Label htmlFor="title" className="text-[#004d6d] font-semibold">Case Title</Label>
               <Input
                 id="title"
                 placeholder="e.g., Mom's Recovery Plan, Dad's Elder Care"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="bg-background"
+                className="bg-white border-[#0097b2]/30 text-[#004d6d] placeholder:text-[#004d6d]/50"
               />
             </div>
 
             {/* Situation Type - Multi-select */}
             <div className="space-y-3">
-              <Label>Situation Type (select all that apply)</Label>
+              <Label className="text-[#004d6d] font-semibold">Situation Type (select all that apply)</Label>
               <div className="grid grid-cols-2 gap-3">
                 {situationTypes.map((type) => {
                   const Icon = type.icon;
@@ -309,8 +309,8 @@ export default function NewCasePage() {
                       key={type.value}
                       className={`flex items-start gap-3 rounded-lg border-2 p-4 cursor-pointer transition-all ${
                         isSelected
-                          ? "border-primary bg-primary/5"
-                          : "border-muted bg-popover hover:bg-accent hover:text-accent-foreground"
+                          ? "border-[#f66] bg-[#f66]/10"
+                          : "border-[#0097b2]/20 bg-white hover:bg-[#aee4ff]/20"
                       }`}
                       onClick={() => {
                         const newTypes = isSelected
@@ -329,12 +329,12 @@ export default function NewCasePage() {
                           setFormData({ ...formData, situationTypes: newTypes });
                         }}
                       />
-                      <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-4 h-4 text-primary" />
+                      <div className="w-8 h-8 rounded-md bg-[#aee4ff]/40 flex items-center justify-center flex-shrink-0 border border-[#0097b2]/20">
+                        <Icon className="w-4 h-4 text-[#0097b2]" />
                       </div>
                       <div className="flex-1">
-                        <span className="font-medium">{type.label}</span>
-                        <p className="text-xs text-muted-foreground mt-0.5">{type.description}</p>
+                        <span className="font-bold text-[#004d6d]">{type.label}</span>
+                        <p className="text-xs text-[#004d6d]/80 mt-0.5">{type.description}</p>
                       </div>
                     </div>
                   );
@@ -343,8 +343,8 @@ export default function NewCasePage() {
 
               {/* Other text field */}
               {formData.situationTypes.includes("other") && (
-                <div className="mt-3 pl-4 border-l-2 border-primary/30">
-                  <Label htmlFor="situationTypeOther" className="text-sm">
+                <div className="mt-3 pl-4 border-l-2 border-[#0097b2]/30">
+                  <Label htmlFor="situationTypeOther" className="text-sm text-[#004d6d] font-semibold">
                     Please describe the situation
                   </Label>
                   <Input
@@ -352,7 +352,7 @@ export default function NewCasePage() {
                     placeholder="Describe the care situation..."
                     value={formData.situationTypeOther}
                     onChange={(e) => setFormData({ ...formData, situationTypeOther: e.target.value })}
-                    className="mt-2 bg-background"
+                    className="mt-2 bg-white border-[#0097b2]/30 text-[#004d6d] placeholder:text-[#004d6d]/50"
                   />
                 </div>
               )}
@@ -360,16 +360,16 @@ export default function NewCasePage() {
 
             {/* Summary */}
             <div className="space-y-2">
-              <Label htmlFor="summary">Summary</Label>
+              <Label htmlFor="summary" className="text-[#004d6d] font-semibold">Summary</Label>
               <Textarea
                 id="summary"
                 placeholder="Brief description of the situation and main challenges..."
                 rows={4}
                 value={formData.summary}
                 onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
-                className="bg-background resize-none"
+                className="bg-white border-[#0097b2]/30 text-[#004d6d] placeholder:text-[#004d6d]/50 resize-none"
               />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-[#004d6d]/80">
                 Keep this general to protect privacy.
               </p>
             </div>
@@ -378,17 +378,17 @@ export default function NewCasePage() {
 
             {/* Constraints */}
             <div className="space-y-3">
-              <Label>Care Constraints (select all that apply)</Label>
+              <Label className="text-[#004d6d] font-semibold">Care Constraints (select all that apply)</Label>
               <div className="grid grid-cols-2 gap-3">
                 {constraintItems.map((item) => {
                   const Icon = item.icon;
                   return (
                     <div
                       key={item.key}
-                      className={`flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer ${
+                      className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${
                         formData.constraints[item.key]
-                          ? "border-primary/50 bg-primary/5"
-                          : "border-border/40 hover:border-border"
+                          ? "border-[#f66]/60 bg-[#f66]/10"
+                          : "border-[#0097b2]/20 hover:bg-[#aee4ff]/20"
                       }`}
                       onClick={() =>
                         setFormData({
@@ -407,8 +407,8 @@ export default function NewCasePage() {
                           })
                         }
                       />
-                      <Icon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-                      <Label htmlFor={item.key} className="text-sm cursor-pointer flex-1">
+                      <Icon className="w-4 h-4 text-[#0097b2] flex-shrink-0" />
+                      <Label htmlFor={item.key} className="text-sm cursor-pointer flex-1 text-[#004d6d] font-medium">
                         {item.label}
                       </Label>
                     </div>
@@ -421,18 +421,18 @@ export default function NewCasePage() {
 
             {/* Risk Signals */}
             <div className="space-y-3">
-              <Label className="flex items-center gap-2">
-                <AlertTriangle className="w-4 h-4 text-destructive" />
+              <Label className="flex items-center gap-2 text-[#004d6d] font-semibold">
+                <AlertTriangle className="w-4 h-4 text-[#f66]" />
                 Risk Signals (select if present)
               </Label>
               <div className="grid grid-cols-2 gap-3">
                 {riskItems.map((item) => (
                   <div
                     key={item.key}
-                    className={`flex items-center gap-3 p-3 rounded-lg border transition-all cursor-pointer ${
+                    className={`flex items-center gap-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${
                       formData.riskSignals[item.key]
-                        ? "border-destructive/50 bg-destructive/5"
-                        : "border-border/40 hover:border-border"
+                        ? "border-[#f66]/60 bg-[#f66]/10"
+                        : "border-[#0097b2]/20 hover:bg-[#aee4ff]/20"
                     }`}
                     onClick={() =>
                       setFormData({
@@ -451,7 +451,7 @@ export default function NewCasePage() {
                         })
                       }
                     />
-                    <Label htmlFor={item.key} className="text-sm cursor-pointer flex-1">
+                    <Label htmlFor={item.key} className="text-sm cursor-pointer flex-1 text-[#004d6d] font-medium">
                       {item.label}
                     </Label>
                   </div>
@@ -468,7 +468,11 @@ export default function NewCasePage() {
             </div>
 
             <div className="flex justify-end pt-4">
-              <Button onClick={handleNext} size="lg">
+              <Button
+                onClick={handleNext}
+                size="lg"
+                className="bg-[#f66] hover:bg-[#f66]/90 text-white font-bold shadow-lg"
+              >
                 Continue
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -476,13 +480,13 @@ export default function NewCasePage() {
           </CardContent>
         </Card>
       ) : (
-        <Card className="border-border/60">
+        <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Users className="w-5 h-5 text-primary" />
+            <CardTitle className="flex items-center gap-2 text-[#004d6d]">
+              <Users className="w-5 h-5 text-[#0097b2]" />
               Caregiver Context
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-[#004d6d]/90">
               Tell us about your capacity and resources so we can create a realistic plan.
             </CardDescription>
           </CardHeader>
@@ -491,10 +495,10 @@ export default function NewCasePage() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <Label className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-muted-foreground" />
+                  <Clock className="w-4 h-4 text-[#0097b2]" />
                   Time Available (hours/week)
                 </Label>
-                <span className="text-sm font-medium bg-muted px-3 py-1 rounded-md">
+                <span className="text-sm font-bold bg-[#aee4ff]/30 text-[#004d6d] px-3 py-1 rounded-md border border-[#0097b2]/20">
                   {formData.timePerWeek} hours
                 </span>
               </div>
@@ -506,7 +510,7 @@ export default function NewCasePage() {
                 step={1}
                 className="py-2"
               />
-              <div className="flex justify-between text-xs text-muted-foreground">
+              <div className="flex justify-between text-xs text-[#004d6d]/80 font-medium">
                 <span>1 hour</span>
                 <span>60 hours</span>
               </div>
@@ -516,10 +520,10 @@ export default function NewCasePage() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <Label className="flex items-center gap-2">
-                  <DollarSign className="w-4 h-4 text-muted-foreground" />
+                  <DollarSign className="w-4 h-4 text-[#0097b2]" />
                   Budget (USD/week)
                 </Label>
-                <span className="text-sm font-medium bg-muted px-3 py-1 rounded-md">
+                <span className="text-sm font-bold bg-[#aee4ff]/30 text-[#004d6d] px-3 py-1 rounded-md border border-[#0097b2]/20">
                   ${formData.budgetPerWeekUsd}
                 </span>
               </div>
@@ -531,7 +535,7 @@ export default function NewCasePage() {
                 step={25}
                 className="py-2"
               />
-              <div className="flex justify-between text-xs text-muted-foreground">
+              <div className="flex justify-between text-xs text-[#004d6d]/80 font-medium">
                 <span>$0</span>
                 <span>$1,000</span>
               </div>
@@ -539,8 +543,8 @@ export default function NewCasePage() {
 
             {/* Distance */}
             <div className="space-y-3">
-              <Label className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-muted-foreground" />
+              <Label className="flex items-center gap-2 text-[#004d6d] font-semibold">
+                <MapPin className="w-4 h-4 text-[#0097b2]" />
                 Distance from Loved One
               </Label>
               <RadioGroup
@@ -559,11 +563,11 @@ export default function NewCasePage() {
                       />
                       <Label
                         htmlFor={`distance-${option.value}`}
-                        className="flex flex-col items-center rounded-lg border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer text-center transition-all"
+                        className="flex flex-col items-center rounded-lg border-2 border-[#0097b2]/20 bg-white p-4 hover:bg-[#aee4ff]/20 peer-data-[state=checked]:border-[#f66] [&:has([data-state=checked])]:border-[#f66] cursor-pointer text-center transition-all"
                       >
-                        <Icon className="w-5 h-5 text-muted-foreground mb-2" />
-                        <span className="font-medium text-sm">{option.label}</span>
-                        <span className="text-xs text-muted-foreground mt-0.5">{option.description}</span>
+                        <Icon className="w-5 h-5 text-[#0097b2] mb-2" />
+                        <span className="font-bold text-sm text-[#004d6d]">{option.label}</span>
+                        <span className="text-xs text-[#004d6d]/80 mt-0.5">{option.description}</span>
                       </Label>
                     </div>
                   );
@@ -574,11 +578,11 @@ export default function NewCasePage() {
             {/* Energy Level */}
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <Label className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-muted-foreground" />
+                <Label className="flex items-center gap-2 text-[#004d6d] font-semibold">
+                  <Zap className="w-4 h-4 text-[#0097b2]" />
                   Your Energy Level
                 </Label>
-                <span className="text-sm font-medium bg-muted px-3 py-1 rounded-md">
+                <span className="text-sm font-bold bg-[#aee4ff]/30 text-[#004d6d] px-3 py-1 rounded-md border border-[#0097b2]/20">
                   {["Very Low", "Low", "Moderate", "Good", "High"][formData.energyLevel - 1]}
                 </span>
               </div>
@@ -590,7 +594,7 @@ export default function NewCasePage() {
                 step={1}
                 className="py-2"
               />
-              <div className="flex justify-between text-xs text-muted-foreground">
+              <div className="flex justify-between text-xs text-[#004d6d]/80 font-medium">
                 <span>Exhausted</span>
                 <span>Energized</span>
               </div>
@@ -598,8 +602,8 @@ export default function NewCasePage() {
 
             {/* Support Network */}
             <div className="space-y-3">
-              <Label className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-muted-foreground" />
+              <Label className="flex items-center gap-2 text-[#004d6d] font-semibold">
+                <Users className="w-4 h-4 text-[#0097b2]" />
                 Support Network
               </Label>
               <RadioGroup
@@ -616,10 +620,10 @@ export default function NewCasePage() {
                     />
                     <Label
                       htmlFor={`support-${option.value}`}
-                      className="flex flex-col items-center rounded-lg border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer text-center transition-all"
+                      className="flex flex-col items-center rounded-lg border-2 border-[#0097b2]/20 bg-white p-4 hover:bg-[#aee4ff]/20 peer-data-[state=checked]:border-[#f66] [&:has([data-state=checked])]:border-[#f66] cursor-pointer text-center transition-all"
                     >
-                      <span className="font-medium text-sm">{option.label}</span>
-                      <span className="text-xs text-muted-foreground mt-0.5">{option.description}</span>
+                      <span className="font-bold text-sm text-[#004d6d]">{option.label}</span>
+                      <span className="text-xs text-[#004d6d]/80 mt-0.5">{option.description}</span>
                     </Label>
                   </div>
                 ))}
@@ -628,8 +632,8 @@ export default function NewCasePage() {
 
             {/* Hard Limits */}
             <div className="space-y-2">
-              <Label htmlFor="hardLimits" className="flex items-center gap-2">
-                <Ban className="w-4 h-4 text-muted-foreground" />
+              <Label htmlFor="hardLimits" className="flex items-center gap-2 text-[#004d6d] font-semibold">
+                <Ban className="w-4 h-4 text-[#0097b2]" />
                 Hard Limits (optional)
               </Label>
               <Textarea
@@ -638,16 +642,26 @@ export default function NewCasePage() {
                 rows={3}
                 value={formData.hardLimits}
                 onChange={(e) => setFormData({ ...formData, hardLimits: e.target.value })}
-                className="bg-background resize-none"
+                className="bg-white border-[#0097b2]/30 text-[#004d6d] placeholder:text-[#004d6d]/50 resize-none"
               />
             </div>
 
             <div className="flex justify-between pt-4">
-              <Button variant="outline" onClick={handleBack} size="lg">
+              <Button
+                variant="outline"
+                onClick={handleBack}
+                size="lg"
+                className="border-[#0097b2] text-[#0097b2] hover:bg-[#0097b2]/10"
+              >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back
               </Button>
-              <Button onClick={handleSubmit} disabled={isSubmitting} size="lg">
+              <Button
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                size="lg"
+                className="bg-[#f66] hover:bg-[#f66]/90 text-white font-bold shadow-lg"
+              >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
