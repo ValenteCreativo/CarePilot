@@ -28,6 +28,9 @@ import {
   Shield,
 } from "lucide-react";
 
+import crossImage from "@/assets/cross.png";
+import ottersImage from "@/assets/otters.png";
+
 function ScrollRotatingLogo() {
   const [rotation, setRotation] = useState(0);
 
@@ -45,7 +48,7 @@ function ScrollRotatingLogo() {
       {/* STATIC LAYER: Medical Cross */}
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <Image
-          src="/images/logos/cross.png"
+          src={crossImage}
           alt="Medical cross"
           width={120}
           height={120}
@@ -61,7 +64,7 @@ function ScrollRotatingLogo() {
         }}
       >
         <Image
-          src="/images/logos/otters.png"
+          src={ottersImage}
           fill
           alt="Otters"
           className="object-contain"
