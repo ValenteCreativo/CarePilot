@@ -204,12 +204,12 @@ export default function LandingPage() {
               </div>
               <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link href="/signup" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full sm:w-auto px-8">
+                  <Button size="lg" className="w-full sm:w-auto px-12 py-8 text-xl rounded-2xl shadow-xl hover:scale-105 transition-transform">
                     Start Your Free Trial
                   </Button>
                 </Link>
                 <Link href="/login" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto px-8">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto px-12 py-8 text-xl rounded-2xl border-2 border-foreground/30 text-foreground hover:bg-foreground/5">
                     Sign in
                   </Button>
                 </Link>
@@ -225,7 +225,7 @@ export default function LandingPage() {
 
             {/* Logo Column */}
             <div className="flex justify-center lg:justify-end">
-              <ScrollRotatingLogo size="xxl" />
+              <ScrollRotatingLogo size="xxxl" />
             </div>
           </div>
         </div>

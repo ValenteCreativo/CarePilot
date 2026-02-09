@@ -6,7 +6,7 @@ import crossImage from "@/assets/cross.png";
 import ottersImage from "@/assets/otters.png";
 
 interface ScrollRotatingLogoProps {
-  size?: "sm" | "md" | "lg" | "xl" | "xxl";
+  size?: "sm" | "md" | "lg" | "xl" | "xxl" | "xxxl";
   className?: string;
 }
 
@@ -27,7 +27,8 @@ export default function ScrollRotatingLogo({ size = "md", className = "" }: Scro
     md: "w-12 h-12", 
     lg: "w-16 h-16",
     xl: "w-32 h-32 md:w-40 md:h-40",
-    xxl: "w-48 h-48 md:w-56 md:h-56"
+    xxl: "w-48 h-48 md:w-56 md:h-56",
+    xxxl: "w-64 h-64 md:w-72 md:h-72"
   };
 
   const crossSize = {
@@ -35,7 +36,8 @@ export default function ScrollRotatingLogo({ size = "md", className = "" }: Scro
     md: 32,
     lg: 48,
     xl: 96,
-    xxl: 120
+    xxl: 120,
+    xxxl: 160
   };
 
   return (
