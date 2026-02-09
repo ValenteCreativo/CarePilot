@@ -59,14 +59,15 @@
 
   /* Fondo General (Azul Cielo) */
   --background: #aee4ff;
-  --foreground: #0097b2;
+  /* Texto principal (AAA sobre blanco) */
+  --foreground: #004d6d;
 
-  /* Tarjetas y Contenedores (Amarillo Crema) */
-  --card: #fff8d7;
-  --card-foreground: #0097b2;
+  /* Tarjetas y Contenedores */
+  --card: #ffffff;
+  --card-foreground: #004d6d;
 
-  --popover: #fff8d7;
-  --popover-foreground: #0097b2;
+  --popover: #ffffff;
+  --popover-foreground: #004d6d;
 
   /* Color Primario (Azul de Letras e Iconos) */
   --primary: #0097b2;
@@ -74,13 +75,13 @@
 
   /* Color Secundario (Amarillo para elementos sutiles) */
   --secondary: #fff8d7;
-  --secondary-foreground: #0097b2;
+  --secondary-foreground: #004d6d;
 
   /* Acentos y Muted */
   --muted: #fff8d7;
-  --muted-foreground: #0097b2;
+  --muted-foreground: #004d6d;
   --accent: #fff8d7;
-  --accent-foreground: #0097b2;
+  --accent-foreground: #004d6d;
 
   /* Alertas y Botón de Inicio (Rojo) */
   --destructive: #FF0000;

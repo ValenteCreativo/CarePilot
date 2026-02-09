@@ -163,6 +163,30 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
                 </Button>
               </div>
 
+              {isLinked ? (
+                <div className="rounded-lg border-2 border-[#0097b2]/20 bg-[#aee4ff]/20 p-4">
+                  <p className="text-sm font-bold text-[#004d6d]">Connected device</p>
+                  <div className="mt-2 grid sm:grid-cols-2 gap-2 text-sm">
+                    <div>
+                      <p className="text-xs text-[#0097b2] font-bold uppercase">Name</p>
+                      <p className="text-[#004d6d] font-semibold">CarePilot Bot</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-[#0097b2] font-bold uppercase">Status</p>
+                      <p className="text-[#004d6d] font-semibold">Online</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-[#0097b2] font-bold uppercase">Linked at</p>
+                      <p className="text-[#004d6d] font-semibold">{new Date().toLocaleString()}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-[#0097b2] font-bold uppercase">Mode</p>
+                      <p className="text-[#004d6d] font-semibold">Demo / Simulated</p>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
               {accountSidMasked ? (
                 <p className="text-xs text-[#004d6d]/70">
                   Legacy Twilio config detected: <span className="font-semibold">{accountSidMasked}</span>
