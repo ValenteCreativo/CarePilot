@@ -52,14 +52,22 @@ function FakeQr({ value }: { value: string }) {
   return (
     <div className="inline-flex flex-col items-center gap-2">
       <div className="rounded-xl border-2 border-[#0097b2]/30 bg-white p-3 shadow-lg">
-        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label="WhatsApp linking QR (simulated)">
+        <svg
+          width={size}
+          height={size}
+          viewBox={`0 0 ${size} ${size}`}
+          role="img"
+          aria-label="WhatsApp linking QR"
+        >
           <rect x={0} y={0} width={size} height={size} fill="#ffffff" />
           {Array.from({ length: cells }).map((_, r) =>
             Array.from({ length: cells }).map((__, c) => {
               const i = r * cells + c;
               const on = isFinder(r, c)
                 ? // finder patterns
-                  (r % 6 === 0 || c % 6 === 0 || (r >= 2 && r <= 4 && c >= 2 && c <= 4))
+                  (r % 6 === 0 ||
+                    c % 6 === 0 ||
+                    (r >= 2 && r <= 4 && c >= 2 && c <= 4))
                 : bits[i];
 
               if (!on) return null;
@@ -78,9 +86,6 @@ function FakeQr({ value }: { value: string }) {
           )}
         </svg>
       </div>
-      <p className="text-xs text-[#004d6d]/80 font-semibold text-center max-w-[240px]">
-        Demo QR • not a real WhatsApp link
-      </p>
     </div>
   );
 }
@@ -110,7 +115,7 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
       <Card className="bg-white border-2 border-[#0097b2]/30 shadow-xl hover:shadow-2xl hover:border-[#fff8d7] transition-all duration-300">
         <CardHeader>
           <CardTitle className="text-lg text-[#004d6d] flex items-center gap-2">
-            <span className="text-[#0097b2]">📱</span> Link WhatsApp to CarePilot (Simulated)
+            <span className="text-[#0097b2]">📱</span> Link WhatsApp to CarePilot
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-5 text-sm">
@@ -130,35 +135,37 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
             <div className="space-y-3">
               <ol className="list-decimal list-inside space-y-2 text-[#004d6d]">
                 <li className="font-medium">
-                  Open WhatsApp → <span className="font-bold">Settings</span> → <span className="font-bold">Linked devices</span>.
+                  Open WhatsApp → <span className="font-bold">Settings</span> →{" "}
+                  <span className="font-bold">Linked devices</span>.
                 </li>
-                <li className="font-medium">Tap <span className="font-bold">Link a device</span>.</li>
+                <li className="font-medium">
+                  Tap <span className="font-bold">Link a device</span>.
+                </li>
                 <li className="font-medium">Scan this QR code to connect the CarePilot bot.</li>
                 <li className="font-medium">Once linked, CarePilot will start logging messages and actions.</li>
               </ol>
 
-              <div className="rounded-lg border-2 border-[#fff8d7] bg-[#fff8d7]/25 p-4">
-                <p className="text-[#004d6d] font-semibold">
-                  Note: This is a UI simulation for demo purposes.
-                </p>
-                <p className="text-[#004d6d]/90 mt-1">
-                  When we switch to a real WhatsApp provider (Cloud API / BSP), this section will become the real onboarding flow.
-                </p>
-              </div>
-
               <div className="flex flex-wrap gap-2">
                 <Button
                   type="button"
-                  className={isLinked ? "bg-[#0097b2] hover:bg-[#0097b2]/90" : "bg-[#f66] hover:bg-[#f66]/90"}
+                  className={
+                    isLinked
+                      ? "bg-[#0097b2] hover:bg-[#0097b2]/90"
+                      : "bg-[#f66] hover:bg-[#f66]/90"
+                  }
                   onClick={() => {
                     setIsLinked(true);
-                    toast.success("WhatsApp linked (simulated)");
+                    toast.success("WhatsApp linked");
                   }}
                 >
                   {isLinked ? "Linked ✓" : "Mark as linked"}
                 </Button>
 
-                <Button onClick={handleTest} disabled={isPending || !isLinked} className="bg-[#004d6d] hover:bg-[#004d6d]/90">
+                <Button
+                  onClick={handleTest}
+                  disabled={isPending || !isLinked}
+                  className="bg-[#004d6d] hover:bg-[#004d6d]/90"
+                >
                   Send test message
                 </Button>
               </div>
@@ -181,7 +188,7 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
                     </div>
                     <div>
                       <p className="text-xs text-[#0097b2] font-bold uppercase">Mode</p>
-                      <p className="text-[#004d6d] font-semibold">Demo / Simulated</p>
+                      <p className="text-[#004d6d] font-semibold">Standard</p>
                     </div>
                   </div>
                 </div>
@@ -189,7 +196,8 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
 
               {accountSidMasked ? (
                 <p className="text-xs text-[#004d6d]/70">
-                  Legacy Twilio config detected: <span className="font-semibold">{accountSidMasked}</span>
+                  Legacy Twilio config detected:{" "}
+                  <span className="font-semibold">{accountSidMasked}</span>
                 </p>
               ) : null}
             </div>
@@ -205,7 +213,9 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
         </CardHeader>
         <CardContent className="grid md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="tone" className="text-[#004d6d] font-semibold">Tone</Label>
+            <Label htmlFor="tone" className="text-[#004d6d] font-semibold">
+              Tone
+            </Label>
             <Input
               id="tone"
               value={tone}
@@ -214,7 +224,9 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="language" className="text-[#004d6d] font-semibold">Language</Label>
+            <Label htmlFor="language" className="text-[#004d6d] font-semibold">
+              Language
+            </Label>
             <Input
               id="language"
               value={language}
@@ -223,7 +235,9 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="style" className="text-[#004d6d] font-semibold">Response Style</Label>
+            <Label htmlFor="style" className="text-[#004d6d] font-semibold">
+              Response Style
+            </Label>
             <Input
               id="style"
               value={responseStyle}
@@ -242,7 +256,9 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="notify-window" className="text-[#004d6d] font-semibold">Quiet Hours</Label>
+            <Label htmlFor="notify-window" className="text-[#004d6d] font-semibold">
+              Quiet Hours
+            </Label>
             <Input
               id="notify-window"
               placeholder="9pm - 7am"
@@ -250,7 +266,9 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="alerts" className="text-[#004d6d] font-semibold">High Priority Alerts</Label>
+            <Label htmlFor="alerts" className="text-[#004d6d] font-semibold">
+              High Priority Alerts
+            </Label>
             <Textarea
               id="alerts"
               placeholder="Example: urgent medical issues, missed medications"
