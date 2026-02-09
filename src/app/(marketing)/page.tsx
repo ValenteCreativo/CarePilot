@@ -41,14 +41,14 @@ function ScrollRotatingLogo() {
   }, []);
 
   return (
-    <div className="relative w-32 h-32 md:w-40 md:h-40">
+    <div className="relative w-48 h-48 md:w-56 md:h-56">
       {/* STATIC LAYER: Medical Cross */}
       <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
         <Image
           src="/images/logos/cross.png"
           alt="Medical cross"
-          width={80}
-          height={80}
+          width={120}
+          height={120}
           className="object-contain"
           style={{ width: "55%", height: "55%" }}
         />
@@ -202,69 +202,73 @@ export default function LandingPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,151,178,0.22),_transparent_55%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(0,151,178,0.18),_transparent_60%)]" />
-        <div className="container mx-auto px-4 py-24 md:py-32 relative">
-          <div className="max-w-3xl">
-            <div className="mb-6">
-              <ScrollRotatingLogo />
-            </div>
-            <Badge variant="secondary" className="mb-6">
-              Compassionate AI support for caregivers
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-foreground">
-              CarePilot: Caring is hard. Don't do it alone.
-            </h1>
-            <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
-              CarePilot organizes the chaos of care through WhatsApp. Share your routine and your loved one&apos;s needs; we handle the reminders, appointments, and daily tasks so you can simply be present.
-            </p>
+        <div className="container mx-auto px-4 py-16 md:py-32 relative">
+          <div className="grid lg:grid-cols-[1fr_350px] gap-12 items-center">
+            <div className="max-w-3xl">
+              <Badge variant="secondary" className="mb-6">
+                Compassionate AI support for caregivers
+              </Badge>
+              <h1 className="text-3xl md:text-6xl font-semibold tracking-tight text-foreground">
+                CarePilot: Caring is hard. Don't do it alone.
+              </h1>
+              <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
+                CarePilot organizes the chaos of care through WhatsApp. Share your routine and your loved one&apos;s needs; we handle the reminders, appointments, and daily tasks so you can simply be present.
+              </p>
 
-            {/* Video Demo Container */}
-            <div className="mt-12 mb-12 relative group">
-              <div className="flex justify-center mb-4">
-                <Badge variant="outline" className="bg-[#0097b2]/5 text-[#0097b2] border-[#0097b2]/20 px-4 py-1.5 text-sm font-medium rounded-full flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-[#FF0000] animate-pulse" />
-                  Watch CarePilot in Action
-                </Badge>
-              </div>
-              <div className="max-w-4xl mx-auto">
-                <div className="relative rounded-[2rem] overflow-hidden border-4 border-[#fff8d7] shadow-[0_20px_60px_rgb(0,151,178,0.15)] hover:shadow-[0_30px_80px_rgb(0,151,178,0.25)] transition-all duration-500 bg-black/5 aspect-video group cursor-pointer">
-                  {/* Video Placeholder (using existing image as cover) */}
-                  <Image
-                    src="/images/Whatsapp-Interfaz.png"
-                    alt="CarePilot Demo Video"
-                    fill
-                    className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
-                  />
+              {/* Video Demo Container */}
+              <div className="mt-12 mb-12 relative group">
+                <div className="flex justify-center mb-4">
+                  <Badge variant="outline" className="bg-[#0097b2]/5 text-[#0097b2] border-[#0097b2]/20 px-4 py-1.5 text-sm font-medium rounded-full flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-[#FF0000] animate-pulse" />
+                    Watch CarePilot in Action
+                  </Badge>
+                </div>
+                <div className="max-w-4xl mx-auto">
+                  <div className="relative rounded-[2rem] overflow-hidden border-4 border-[#fff8d7] shadow-[0_20px_60px_rgb(0,151,178,0.15)] hover:shadow-[0_30px_80px_rgb(0,151,178,0.25)] transition-all duration-500 bg-black/5 aspect-video group cursor-pointer">
+                    {/* Video Placeholder (using existing image as cover) */}
+                    <Image
+                      src="/images/Whatsapp-Interfaz.png"
+                      alt="CarePilot Demo Video"
+                      fill
+                      className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
+                    />
 
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center z-20">
-                    <div className="w-20 h-20 bg-[#fff8d7]/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-[#0097b2] border-b-[12px] border-b-transparent ml-1" />
+                    {/* Play Button Overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center z-20">
+                      <div className="w-20 h-20 bg-[#fff8d7]/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-[#0097b2] border-b-[12px] border-b-transparent ml-1" />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0097b2]/20 to-transparent pointer-events-none" />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0097b2]/20 to-transparent pointer-events-none" />
+                  </div>
                 </div>
               </div>
+              <div className="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Link href="/signup" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto px-8">
+                    Start Your Free Trial
+                  </Button>
+                </Link>
+                <Link href="/login" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto px-8">
+                    Sign in
+                  </Button>
+                </Link>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+                <span className="flex items-center gap-2">
+                  <ShieldCheck className="h-4 w-4" />
+                  Privacy-first, caregiver-safe
+                </span>
+                <span>Subscription: ~$30/mo after trial</span>
+              </div>
             </div>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Link href="/signup">
-                <Button size="lg" className="px-8">
-                  Start Your Free Trial
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button size="lg" variant="outline" className="px-8">
-                  Sign in
-                </Button>
-              </Link>
-            </div>
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-              <span className="flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4" />
-                Privacy-first, caregiver-safe
-              </span>
-              <span>Subscription: ~$30/mo after trial</span>
+
+            {/* Logo Column */}
+            <div className="flex justify-center lg:justify-end">
+              <ScrollRotatingLogo />
             </div>
           </div>
         </div>
