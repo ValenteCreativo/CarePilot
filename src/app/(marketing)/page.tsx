@@ -155,20 +155,20 @@ const howItWorksSteps = [
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,151,178,0.22),_transparent_55%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_rgba(0,151,178,0.18),_transparent_60%)]" />
+    <div className="min-h-screen bg-white">
+      <section className="relative overflow-hidden bg-[#aee4ff]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,248,215,0.4),_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(0,77,109,0.15),_transparent_60%)]" />
         <div className="container mx-auto px-4 py-16 md:py-32 relative">
           <div className="grid lg:grid-cols-[1fr_350px] gap-12 items-center">
             <div className="max-w-3xl">
-              <Badge variant="secondary" className="mb-6">
+              <Badge variant="secondary" className="mb-6 bg-[#fff8d7] text-[#004d6d] border-[#004d6d]/20 hover:bg-[#fff8d7]/90">
                 Compassionate AI support for caregivers
               </Badge>
-              <h1 className="text-3xl md:text-6xl font-semibold tracking-tight text-foreground">
+              <h1 className="text-3xl md:text-6xl font-bold tracking-tight text-[#004d6d]">
                 CarePilot: Caring is hard. Don't do it alone.
               </h1>
-              <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed">
+              <p className="mt-6 text-lg md:text-xl text-[#004d6d]/90 leading-relaxed font-medium">
                 CarePilot organizes the chaos of care through WhatsApp. Share your routine and your loved one&apos;s needs; we handle the reminders, appointments, and daily tasks so you can simply be present.
               </p>
 
@@ -214,7 +214,7 @@ export default function LandingPage() {
                   </Button>
                 </Link>
               </div>
-              <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+              <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-[#004d6d]/90">
                 <span className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4" />
                   Privacy-first, caregiver-safe
@@ -232,11 +232,11 @@ export default function LandingPage() {
       </section>
 
       {/* CarePilot is for you if - Caregiver Personas */}
-      <section className="py-16 border-t border-border/50 bg-[#aee4ff]/20">
+      <section className="py-16 border-t border-[#0097b2]/50 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display text-foreground mb-4">CarePilot is for you if:</h2>
-            <p className="text-lg text-foreground/90 max-w-2xl mx-auto font-sans">
+            <h2 className="text-3xl md:text-4xl font-display text-[#004d6d] mb-4">CarePilot is for you if:</h2>
+            <p className="text-lg text-[#004d6d]/90 max-w-2xl mx-auto font-sans">
               Recognize yourself in these stories? You're not alone.
             </p>
           </div>
@@ -244,7 +244,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {caregiverPersonas.map((persona, index) => (
               <div key={persona.title} className="relative group persona-card" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="bg-[#fff8d7]/90 backdrop-blur-md p-8 rounded-[2.5rem] border-2 border-primary/20 shadow-[0_8px_30px_rgb(0,151,178,0.12)] hover:backdrop-blur-xl hover:-translate-y-2 hover:shadow-[0_16px_40px_rgb(0,151,178,0.18)] hover:rotate-1 transition-all duration-500 ease-out h-full">
+                <div className="bg-[#fff8d7]/90 backdrop-blur-md p-8 rounded-[2.5rem] border-2 border-[#0097b2]/20 shadow-[0_8px_30px_rgb(0,151,178,0.12)] hover:backdrop-blur-xl hover:-translate-y-2 hover:shadow-[0_16px_40px_rgb(0,151,178,0.18)] hover:rotate-1 transition-all duration-500 ease-out h-full">
                   {/* Icon Container */}
                   <div className="mb-6 relative">
                     <div className="w-16 h-16 mx-auto relative">
@@ -260,7 +260,7 @@ export default function LandingPage() {
                     {persona.title}
                   </h3>
 
-                  <p className="text-[#0097b2]/80 font-sans leading-relaxed text-sm text-center" style={{ lineHeight: '1.75' }}>
+                  <p className="text-[#004d6d]/90 font-sans leading-relaxed text-sm text-center" style={{ lineHeight: '1.75' }}>
                     {persona.description}
                   </p>
                 </div>
@@ -284,24 +284,24 @@ export default function LandingPage() {
           `}</style>
 
           <div className="mt-12 text-center">
-            <p className="text-sm text-primary/60 font-sans">
+            <p className="text-sm text-[#0097b2]/60 font-sans">
               If any of these resonate, you're in the right place.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-16 border-t border-border/50">
+      <section className="py-16 border-t border-[#0097b2]/50">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             {valueProps.map((item) => (
-              <Card key={item.title} className="bg-card/90 backdrop-blur-md border border-primary/20 shadow-lg hover:bg-card hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+              <Card key={item.title} className="bg-white backdrop-blur-md border border-[#0097b2]/20 shadow-lg hover:bg-card hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                 <CardContent className="p-6">
                   <div className="h-11 w-11 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
-                    <item.icon className="h-5 w-5 text-primary" />
+                    <item.icon className="h-5 w-5 text-[#0097b2]" />
                   </div>
-                  <h3 className="text-lg font-semibold mb-2 text-foreground">{item.title}</h3>
-                  <p className="text-sm text-foreground/90 leading-relaxed">{item.description}</p>
+                  <h3 className="text-lg font-semibold mb-2 text-[#004d6d]">{item.title}</h3>
+                  <p className="text-sm text-[#004d6d]/90 leading-relaxed">{item.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -309,11 +309,11 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-24 border-t border-border/50 bg-[#aee4ff]/30">
+      <section className="py-24 border-t border-[#0097b2]/50 bg-[#aee4ff]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-display text-foreground mb-6">How It Works</h2>
-            <p className="text-lg text-foreground/90 max-w-2xl mx-auto font-sans">
+            <h2 className="text-4xl md:text-5xl font-display text-[#004d6d] mb-6">How It Works</h2>
+            <p className="text-lg text-[#004d6d]/90 max-w-2xl mx-auto font-sans">
               Get started in minutes with a process designed to give you peace. No complex setups, everything happens where you already are: WhatsApp.
             </p>
           </div>
@@ -348,12 +348,14 @@ export default function LandingPage() {
 
                 {/* Text Side */}
                 <div className="w-full md:w-1/2 text-center md:text-left z-10">
-                  <h3 className="text-3xl md:text-4xl font-display text-[#0097b2] mb-6 leading-tight">
-                    {item.title}
-                  </h3>
-                  <p className="text-lg text-[#0097b2]/80 font-sans leading-relaxed">
-                    {item.description}
-                  </p>
+                  <div className="bg-white/70 backdrop-blur-sm p-8 rounded-3xl border border-[#0097b2]/10 shadow-lg">
+                    <h3 className="text-3xl md:text-4xl font-display text-[#004d6d] mb-6 leading-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-lg text-[#004d6d]/90 font-sans leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
 
               </div>
@@ -366,7 +368,7 @@ export default function LandingPage() {
                 Start Your Free Trial
               </Button>
             </Link>
-            <p className="mt-4 text-sm text-[#0097b2]/60 font-sans">
+            <p className="mt-4 text-sm text-[#004d6d]/70 font-sans font-medium">
               Set up in 3 minutes • No credit card required
             </p>
           </div>
@@ -418,38 +420,38 @@ export default function LandingPage() {
             {/* Right: Content */}
             <div className="order-1 lg:order-2">
               <div className="mb-10">
-                <Badge variant="outline" className="border-[#0097b2]/20 text-[#0097b2] bg-[#0097b2]/5 mb-4 px-4 py-1">
+                <Badge variant="outline" className="border-[#004d6d]/30 text-[#004d6d] bg-[#aee4ff]/40 mb-4 px-4 py-1 font-semibold">
                   Beyond Simple Reminders
                 </Badge>
-                <h2 className="text-4xl md:text-5xl font-display text-[#0097b2] mb-6 leading-tight">
+                <h2 className="text-4xl md:text-5xl font-display text-[#004d6d] mb-6 leading-tight">
                   Why CarePilot is Different
                 </h2>
-                <p className="text-lg text-[#0097b2]/80 font-sans leading-relaxed">
+                <p className="text-lg text-[#004d6d]/90 font-sans leading-relaxed">
                   This isn't a chatbot with a calendar. It's an AI Agent built for the chaos of real caregiving.
                 </p>
               </div>
 
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {differentiators.map((item, index) => (
-                  <div key={item.title} className="flex gap-5 group">
+                  <div key={item.title} className="flex gap-5 group bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-[#0097b2]/10 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     <div className="flex-shrink-0 mt-1">
-                      <div className="w-12 h-12 rounded-2xl bg-[#fff8d7] border border-[#0097b2]/20 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
-                        <item.icon className="h-6 w-6 text-[#0097b2]" />
+                      <div className="w-12 h-12 rounded-2xl bg-[#0097b2] border border-[#0097b2]/20 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
+                        <item.icon className="h-6 w-6 text-white" />
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-xl font-display text-[#0097b2] mb-2">{item.title}</h3>
-                      <p className="text-[#0097b2]/70 font-sans leading-relaxed text-sm">{item.description}</p>
+                      <h3 className="text-xl font-display text-[#004d6d] mb-2">{item.title}</h3>
+                      <p className="text-[#004d6d]/85 font-sans leading-relaxed text-sm">{item.description}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
               <div className="mt-12">
-                <div className="inline-flex items-center gap-3 px-6 py-3 bg-[#0097b2]/5 rounded-full border border-[#0097b2]/10">
-                  <span className="text-sm font-semibold text-[#0097b2]">Built for Hackathon 2026</span>
-                  <span className="text-[#0097b2]/20">|</span>
-                  <span className="text-sm text-[#0097b2]/80">Evaluated with Opik</span>
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/60 backdrop-blur-sm rounded-full border border-[#0097b2]/20 shadow-sm">
+                  <span className="text-sm font-semibold text-[#004d6d]">Built for Hackathon 2026</span>
+                  <span className="text-[#0097b2]/30">|</span>
+                  <span className="text-sm text-[#004d6d]/80">Evaluated with Opik</span>
                 </div>
               </div>
             </div>
@@ -465,7 +467,7 @@ export default function LandingPage() {
             <h2 className="text-4xl md:text-5xl font-display text-[#0097b2] mb-6">
               Safe, Secure, and Trusted
             </h2>
-            <p className="text-lg text-[#0097b2]/80 max-w-2xl mx-auto font-sans">
+            <p className="text-lg text-[#004d6d]/90 max-w-2xl mx-auto font-sans">
               Built on transparency, control, and real-world caregiving experience.
             </p>
           </div>
@@ -513,7 +515,7 @@ export default function LandingPage() {
                   <item.icon className="h-6 w-6" />
                 </div>
                 <h3 className="text-lg font-display text-[#0097b2] mb-2">{item.title}</h3>
-                <p className="text-[#0097b2]/80 text-sm leading-relaxed">{item.desc}</p>
+                <p className="text-[#004d6d]/90 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -527,7 +529,7 @@ export default function LandingPage() {
             <h2 className="text-3xl md:text-5xl font-display text-[#0097b2] mb-6 leading-tight">
               One plan to help you sleep peacefully again
             </h2>
-            <p className="text-lg text-[#0097b2]/80 mb-10 font-sans">
+            <p className="text-lg text-[#004d6d]/90 mb-10 font-sans">
               Simple pricing. No hidden fees. Cancel anytime.
             </p>
 
@@ -555,7 +557,7 @@ export default function LandingPage() {
                         <div className="h-5 w-5 rounded-full bg-[#0097b2]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                           <CheckCircle className="h-3 w-3 text-[#0097b2]" />
                         </div>
-                        <span className="text-[#0097b2]/80 text-sm font-medium">{feature}</span>
+                        <span className="text-[#004d6d]/90 text-sm font-medium">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -578,10 +580,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-32 border-t border-border/50 bg-[#aee4ff]/20">
+      <section className="py-32 border-t border-[#0097b2]/50 bg-[#aee4ff]/20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-6xl font-display text-foreground mb-6">Ready to lighten the load?</h2>
-          <p className="mt-4 text-xl text-foreground/90 font-sans max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-display text-[#004d6d] mb-6">Ready to lighten the load?</h2>
+          <p className="mt-4 text-xl text-[#004d6d]/90 font-sans max-w-2xl mx-auto">
             Join thousands of families finding their peace with CarePilot. Meet your assistant on WhatsApp today.
           </p>
           <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center">
@@ -591,17 +593,17 @@ export default function LandingPage() {
               </Button>
             </Link>
             <Link href="/login">
-              <Button size="lg" variant="outline" className="px-12 py-8 text-xl rounded-2xl border-2 border-foreground/30 text-foreground hover:bg-foreground/5">
+              <Button size="lg" variant="outline" className="px-12 py-8 text-xl rounded-2xl border-2 border-foreground/30 text-[#004d6d] hover:bg-foreground/5">
                 Sign in
               </Button>
             </Link>
           </div>
-          <p className="mt-8 text-sm text-foreground/50">Setup takes less than 3 minutes.</p>
+          <p className="mt-8 text-sm text-[#004d6d]/50">Setup takes less than 3 minutes.</p>
         </div>
       </section>
 
-      <footer className="py-10 border-t border-border/50">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+      <footer className="py-10 border-t border-[#0097b2]/50">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[#004d6d]/90">
           <span>CarePilot · AI Care Assistant for caregivers</span>
           <span>Not a substitute for professional medical or legal advice.</span>
         </div>
