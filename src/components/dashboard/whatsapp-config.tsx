@@ -36,19 +36,19 @@ export function WhatsAppConfig({ accountSidMasked }: WhatsAppConfigProps) {
         <CardHeader>
           <CardTitle className="text-lg">Connect WhatsApp (Twilio sandbox)</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4 text-sm text-muted-foreground">
+        <CardContent className="space-y-4 text-sm text-[#004d6d]/90">
           <ol className="list-decimal list-inside space-y-2">
             <li>
               Open WhatsApp and send the message:{" "}
-              <span className="font-medium text-foreground">join four-mission</span>
+              <span className="font-medium text-[#004d6d]">join four-mission</span>
             </li>
             <li>Send to the Twilio sandbox number listed in your Twilio console.</li>
             <li>Once connected, CarePilot will start logging messages here.</li>
           </ol>
           <div className="rounded-lg border border-border/40 p-4 text-xs">
-            <p className="text-muted-foreground">
+            <p className="text-[#004d6d]/90">
               TWILIO_ACCOUNT_SID:{" "}
-              <span className="font-medium text-foreground">{accountSidMasked ?? "Not configured"}</span>
+              <span className="font-medium text-[#004d6d]">{accountSidMasked ?? "Not configured"}</span>
             </p>
           </div>
           <Button onClick={handleTest} disabled={isPending}>

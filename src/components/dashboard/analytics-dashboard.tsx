@@ -60,13 +60,13 @@ export function AnalyticsDashboard({ initialData }: { initialData?: AnalyticsPay
       <div className="grid md:grid-cols-3 gap-4">
         <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">Action completion rate</CardTitle>
+            <CardTitle className="text-sm text-[#004d6d]/90">Action completion rate</CardTitle>
           </CardHeader>
           <CardContent className="text-3xl font-semibold">{data.completionRate}%</CardContent>
         </Card>
         <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">Avg response time</CardTitle>
+            <CardTitle className="text-sm text-[#004d6d]/90">Avg response time</CardTitle>
           </CardHeader>
           <CardContent className="text-3xl font-semibold">
             {data.avgResponseMinutes}m
@@ -74,9 +74,9 @@ export function AnalyticsDashboard({ initialData }: { initialData?: AnalyticsPay
         </Card>
         <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">Data freshness</CardTitle>
+            <CardTitle className="text-sm text-[#004d6d]/90">Data freshness</CardTitle>
           </CardHeader>
-          <CardContent className="text-sm text-muted-foreground">
+          <CardContent className="text-sm text-[#004d6d]/90">
             {loading ? "Refreshing..." : "Updated just now"}
           </CardContent>
         </Card>
@@ -89,7 +89,7 @@ export function AnalyticsDashboard({ initialData }: { initialData?: AnalyticsPay
         </CardHeader>
         <CardContent className="h-64">
           {data.messageVolume.length === 0 ? (
-            <div className="h-full flex items-center justify-center text-sm text-muted-foreground">
+            <div className="h-full flex items-center justify-center text-sm text-[#004d6d]/90">
               No message data yet.
             </div>
           ) : (

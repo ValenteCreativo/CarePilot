@@ -67,9 +67,9 @@ export function AuthForm({ mode }: AuthFormProps) {
   };
 
   return (
-    <Card className="bg-card/70 backdrop-blur-md border border-white/20 shadow-xl hover:bg-card/75 transition-all duration-300">
+    <Card className="bg-white backdrop-blur-md border-2 border-[#0097b2]/30 shadow-2xl transition-all duration-300">
       <CardHeader className="pt-8">
-        <CardTitle className="text-3xl font-parisienne text-primary text-center">
+        <CardTitle className="text-3xl font-parisienne text-[#0097b2] text-center">
           {isSignup ? "Start your free trial" : "Welcome back"}
         </CardTitle>
       </CardHeader>
@@ -125,16 +125,16 @@ export function AuthForm({ mode }: AuthFormProps) {
 
           <Button
             type="submit"
-            className="w-full bg-[#FF0000] hover:bg-[#CC0000] text-white font-ultra rounded-full py-6 text-lg transition-all duration-300 shadow-lg hover:shadow-red-500/20"
+            className="w-full bg-[#f66] hover:bg-[#f66]/90 text-white font-bold rounded-full py-6 text-lg transition-all duration-300 shadow-xl hover:shadow-2xl"
             disabled={isPending}
           >
             {isSignup ? "Create account" : "Sign in"}
           </Button>
         </form>
 
-        <div className="mt-6 text-sm text-muted-foreground">
+        <div className="mt-6 text-sm text-[#004d6d]/90">
           {isSignup ? "Already have an account?" : "Need an account?"}{" "}
-          <Link href={isSignup ? "/login" : "/signup"} className="text-primary hover:underline">
+          <Link href={isSignup ? "/login" : "/signup"} className="text-[#0097b2] hover:underline">
             {isSignup ? "Sign in" : "Start free trial"}
           </Link>
         </div>

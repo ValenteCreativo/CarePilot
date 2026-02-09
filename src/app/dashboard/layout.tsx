@@ -32,14 +32,14 @@ export default async function DashboardLayout({ children }: { children: React.Re
             <Link href="/" className="text-xl font-semibold tracking-tight">
               CarePilot
             </Link>
-            <p className="text-xs text-muted-foreground mt-1">Caregiver AI workspace</p>
+            <p className="text-xs text-[#004d6d]/90 mt-1">Caregiver AI workspace</p>
           </div>
           <nav className="flex-1 px-4 py-6 space-y-2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-[#004d6d]/90 hover:text-[#004d6d] hover:bg-muted/40 transition-colors"
               >
                 <item.icon className="h-4 w-4" />
                 {item.label}
@@ -59,7 +59,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
               </Link>
               <div className="flex gap-2">
                 {navItems.slice(0, 2).map((item) => (
-                  <Link key={item.href} href={item.href} className="text-xs text-muted-foreground">
+                  <Link key={item.href} href={item.href} className="text-xs text-[#004d6d]/90">
                     {item.label}
                   </Link>
                 ))}

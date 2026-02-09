@@ -38,7 +38,7 @@ export default async function SettingsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-semibold">Settings</h1>
-        <p className="text-muted-foreground mt-2">
+        <p className="text-[#004d6d]/90 mt-2">
           Update your profile, review subscription status, and manage account options.
         </p>
       </div>
@@ -48,18 +48,18 @@ export default async function SettingsPage() {
           <CardHeader>
             <CardTitle className="text-lg">Profile</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3 text-sm text-muted-foreground">
+          <CardContent className="space-y-3 text-sm text-[#004d6d]/90">
             <div>
               <p className="text-xs uppercase">Name</p>
-              <p className="text-foreground">{user?.name ?? "Not set"}</p>
+              <p className="text-[#004d6d]">{user?.name ?? "Not set"}</p>
             </div>
             <div>
               <p className="text-xs uppercase">Email</p>
-              <p className="text-foreground">{user?.email ?? "Not set"}</p>
+              <p className="text-[#004d6d]">{user?.email ?? "Not set"}</p>
             </div>
             <div>
               <p className="text-xs uppercase">WhatsApp number</p>
-              <p className="text-foreground">{user?.phoneNumber ?? "Not set"}</p>
+              <p className="text-[#004d6d]">{user?.phoneNumber ?? "Not set"}</p>
             </div>
           </CardContent>
         </Card>
@@ -68,18 +68,18 @@ export default async function SettingsPage() {
           <CardHeader>
             <CardTitle className="text-lg">Subscription</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3 text-sm text-muted-foreground">
+          <CardContent className="space-y-3 text-sm text-[#004d6d]/90">
             <div className="flex items-center justify-between">
               <span>Status</span>
               <Badge variant="secondary">{subscriptionStatus}</Badge>
             </div>
             <div className="flex items-center justify-between">
               <span>Plan</span>
-              <span className="text-foreground">CarePilot Plus</span>
+              <span className="text-[#004d6d]">CarePilot Plus</span>
             </div>
             <div className="flex items-center justify-between">
               <span>Started</span>
-              <span className="text-foreground">
+              <span className="text-[#004d6d]">
                 {user?.createdAt ? user.createdAt.toLocaleDateString() : "Not available"}
               </span>
             </div>
@@ -91,7 +91,7 @@ export default async function SettingsPage() {
         <CardHeader>
           <CardTitle className="text-lg">Billing</CardTitle>
         </CardHeader>
-        <CardContent className="text-sm text-muted-foreground">
+        <CardContent className="text-sm text-[#004d6d]/90">
           Stripe billing management coming soon. We&apos;ll notify you before any charges start.
         </CardContent>
       </Card>
@@ -100,7 +100,7 @@ export default async function SettingsPage() {
         <CardHeader>
           <CardTitle className="text-lg">Danger zone</CardTitle>
         </CardHeader>
-        <CardContent className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm text-muted-foreground">
+        <CardContent className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm text-[#004d6d]/90">
           <p>Delete your account and remove all CarePilot data permanently.</p>
           <DeleteAccountButton />
         </CardContent>

@@ -77,24 +77,24 @@ export function ActionsKanban({ initialActions }: { initialActions: ActionRow[] 
         <div key={column.key} className="space-y-3">
           <div className="px-1">
             <h3 className="text-sm font-semibold">{column.label}</h3>
-            <p className="text-xs text-muted-foreground">{column.helper}</p>
+            <p className="text-xs text-[#004d6d]/90">{column.helper}</p>
           </div>
           <div className="space-y-3">
             {grouped[column.key].length === 0 ? (
               <Card className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg border-dashed">
-                <CardContent className="p-4 text-xs text-muted-foreground">Nothing here yet.</CardContent>
+                <CardContent className="p-4 text-xs text-[#004d6d]/90">Nothing here yet.</CardContent>
               </Card>
             ) : (
               grouped[column.key].map((action) => (
                 <Card key={action.id} className="bg-card/60 backdrop-blur-md border border-primary/10 shadow-lg hover:bg-card/70 hover:-translate-y-0.5 transition-all duration-300">
                   <CardContent className="p-4 space-y-3">
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <div className="flex items-center justify-between text-xs text-[#004d6d]/90">
                       <span>{action.caseTitle ?? "Care case"}</span>
                       <Badge variant="outline">{action.type.replace("_", " ")}</Badge>
                     </div>
                     <div>
                       <p className="text-sm font-medium">{getPayloadLabel(action.payload)}</p>
-                      <p className="text-xs text-muted-foreground mt-1">
+                      <p className="text-xs text-[#004d6d]/90 mt-1">
                         {action.scheduledFor
                           ? `Scheduled: ${new Date(action.scheduledFor).toLocaleString()}`
                           : "Scheduled time TBD"}

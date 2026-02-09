@@ -62,7 +62,7 @@ export default async function DashboardOverviewPage() {
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold">Overview</h1>
-          <p className="text-muted-foreground mt-2">
+          <p className="text-[#004d6d]/90 mt-2">
             Keep a pulse on today&apos;s care coordination and WhatsApp activity.
           </p>
         </div>
@@ -85,13 +85,13 @@ export default async function DashboardOverviewPage() {
       <div className="grid md:grid-cols-3 gap-6">
         <Card className="bg-background/80 border-border/50">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">Active cases</CardTitle>
+            <CardTitle className="text-sm text-[#004d6d]/90">Active cases</CardTitle>
           </CardHeader>
           <CardContent className="text-3xl font-semibold">
             {activeCases === 0 ? (
               <div className="space-y-2">
                 <p className="text-sm font-medium">Looks like you don't have a support network yet.</p>
-                <p className="text-sm text-muted-foreground">Would you like us to meet who you're caring for?</p>
+                <p className="text-sm text-[#004d6d]/90">Would you like us to meet who you're caring for?</p>
                 <Link href="/case/new">
                   <Button size="sm" className="mt-2">Start my first case</Button>
                 </Link>
@@ -103,13 +103,13 @@ export default async function DashboardOverviewPage() {
         </Card>
         <Card className="bg-background/80 border-border/50">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">Pending actions</CardTitle>
+            <CardTitle className="text-sm text-[#004d6d]/90">Pending actions</CardTitle>
           </CardHeader>
           <CardContent className="text-3xl font-semibold">
             {pendingActions === 0 ? (
               <div className="space-y-2">
                 <p className="text-sm font-medium">Everything's under control for now.</p>
-                <p className="text-sm text-muted-foreground">Take a breath, your Otter Guide will let you know if anything changes.</p>
+                <p className="text-sm text-[#004d6d]/90">Take a breath, your Otter Guide will let you know if anything changes.</p>
               </div>
             ) : (
               pendingActions
@@ -118,7 +118,7 @@ export default async function DashboardOverviewPage() {
         </Card>
         <Card className="bg-background/80 border-border/50">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm text-muted-foreground">Messages today</CardTitle>
+            <CardTitle className="text-sm text-[#004d6d]/90">Messages today</CardTitle>
           </CardHeader>
           <CardContent className="text-3xl font-semibold">{messagesToday}</CardContent>
         </Card>
@@ -128,7 +128,7 @@ export default async function DashboardOverviewPage() {
         <Card className="bg-background/80 border-border/50">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <MessageSquare className="h-4 w-4 text-primary" />
+              <MessageSquare className="h-4 w-4 text-[#0097b2]" />
               Recent activity
             </CardTitle>
           </CardHeader>
@@ -136,12 +136,12 @@ export default async function DashboardOverviewPage() {
             {recentMessages.length === 0 ? (
               <div className="space-y-2">
                 <p className="text-sm font-medium">Your conversation hasn't started yet.</p>
-                <p className="text-sm text-muted-foreground">Your Otter Guide is ready when you are.</p>
+                <p className="text-sm text-[#004d6d]/90">Your Otter Guide is ready when you are.</p>
               </div>
             ) : (
               recentMessages.map((message) => (
                 <div key={message.id} className="rounded-lg border border-border/50 p-4">
-                  <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
+                  <div className="flex items-center justify-between text-xs text-[#004d6d]/90 mb-2">
                     <span>{message.direction === "inbound" ? "Inbound" : "Outbound"}</span>
                     <span>{message.createdAt.toLocaleString()}</span>
                   </div>
@@ -155,20 +155,20 @@ export default async function DashboardOverviewPage() {
         <Card className="bg-background/80 border-border/50">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <ClipboardCheck className="h-4 w-4 text-primary" />
+              <ClipboardCheck className="h-4 w-4 text-[#0097b2]" />
               Quick actions
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4 text-sm text-muted-foreground">
+          <CardContent className="space-y-4 text-sm text-[#004d6d]/90">
             <div className="rounded-lg border border-border/40 p-4">
-              <p className="font-medium text-foreground">New case intake</p>
+              <p className="font-medium text-[#004d6d]">New case intake</p>
               <p className="mt-1">Capture medical context, caregiver schedule, and priorities.</p>
               <Link href="/case/new">
                 <Button size="sm" className="mt-3">Start case</Button>
               </Link>
             </div>
             <div className="rounded-lg border border-border/40 p-4">
-              <p className="font-medium text-foreground">WhatsApp check-in</p>
+              <p className="font-medium text-[#004d6d]">WhatsApp check-in</p>
               <p className="mt-1">Send a quick update or test message to the caregiver.</p>
               <Link href="/dashboard/whatsapp">
                 <Button size="sm" variant="outline" className="mt-3">Open WhatsApp config</Button>

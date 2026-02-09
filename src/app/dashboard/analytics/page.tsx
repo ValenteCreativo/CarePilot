@@ -8,7 +8,7 @@ export default function AnalyticsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-semibold">Analytics</h1>
-        <p className="text-muted-foreground mt-2">
+        <p className="text-[#004d6d]/90 mt-2">
           Track response quality, action throughput, and caregiver communication trends.
         </p>
       </div>
@@ -19,7 +19,7 @@ export default function AnalyticsPage() {
         <CardHeader>
           <CardTitle className="text-lg">Opik dashboard</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4 text-sm text-muted-foreground">
+        <CardContent className="space-y-4 text-sm text-[#004d6d]/90">
           {opikUrl ? (
             <iframe
               title="Opik Dashboard"
