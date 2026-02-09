@@ -3,7 +3,7 @@
  * Comprehensive validation across all components and requirements
  */
 
-import { validateGlassmorphismAccessibility } from './accessibility';
+import { validateGlassmorphismAccessibility } from './accessibility-validation-enhanced';
 import { runPerformanceValidation } from './performance-validation';
 import { runDarkModeValidation } from './dark-mode-test';
 import { readFileSync } from 'fs';

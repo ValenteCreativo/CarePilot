@@ -180,10 +180,16 @@ export function testAllGlassmorphismAccessibility(): {
   };
 }
 
-// Export for use in tests
-export { 
-  testWCAGCompliance, 
-  getContrastRatio, 
-  getEffectiveBackgroundColor, 
-  testAllGlassmorphismAccessibility 
-};
+// Alias for backward compatibility
+export function validateGlassmorphismAccessibility() {
+  const results = testAllGlassmorphismAccessibility();
+  return {
+    primaryOnCream: results.lightMode.primaryOnCream,
+    primaryOnSkyBlue: results.lightMode.primaryOnSkyBlue,
+    whiteOnPrimary: results.lightMode.whiteOnPrimary,
+    darkModeVariants: {
+      primaryOnDarkBlue: results.darkMode.primaryOnDarkBlue,
+      whiteOnLightBlue: results.darkMode.whiteOnLightBlue
+    }
+  };
+}

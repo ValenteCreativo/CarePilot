@@ -7,8 +7,25 @@ import { testAllGlassmorphismAccessibility } from './accessibility-validation-en
 
 // Property test: For any text/background combination, contrast ratio meets WCAG AA standard
 export function testAccessibilityContrastProperty(): {
-  name: 'Property 5: Accessibility Contrast Compliance';
-  description: 'For any text element on a glassmorphism background, the contrast ratio between the text color and the effective background color (considering opacity and blur) should meet or exceed WCAG AA standard of 4.5:1';
+  name: string;
+  description: string;
+  compliant: boolean;
+  testResults: {
+    totalTests: number;
+    compliantTests: number;
+    compliancePercentage: number;
+    nonCompliant: Array<{
+      type: string;
+      text: string;
+      background: string;
+      opacity: number;
+      ratio: number;
+      compliant: boolean;
+    }>;
+  };
+} {
+  const name = 'Property 5: Accessibility Contrast Compliance';
+  const description = 'For any text element on a glassmorphism background, the contrast ratio between the text color and the effective background color (considering opacity and blur) should meet or exceed WCAG AA standard of 4.5:1';
   
   console.log('🔍 Property 5: Accessibility Contrast Compliance');
   console.log('=====================================\n');
@@ -52,7 +69,7 @@ export function testAccessibilityContrastProperty(): {
   
   if (compliantTests < totalTests) {
     console.log('\n❌ Non-compliant combinations:');
-    allCombinations.forEach((combo, index) => {
+    allCombinations.forEach((combo) => {
       const ratio = validation.overall.compliant ? 
         validation.lightMode.primaryOnCream.ratio : 
         validation.lightMode.primaryOnSkyBlue.ratio;
@@ -64,27 +81,33 @@ export function testAccessibilityContrastProperty(): {
   }
   
   return {
-    name: 'Property 5: Accessibility Contrast Compliance',
+    name,
     description,
     compliant: compliantTests === totalTests,
     testResults: {
       totalTests,
       compliantTests,
       compliancePercentage,
-      nonCompliant: allCombinations.filter((_, index) => {
+      nonCompliant: allCombinations.filter(() => {
         const ratio = validation.overall.compliant ? 
           validation.lightMode.primaryOnCream.ratio : 
           validation.lightMode.primaryOnSkyBlue.ratio;
         
         return !validation.overall.compliant && ratio < 4.5;
-      }).map(combo => ({
-        type: combo.type,
-        text: combo.text,
-        background: combo.bg,
-        opacity: combo.opacity,
-        ratio: ratio,
-        compliant: false
-      }))
+      }).map(combo => {
+        const ratio = validation.overall.compliant ? 
+          validation.lightMode.primaryOnCream.ratio : 
+          validation.lightMode.primaryOnSkyBlue.ratio;
+        
+        return {
+          type: combo.type,
+          text: combo.text,
+          background: combo.bg,
+          opacity: combo.opacity,
+          ratio: ratio,
+          compliant: false
+        };
+      })
     }
   };
 }

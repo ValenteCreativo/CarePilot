@@ -129,7 +129,7 @@ export function testAnalyticsWidgetsGlassmorphism(): {
   console.log(`\n📊 Overall Results:`);
   console.log('-------------------');
   console.log(`Total Issues: ${totalIssues}`);
-  console.log(`Overall Status: ${allTestsPass ? 'ALL TESTS PASS' : `${totalIssues} TESTS FAIL'}`);
+  console.log(`Overall Status: ${allTestsPass ? 'ALL TESTS PASS' : `${totalIssues} TESTS FAIL`}`);
   
   if (!allTestsPass) {
     console.log('\n❌ Issues Found:');
